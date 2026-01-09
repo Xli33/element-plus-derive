@@ -1,11 +1,11 @@
 # ModalFooter
 
-代替Modal自带的底栏部分，按钮易于控制，自定义度更高
+代替ElDialog自带的底栏部分，按钮易于控制，自定义度更高
 
 ```jsx
 <template>
   <Button @click="modal.show = true">show Modal</Button>
-  <Modal v-model="modal.show" title="modal footer">
+  <Dialog v-model="modal.show" title="modal footer">
     <h1>modal content</h1>
     <template #footer>
       <ModalFooter
@@ -14,7 +14,7 @@
         @ok="confirm"
         @cancel="cancel"></ModalFooter>
     </template>
-  </Modal>
+  </Dialog>
 </template>
 <script setup>
   import { reactive } from 'vue'

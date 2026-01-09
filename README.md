@@ -313,7 +313,7 @@ import { elSelect as vElSelect } from "element-plus-derive";
 月度日历组件
 
 [ModalFooter](./md/ModalFooter.md)  
-代替Modal自带的底栏部分，按钮易于控制，自定义度更高
+代替ElDialog自带的底栏部分，按钮易于控制，自定义度更高
 
 [PageTable](./md/PageTable.md)  
 远程分页/本地分页的Table

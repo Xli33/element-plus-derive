@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-// Modal/Drawer底部通用组件
+// ElDialog/ElDrawer底部通用组件
 
 import { getCurrentInstance, type PropType } from 'vue'
 import { ElRow, ElButton } from 'element-plus'
