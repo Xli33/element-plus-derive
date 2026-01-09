@@ -1,0 +1,106 @@
+{
+  "name": "element-plus-derive",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "基于element-plus的组件&优化扩展等，可自定义组件前缀",
+  "keywords": [
+    "element-plus-derive",
+    "element plus derive",
+    "vue",
+    "component library",
+    "derive",
+    "enhancement",
+    "ui",
+    "typescript"
+  ],
+  "main": "dist/umd/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./locale/*": {
+      "types": "./dist/locale/index.d.ts",
+      "import": "./dist/locale/*.js"
+    },
+    "./style": "./dist/style.js",
+    "./styles/*": "./dist/styles/*",
+    "./scss/*": "./dist/scss/*",
+    "./umd/index": "./dist/umd/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "release": "commit-and-tag-version",
+    "dev": "vite",
+    "prebuild": "node -e \"fs.rm('dist',{recursive:true},err=>{console.log(err)})\"",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "postbuild": "node postBuild.js",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/",
+    "check-auth": "npm whoami --registry=https://registry.npmjs.org",
+    "prepublishOnly": "npm run check-auth && npm run build && npm run release",
+    "republish": "npm run build && npm publish --ignore-scripts"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xli33/element-plus-derive.git"
+  },
+  "author": "Xli33",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xli33/element-plus-derive/issues"
+  },
+  "homepage": "https://github.com/Xli33/element-plus-derive#readme",
+  "unpkg": "dist/umd/index.js",
+  "jsdelivr": "dist/umd/index.js",
+  "peerDependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "element-plus": "^2.13.0",
+    "utils-where": "^0.4.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.3.0",
+    "@commitlint/config-conventional": "^20.3.0",
+    "@tsconfig/node22": "^22.0.5",
+    "@types/jsdom": "^27.0.0",
+    "@types/node": "^25.0.3",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vitejs/plugin-vue-jsx": "^5.1.3",
+    "@vitest/eslint-plugin": "1.6.5",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.8.1",
+    "commit-and-tag-version": "^12.6.1",
+    "element-plus": "^2.13.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-vue": "^10.6.2",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "jsdom": "^27.4.0",
+    "npm-run-all2": "^8.0.4",
+    "prettier": "^3.7.4",
+    "sass-embedded": "^1.97.2",
+    "typescript": "~5.9.3",
+    "utils-where": "^0.4.3",
+    "vite": "^7.3.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-vue-devtools": "^8.0.5",
+    "vitest": "^4.0.16",
+    "vue": "^3.5.26",
+    "vue-i18n": "^11.2.8",
+    "vue-tsc": "^3.2.2"
+  }
+}

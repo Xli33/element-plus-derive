@@ -1,0 +1,26 @@
+@use 'common.scss' as *;
+
+$prefix: get-block-name(toggle-column-);
+
+.#{$prefix} {
+  &list {
+    max-height: 400px;
+    max-height: 60vh;
+    padding-top: 0;
+    // overflow: auto;
+    user-select: none;
+  }
+
+  &btn .el-icon {
+    // line-height: 1;
+    // font-size: 16px;
+
+    // + span {
+    //   display: none;
+    // }
+  }
+
+  &pop {
+    // text-align: left;
+  }
+}

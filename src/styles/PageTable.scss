@@ -1,0 +1,90 @@
+@use 'common.scss' as *;
+
+$prefix: get-block-name(page-table-);
+
+body.clip {
+  overflow: hidden;
+}
+
+.#{$prefix} {
+  &bordered {
+    border-radius: 4px;
+
+    &:not(.#{$prefix}maximized) {
+      border: 1px solid #e8eaec;
+    }
+
+    > .#{$prefix} {
+      &list {
+        padding: 15px;
+      }
+      &header {
+        border-bottom: 1px solid #e8eaec;
+        padding-top: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+  }
+
+  &maximized {
+    background: #fff;
+    border-radius: 0;
+
+    &:not(.#{$prefix}bordered),
+    &:not(.#{$prefix}bordered):fullscreen {
+      padding: 10px;
+    }
+    &:not(.#{$prefix}fullscreen) {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 999;
+    }
+  }
+
+  &header {
+    // padding: 10px 0px;
+    padding-bottom: 10px;
+
+    &-title {
+      margin: 0;
+      font-size: 16px;
+    }
+    .toggle-column {
+      vertical-align: middle;
+
+      // > .ivu-dropdown-rel,
+      // .el-icon {
+      //   vertical-align: top;
+      // }
+    }
+  }
+
+  &action {
+    vertical-align: middle;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    // > .ivu-tooltip-rel {
+    //   vertical-align: top;
+    // }
+    // > .el-icon {
+    //   vertical-align: top;
+    // }
+  }
+
+  &paginator {
+    margin-top: 10px;
+    justify-content: flex-end;
+  }
+
+  &mr0 .ivu-checkbox-wrapper {
+    margin-right: 0;
+  }
+}

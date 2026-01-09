@@ -1,0 +1,125 @@
+<template>
+  <Modal
+    v-model="show"
+    :title="title"
+    :width="width"
+    :footer-hide="footerHide"
+    @on-visible-change="changeModal">
+    <slot></slot>
+    <PageTable
+      ref="tableRef"
+      v-if="isLocal"
+      :columns="columns"
+      :data="data"
+      :loading="loading"
+      is-local
+      :max-height="maxHeight"
+      :showHeader="showHeader"
+      :size="size"></PageTable>
+    <PageTable
+      ref="tableRef"
+      v-else
+      v-model="remoteData"
+      v-model:loading="loading"
+      :columns="columns"
+      :param="param"
+      :method="method"
+      :page-key="pageKey"
+      :size-key="sizeKey"
+      :data-key="dataKey"
+      :total-key="totalKey"
+      :max-height="maxHeight"
+      :showHeader="showHeader"
+      :size="size"></PageTable>
+  </Modal>
+</template>
+
+<script lang="ts">
+// log组件
+
+import type { Obj } from '@/type'
+import type { PropType } from 'vue'
+import { ref, useTemplateRef, watch } from 'vue'
+import PageTable from './PageTable.vue'
+
+export default {
+  name: 'Log',
+  inheritAttrs: false
+}
+</script>
+
+<script setup lang="ts">
+const props = defineProps({
+  modelValue: Boolean,
+  title: {
+    type: String,
+    default: '日志'
+  },
+  columns: {
+    type: Array as PropType<Obj[]>,
+    default: () => []
+  },
+  data: {
+    type: Array as PropType<Obj[]>,
+    default: () => []
+  },
+  param: [Object, Function],
+  method: Function,
+  width: {
+    default: 65
+  },
+  dataKey: String,
+  totalKey: String,
+  pageKey: String,
+  sizeKey: String,
+  isLocal: Boolean,
+  footerHide: {
+    type: Boolean,
+    default: true
+  },
+  showHeader: Boolean,
+  size: String,
+  maxHeight: {
+    type: [Number, String],
+    default: window.innerHeight / 2
+  }
+})
+
+const emit = defineEmits<{
+  'update:modelValue': [val: false]
+  'update:data': [val: Obj[]]
+  closed: []
+}>()
+
+// data
+
+const loading = defineModel('loading', { type: Boolean }),
+  show = ref(false),
+  remoteData = ref<Obj[]>([]),
+  refTable = useTemplateRef('tableRef')
+
+// methods
+
+function changeModal(visible: boolean) {
+  !visible &&
+    setTimeout(() => {
+      remoteData.value = []
+      emit('update:modelValue', visible)
+      emit('closed')
+    }, 200)
+}
+
+// watch
+
+watch(
+  () => props.modelValue,
+  (val) => {
+    show.value = val
+    if (val && !props.isLocal) refTable.value!.search()
+  }
+)
+
+watch(remoteData, (val) => {
+  emit('update:data', val)
+})
+</script>

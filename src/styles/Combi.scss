@@ -1,0 +1,43 @@
+@use 'common.scss' as *;
+
+$prefix: get-block-name(combi);
+
+.#{$prefix} {
+  --el-input-border-radius: var(--el-border-radius-base);
+  // display: inline-table;
+  vertical-align: middle;
+
+  .el-input-group__prepend .el-select .el-select__wrapper {
+    box-shadow: none;
+  }
+
+  &-cell {
+    // display: table-cell;
+    flex-grow: 1;
+
+    > [class^='el-'] {
+      width: 100%;
+      vertical-align: top;
+    }
+
+    .el-date-picker .el-input {
+      z-index: 0;
+    }
+
+    &.with-append {
+      > .el-select .el-select__wrapper,
+      > .el-date-editor .el-input__wrapper {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    &.with-prepend {
+      > .el-select .el-select__wrapper,
+      > .el-date-editor .el-input__wrapper {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}

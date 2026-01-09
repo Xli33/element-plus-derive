@@ -1,0 +1,70 @@
+@use 'common.scss' as *;
+
+$prefix: get-block-name(mcalendar);
+$border: 1px solid #f5f5f5;
+$width: 14.2857%;
+$timing: 0.15s ease-out;
+
+@mixin bg-color($color) {
+  border-color: $color;
+  background-color: $color;
+}
+
+.#{$prefix} {
+  position: relative;
+  color: #333;
+
+  &- {
+    &title {
+      flex-basis: $width;
+      max-width: $width;
+      padding: 10px 0;
+      line-height: 1;
+      text-align: center;
+      background: #efefef;
+
+      &.weekend {
+        color: #fff;
+        background: coral;
+      }
+    }
+
+    &cell {
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      flex-basis: $width;
+      max-width: $width;
+      min-height: 100px;
+      padding: 5px;
+      border-bottom: $border;
+      border-left: $border;
+      word-break: break-all;
+      transition:
+        border-color $timing,
+        background-color $timing;
+      // font-size: 14px;
+
+      &:nth-child(7n) {
+        border-right: $border;
+      }
+
+      &.outer:not(.in-range) {
+        color: #aaa;
+      }
+
+      &.in-range {
+        @include bg-color(#e6eafd);
+      }
+
+      &.range-start,
+      &.range-end {
+        @include bg-color(#b9c6ff);
+      }
+    }
+
+    &cell_today {
+      background-color: #f2faff;
+    }
+  }
+}

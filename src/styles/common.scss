@@ -1,0 +1,6 @@
+$epd-prefix: '' !default;
+
+@function get-block-name($name) {
+  @return if(sass($epd-prefix == ''): $name; else: '#{$epd-prefix}-#{$name}');
+  // @return if($epd-prefix == '', $name, '#{$epd-prefix}-#{$name}');
+}
