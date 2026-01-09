@@ -1,6 +1,6 @@
 {
   "name": "element-plus-derive",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "description": "基于element-plus的组件&优化扩展等，可自定义组件前缀",
   "keywords": [
