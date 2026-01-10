@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div :class="useClass('all-checkbox')">
     <el-checkbox
       v-show="!hideAll"
       v-model="whole"
       :indeterminate="indeterminate"
+      :class="useClass('all-checkbox-whole')"
       @change="change"
       >{{ title ?? $i18n.t('allCheckbox.title') }}</el-checkbox
     >
-    <el-checkbox-group v-model="inner" class="ep-inline-block" @change="change">
+    <el-checkbox-group v-model="inner" :class="useClass('all-checkbox-group')" @change="change">
       <el-checkbox v-for="item in list" :key="item[keyMap.value]" :value="item[keyMap.value]">
         <slot :item="item">{{ item[keyMap.label] }}</slot>
       </el-checkbox>
@@ -22,6 +23,8 @@ import type { Obj } from '@/type'
 import { type PropType, computed, onMounted, watch, shallowRef } from 'vue'
 import { ElCheckbox, ElCheckboxGroup } from 'element-plus'
 import { $i18n } from '@/locale/i18n'
+import { useClass } from '@/utils'
+
 // 声明组件 name 不建议用 definOptions，因为 setup 内部有内容时，哪怕只有一行注释，依旧会导致无名组件被赋予 __name 属性
 // 这时若用 defineOptions 声明了 name，组件就会有一个多余的 __name
 // 当这里声明过 name 后，即便有调用 setup 也不会再生成多余的 __name
@@ -165,3 +168,7 @@ watch(
   }
 )
 </script>
+
+<style lang="scss">
+@use '@/styles/AllCheckbox.scss';
+</style>

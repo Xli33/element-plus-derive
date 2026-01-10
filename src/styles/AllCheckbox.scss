@@ -1,0 +1,12 @@
+@use 'common.scss' as *;
+
+$prefix: get-block-name(all-checkbox);
+
+.#{$prefix} {
+  & > &-whole {
+    margin-right: 30px;
+  }
+  &-group {
+    display: inline-flex;
+  }
+}

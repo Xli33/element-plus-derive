@@ -1,3 +1,4 @@
+import './styles/AllCheckbox.css'
 import './styles/Combi.css'
 import './styles/MCalendar.css'
 import './styles/PageTable.css'
