@@ -1,5 +1,5 @@
 <template>
-  <el-card title="AllCheckbox" class="block">
+  <el-card header="AllCheckbox" class="block">
     <AllCheckbox v-model="allCheckeds" v-model:all="allCheck" :list="allCheckedList"></AllCheckbox>
     <AllCheckbox v-model="allCheckeds" :list="allCheckedList">
       <template #default="{ item }">
@@ -13,7 +13,7 @@
       值：{{ allCheckeds }} <span style="margin-left: 16px">whole: {{ allCheck }}</span>
     </p>
   </el-card>
-  <el-card title="Combi" class="block">
+  <el-card header="Combi" class="block">
     <el-space>
       <Combi prepend="begin" append="end">
         <el-select clearable>
@@ -44,7 +44,7 @@
       </Combi>
     </el-space>
   </el-card>
-  <el-card title="RemoteSelect" class="block">
+  <el-card header="RemoteSelect" class="block">
     <el-space>
       <RemoteSelect
         v-model="selectModel"
@@ -63,7 +63,7 @@
       值：{{ selectModel }}
     </el-space>
   </el-card>
-  <el-card title="CacheSelect" class="block">
+  <el-card header="CacheSelect" class="block">
     <el-space>
       <CacheSelect
         v-model="selectModel"
@@ -87,7 +87,7 @@
       值：{{ selectModel }}
     </el-space>
   </el-card>
-  <el-card title="CurdTable" class="block">
+  <el-card header="CurdTable" class="block">
     <ToggleColumn v-for="n in colNum" :key="n" v-model="columns" cache-id="app"></ToggleColumn>
     <el-table :data="table.list" style="margin-bottom: 20px">
       <ElColumn :columns="columns">
@@ -111,7 +111,7 @@
       </template>
     </CurdTable>
   </el-card>
-  <el-card title="ModalFooter" class="block">
+  <el-card header="ModalFooter" class="block">
     <el-button @click="modal.show = true">show Modal</el-button>
     <el-dialog v-model="modal.show" title="modal footer">
       <el-table>
@@ -127,7 +127,7 @@
       </template>
     </el-dialog>
   </el-card>
-  <el-card title="PageTable" class="block">
+  <el-card header="PageTable" class="block">
     <el-row align="bottom" :gutter="10">
       <el-col :span="12">
         <PageTable
@@ -172,7 +172,7 @@
     </el-row>
     <el-tag v-for="(item, index) in pageTable.selection" :key="index">{{ item }}</el-tag>
   </el-card>
-  <el-card title="MCalendar" class="block">
+  <el-card header="MCalendar" class="block">
     <MCalendar
       v-model:range="calendar.range"
       has-range
@@ -184,7 +184,10 @@
       "
       @dblclick-day="(...args:[]) => console.log('dblclickDay', args)"
       @select-range="(...args:[]) => console.log('select-range', args)">
-      <template #cell="{ day }"> <el-badge status="success"></el-badge>{{ day._text }} </template>
+      <template #cell="{ day }">
+        <el-badge type="success" is-dot></el-badge>
+        <p>{{ day._text }}</p>
+      </template>
     </MCalendar>
   </el-card>
 </template>
