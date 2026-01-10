@@ -286,7 +286,7 @@ import { elSelect as vElSelect } from "element-plus-derive";
 </script>
 
 // 使用
-<Select v-el-select:all="true" multiple></Select>
+<el-select v-el-select:all="true" multiple></el-select>
 ```
 
 ### 组件
@@ -298,16 +298,16 @@ import { elSelect as vElSelect } from "element-plus-derive";
 避免重复调用远程接口的RemoteSelect，同一个cacheId对应只触发一次请求
 
 [Combi](./md/Combi.md)  
-类似iview Input[append prepend]的组合框
+类似ElInput[append prepend]样式的组合框
 
 [CurdTable](./md/CurdTable.md)
-具有增删功能的Table
+具有增删功能的ElTable
 
 [Drawer](./md/Drawer.md)  
-默认带footer的el-drawer
+默认带footer的ElDrawer
 
 [ElColumn](./md/ElColumn.md)  
-通过数组形式使用el-table-column
+通过数组形式使用ElTableColumn
 
 [MCalendar](./md/MCalendar.md)  
 月度日历组件
@@ -316,13 +316,13 @@ import { elSelect as vElSelect } from "element-plus-derive";
 代替ElDialog自带的底栏部分，按钮易于控制，自定义度更高
 
 [PageTable](./md/PageTable.md)  
-远程分页/本地分页的Table
+远程分页/本地分页的ElTable
 
 [RemoteSelect](./md/RemoteSelect.md)  
-远程Select
+获取远程数据的ElSelect，默认在展开时才触发请求
 
 [ToggleColumn](./md/ToggleColumn.md)  
-用于切换Table列的显示状态
+用于切换ElTable列的显示状态
 
 ## License
 

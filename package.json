@@ -5,7 +5,7 @@
   "description": "基于element-plus的组件&优化扩展等，可自定义组件前缀",
   "keywords": [
     "element-plus-derive",
-    "element plus derive",
+    "epDerive",
     "vue",
     "component library",
     "derive",
