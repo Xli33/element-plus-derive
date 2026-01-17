@@ -2,7 +2,7 @@
 
 具有增删功能的Table
 
-```html
+```vue
 <template>
   <CurdTable
     v-model="table.list"
@@ -19,56 +19,56 @@
   </CurdTable>
 </template>
 <script setup>
-  const table = {
-    columns: [
-        {
-            title: 'emoji',
-            key: 'emoji',
-            type: 'selection'
-        },
-        {
-            title: 'exp',
-            key: 'exp'
-        },
-        {
-            title: 'num',
-            key: 'num',
-            slot: 'num',
-            renderHeader: (h, { column }) => (
-                <>
-                    {column.title}
-                    <input value={column.title} onInput={(e) => column.title = e.target.value} />
-                </>
-            )
-        },
-        {
-            title: 'time',
-            key: 'time'
-        }
-    ],
-    list: [
-        {
-            emoji: '😶‍🌫️🤨😐',
-            exp: 'ԅ(¯﹃¯ԅ)',
-            num: Math.random(),
-            time: new Date().toLocaleString()
-        },
-        {
-            emoji: '😠😪',
-            exp: 'ヾ(•ω•`)o',
-            num: Math.random(),
-            time: new Date().toLocaleString()
-        }
-    ],
-    add: () => [
-        {
-            emoji: ' 😏🤤',
-            exp: 'Σ(っ °Д °;)っ',
-            num: Math.random(),
-            time: new Date().toLocaleString()
-        }
-    ]
-  }
+const table = {
+  columns: [
+    {
+      title: 'emoji',
+      key: 'emoji',
+      type: 'selection'
+    },
+    {
+      title: 'exp',
+      key: 'exp'
+    },
+    {
+      title: 'num',
+      key: 'num',
+      slot: 'num',
+      renderHeader: (h, { column }) => (
+        <>
+          {column.title}
+          <input value={column.title} onInput={(e) => (column.title = e.target.value)} />
+        </>
+      )
+    },
+    {
+      title: 'time',
+      key: 'time'
+    }
+  ],
+  list: [
+    {
+      emoji: '😶‍🌫️🤨😐',
+      exp: 'ԅ(¯﹃¯ԅ)',
+      num: Math.random(),
+      time: new Date().toLocaleString()
+    },
+    {
+      emoji: '😠😪',
+      exp: 'ヾ(•ω•`)o',
+      num: Math.random(),
+      time: new Date().toLocaleString()
+    }
+  ],
+  add: () => [
+    {
+      emoji: ' 😏🤤',
+      exp: 'Σ(っ °Д °;)っ',
+      num: Math.random(),
+      time: new Date().toLocaleString()
+    }
+  ]
+}
 </script>
 ```
 

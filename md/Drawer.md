@@ -2,30 +2,35 @@
 
 默认带footer的el-drawer
 
-```jsx
+```vue
 <template>
-  <Drawer v-model="drawer.show" v-loading="drawer.loading" title="Drawer" @ok="confirm" @cancel="cancel"></Drawer>
+  <Drawer
+    v-model="drawer.show"
+    v-loading="drawer.loading"
+    title="Drawer"
+    @ok="confirm"
+    @cancel="cancel"></Drawer>
 </template>
 <script setup>
-  import { reactive } from 'vue'
+import { reactive } from 'vue'
 
-  const drawer = reactive({
-      show: false,
-      loading: false
-    }),
-    confirm = () => {
-      drawer.loading = true
-      setTimeout(() => {
-        drawer.show = false
-        setTimeout(() => {
-          drawer.loading = false
-        }, 200)
-      }, 2000)
-    },
-    cancel = () => {
-      alert('cancel')
+const drawer = reactive({
+    show: false,
+    loading: false
+  }),
+  confirm = () => {
+    drawer.loading = true
+    setTimeout(() => {
       drawer.show = false
-    }
+      setTimeout(() => {
+        drawer.loading = false
+      }, 200)
+    }, 2000)
+  },
+  cancel = () => {
+    alert('cancel')
+    drawer.show = false
+  }
 </script>
 ```
 

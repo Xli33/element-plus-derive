@@ -2,7 +2,7 @@
 
 代替ElDialog自带的底栏部分，按钮易于控制，自定义度更高
 
-```jsx
+```vue
 <template>
   <Button @click="modal.show = true">show Modal</Button>
   <Dialog v-model="modal.show" title="modal footer">
@@ -17,25 +17,25 @@
   </Dialog>
 </template>
 <script setup>
-  import { reactive } from 'vue'
+import { reactive } from 'vue'
 
-  const modal = reactive({
-      show: false,
-      loading: false
-    }),
-    confirm = () => {
-      modal.loading = true
-      setTimeout(() => {
-        modal.show = false
-        setTimeout(() => {
-          modal.loading = false
-        }, 200)
-      }, 2000)
-    },
-    cancel = () => {
-      alert('cancel')
+const modal = reactive({
+    show: false,
+    loading: false
+  }),
+  confirm = () => {
+    modal.loading = true
+    setTimeout(() => {
       modal.show = false
-    }
+      setTimeout(() => {
+        modal.loading = false
+      }, 200)
+    }, 2000)
+  },
+  cancel = () => {
+    alert('cancel')
+    modal.show = false
+  }
 </script>
 ```
 

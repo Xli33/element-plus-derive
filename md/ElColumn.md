@@ -2,7 +2,7 @@
 
 通过数组形式使用el-table-column
 
-```jsx
+```vue
 <template>
   <el-table :data="tableData" border style="width: 100%">
     <!-- 引入 ElColumn 组件配置列 -->
@@ -25,16 +25,15 @@
 </template>
 
 <script setup lang="tsx">
-import { ref } from 'vue';
-import { ElButton, ElMessage } from 'element-plus';
-import { User, Timer, Edit } from '@element-plus/icons-vue';
-
+import { ref } from 'vue'
+import { ElButton, ElMessage } from 'element-plus'
+import { User, Timer, Edit } from '@element-plus/icons-vue'
 
 const tableData = ref([
   { date: '2024-01-01', name: 'Tom', address: 'No. 189, Grove St, Los Angeles' },
   { date: '2024-01-02', name: 'Jack', address: 'No. 189, Grove St, Los Angeles' },
   { date: '2024-01-03', name: 'Alice', address: 'No. 189, Grove St, Los Angeles' }
-]);
+])
 
 // 列配置
 const columns = [
@@ -99,7 +98,7 @@ const columns = [
       </ElButton>
     )
   }
-];
+]
 </script>
 ```
 

@@ -1,29 +1,29 @@
 # RemoteSelect
 
-远程Select
+获取远程数据的ElSelect，默认在展开时才触发请求
 
-```html
+```vue
 <template>
   <RemoteSelect
     v-model="selectModel"
     :method="getList"
     filterable
     style="width: 200px"
-    @on-change="$Message.info($event)"></RemoteSelect>
+    @change="$message.info($event)"></RemoteSelect>
 </template>
 <script setup>
-  import { ref } from 'vue'
+import { ref } from 'vue'
 
-  const selectModel = ref(''),
-    getList = () => new Promise(resolve => {
-        setTimeout(() => {
-            resolve([
-                {value: 'a', label: '一'}
-                {value: 'b', label: '二'}
-                {value: 'c', label: '三'}
-            ])
-        }, 2000)
-    })
+const selectModel = ref(''),
+  getList = () => new Promise(resolve => {
+      setTimeout(() => {
+          resolve([
+              {value: 'a', label: '一'}
+              {value: 'b', label: '二'}
+              {value: 'c', label: '三'}
+          ])
+      }, 2000)
+  })
 </script>
 ```
 
@@ -113,7 +113,7 @@ v-model双向绑定选中值
 
 ## emits
 
-除以下事件，可监听Select的其它事件，如on-change
+除以下事件，可监听Select的其它事件，如change
 
 `load` (value)  
 成功加载数据后触发。`value`: 返回的列表结果，应该是数组

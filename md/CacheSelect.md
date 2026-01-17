@@ -2,32 +2,32 @@
 
 避免重复调用远程接口的RemoteSelect，同一个cacheId对应只触发一次请求
 
-```html
+```vue
 <template>
   <CacheSelect
     v-model="selectModel"
     :method="getList"
     style="width: 200px"
-    @on-change="$Message.info($event)"></CacheSelect>
+    @change="$message.info($event)"></CacheSelect>
   <CacheSelect
     v-model="selectModel"
     :method="getList"
     style="width: 200px"
-    @on-change="$Message.info($event)"></CacheSelect>
+    @change="$message.info($event)"></CacheSelect>
 </template>
 <script setup>
-  import { ref } from 'vue'
+import { ref } from 'vue'
 
-  const selectModel = ref(''),
-        getList = () => new Promise(resolve => {
-            setTimeout(() => {
-                resolve([
-                    {value: 'a', label: '一'}
-                    {value: 'b', label: '二'}
-                    {value: 'c', label: '三'}
-                ])
-            })
-        }, 2000)
+const selectModel = ref(''),
+      getList = () => new Promise(resolve => {
+          setTimeout(() => {
+              resolve([
+                  {value: 'a', label: '一'}
+                  {value: 'b', label: '二'}
+                  {value: 'c', label: '三'}
+              ])
+          })
+      }, 2000)
 </script>
 ```
 
@@ -53,4 +53,4 @@ v-model双向绑定选中值
 
 ## slots
 
-同RemoteSelect [slots](#slots)
+同RemoteSelect

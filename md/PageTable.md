@@ -2,7 +2,7 @@
 
 远程分页/本地分页的Table
 
-```html
+```vue
 <template>
   <button :loading="pageTable.loading" @click="search">查询</button>
   <PageTable
@@ -24,40 +24,40 @@
   </PageTable>
 </template>
 <script setup>
-  import { shallowReactive, useTemplateRef } from 'vue'
+import { shallowReactive, useTemplateRef } from 'vue'
 
-  const refPageTable = useTemplateRef('pageTableRef')
-  const pageTable = shallowReactive({
-    loading: false,
-    selection: [],
-    columns: [
-      {
-        title: 'num',
-        key: 'num'
-      },
-      {
-        title: 'date',
-        key: 'date'
-      },
-      {
-        title: 'time',
-        key: 'time'
-      }
-    ]
-  })
-  function search() {
-    refPageTable.value.search()
-  }
-  function getList() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          ress: new Array(30).fill(0).map((e, i) => ({ num: i, date: '1010', time: '----' })),
-          total: 30
-        })
+const refPageTable = useTemplateRef('pageTableRef')
+const pageTable = shallowReactive({
+  loading: false,
+  selection: [],
+  columns: [
+    {
+      title: 'num',
+      key: 'num'
+    },
+    {
+      title: 'date',
+      key: 'date'
+    },
+    {
+      title: 'time',
+      key: 'time'
+    }
+  ]
+})
+function search() {
+  refPageTable.value.search()
+}
+function getList() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        ress: new Array(30).fill(0).map((e, i) => ({ num: i, date: '1010', time: '----' })),
+        total: 30
       })
     })
-  }
+  })
+}
 </script>
 ```
 

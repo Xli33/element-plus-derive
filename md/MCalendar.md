@@ -2,22 +2,22 @@
 
 月度日历组件
 
-```html
+```vue
 <template>
   <MCalendar v-model:range="calendar.range" :date="calendar.date" has-range>
     <template #cell="{ day }"> <Badge status="success"></Badge>{{ day._text }} </template>
   </MCalendar>
 </template>
 <script setup>
-  import { shallowReactive } from 'vue'
+import { shallowReactive } from 'vue'
 
-  const caledar = shallowReactive({
-    range: [
-      { _date: new Date(Date.now() - 86400000 * 7) },
-      { _date: new Date(Date.now() - 86400000) }
-    ],
-    date: new Date('2000-01-01')
-  })
+const caledar = shallowReactive({
+  range: [
+    { _date: new Date(Date.now() - 86400000 * 7) },
+    { _date: new Date(Date.now() - 86400000) }
+  ],
+  date: new Date('2000-01-01')
+})
 </script>
 ```
 

@@ -2,42 +2,42 @@
 
 用于切换Table列的显示状态
 
-```jsx
+```vue
 <template>
   <ToggleColumn v-model="table.columns"></ToggleColumn>
   <Table :columns="table.columns" :data="table.list"></Table>
 </template>
 <script setup>
-  import { reactive } from 'vue'
+import { reactive } from 'vue'
 
-  const table = reactive({
-    list: [
-      {
-        year: 2000,
-        date: '2000-01-01'
-      },
-      {
-        year: 1000,
-        date: '1000-01-01'
-      }
-    ],
-    columns: [
-      {
-        type: 'selection',
-        key: 'selection',
-        width: 60,
-        _switchable: false // 让该列不可被切换
-      },
-      {
-        title: 'year',
-        key: 'year'
-      },
-      {
-        title: 'date',
-        key: 'date'
-      }
-    ]
-  })
+const table = reactive({
+  list: [
+    {
+      year: 2000,
+      date: '2000-01-01'
+    },
+    {
+      year: 1000,
+      date: '1000-01-01'
+    }
+  ],
+  columns: [
+    {
+      type: 'selection',
+      key: 'selection',
+      width: 60,
+      _switchable: false // 让该列不可被切换
+    },
+    {
+      title: 'year',
+      key: 'year'
+    },
+    {
+      title: 'date',
+      key: 'date'
+    }
+  ]
+})
 </script>
 ```
 

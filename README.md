@@ -13,8 +13,6 @@ or
 yarn add element-plus-derive
 ```
 
-[TOC]
-
 ### CDN引入
 
 ```html
@@ -25,7 +23,7 @@ yarn add element-plus-derive
 <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 <script src="https://unpkg.com/element-plus-derive/dist/umd/index.js"></script>
 
-<!-- <script src="https://unpkg.com/-derive/dist/umd/en-US.js"></script> -->
+<!-- <script src="https://unpkg.com/element-plus-derive/dist/umd/en-US.js"></script> -->
 
 <script>
   const app = Vue.createApp(App)
@@ -300,7 +298,7 @@ import { elSelect as vElSelect } from "element-plus-derive";
 [Combi](./md/Combi.md)  
 类似ElInput[append prepend]样式的组合框
 
-[CurdTable](./md/CurdTable.md)
+[CurdTable](./md/CurdTable.md)  
 具有增删功能的ElTable
 
 [Drawer](./md/Drawer.md)  
