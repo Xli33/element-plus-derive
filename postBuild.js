@@ -16,7 +16,7 @@ rename('dist/umd.d.ts', 'dist/umd/index.d.ts').catch((err) => {
 
 // 配置路径
 const srcDir = 'md/'
-const distDir = 'doc/readme/'
+const distDir = 'docs/readme/'
 // 最终需要生成的菜单结构
 const menus = []
 const suffix = '.txt'
@@ -138,7 +138,7 @@ async function buildComponentHtml() {
 
       const htmlFragment = await mdToHtml(mdContent)
 
-      // 确保目标目录存在（例如 doc/readme/va/1.txt）
+      // 确保目标目录存在（例如 docs/readme/va/1.txt）
       await fs.ensureFile(distPath)
 
       // 写入文件
@@ -157,9 +157,9 @@ fs.rm(distDir, { recursive: true })
   .finally(async () => {
     await buildFromReadme()
     await buildComponentHtml()
-    fs.writeFileSync('doc/menus.json', JSON.stringify(Object.values(menus)))
-    // 复制assets文件夹到doc/readme下便于文档访问
-    cp('assets/', 'doc/assets', {
+    fs.writeFileSync('docs/menus.json', JSON.stringify(Object.values(menus)))
+    // 复制assets文件夹到docs/readme下便于文档访问
+    cp('assets/', 'docs/assets', {
       recursive: true
     }).catch((err) => {
       console.warn(`failed to copy assets files and the error is:`, err)
