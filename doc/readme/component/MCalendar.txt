@@ -1,0 +1,49 @@
+<h2>MCalendar</h2>
+<p>月度日历组件</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">MCalendar</span><span style="color:#C792EA"> v-model:range</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">calendar.range</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> :date</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">calendar.date</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> has-range</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF"> #</span><span style="color:#C792EA">cell</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">{</span><span style="color:#BABED8"> day </span><span style="color:#89DDFF">}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> &#x3C;</span><span style="color:#F07178">Badge</span><span style="color:#C792EA"> status</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">success</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">Badge</span><span style="color:#89DDFF">></span><span style="color:#BABED8">{{ day._text }} </span><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">MCalendar</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> shallowReactive</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> caledar </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> shallowReactive</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#F07178">  range</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span><span style="color:#F07178"> _date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Date</span><span style="color:#BABED8">(Date</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">now</span><span style="color:#BABED8">() </span><span style="color:#89DDFF">-</span><span style="color:#F78C6C"> 86400000</span><span style="color:#89DDFF"> *</span><span style="color:#F78C6C"> 7</span><span style="color:#BABED8">) </span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span><span style="color:#F07178"> _date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Date</span><span style="color:#BABED8">(Date</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">now</span><span style="color:#BABED8">() </span><span style="color:#89DDFF">-</span><span style="color:#F78C6C"> 86400000</span><span style="color:#BABED8">) </span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#BABED8">  ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">  date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Date</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">2000-01-01</span><span style="color:#89DDFF">'</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#89DDFF">}</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p><code>date</code> <em>Date</em><br>指定日期，默认显示该日期所在月份</p>
+<p><code>dates</code> <em>Array</em><br>传入的额外日期数据。
+组件始终展示一段日期，但业务上有时需要根据返回的一组日期进行渲染，如 <code>[{date:&#39;2000-01-01&#39;,xxx:false},{date:&#39;2000-01-02&#39;,xxx:true}]</code></p>
+<p><code>start-day</code> <em>Number</em> （default <code>1</code>）<br>周起始日，默认星期一</p>
+<p><code>off-day</code> <em>Array</em> （default <code>[6, 0]</code>）<br>休息日，默认周六周日</p>
+<p><code>date-key</code> <em>String</em> （default <code>&#39;date&#39;</code>）<br>传入dates里日期值对应的key</p>
+<p><code>title-class</code> <em>Function</em><br>单元格标题class</p>
+<p><code>date-class</code> <em>Function</em><br>每一天单元格class</p>
+<p><code>loading</code> <em>Boolean</em><br>加载状态</p>
+<p><code>text-format</code> <em>String</em> （default <code>&#39;YYYY-MM-DD&#39;</code>）<br>单元格日期<a href="https://day.js.org/docs/en/display/format">格式</a></p>
+<p><code>is-on-first-line</code> <em>Boolean</em><br>是否将指定date放在第一行，而不是按传统模式将每月1号放在第一行，此时可能不会显示完整的单一月份</p>
+<p><code>has-range</code> <em>Boolean</em><br>是否开启范围选择</p>
+<p><code>outer-in-range</code> <em>Boolean</em><br>非当前有效时间范围内的日期是否可被选入范围</p>
+<p><code>clearable</code> <em>Boolean</em> （default <code>true</code>）<br>选择一个范围后，再选择时是否先将已选范围清除，即是否可清除已选范围</p>
+<p><code>range</code> <em>Array</em><br>已选范围。</p>
+<p><code>week-type</code> <em>String</em> （default <code>&#39;mini&#39;</code>）<br>周标题内容类型，可选mini、short、long</p>
+<ul>
+<li><code>week-type=&#39;mini&#39;</code> 对应显示成 一、二、三。。。</li>
+<li><code>week-type=&#39;short&#39;</code> 对应显示成 周一、周二、周三。。。</li>
+<li><code>week-type=&#39;long&#39;</code> 对应显示成 星期一、星期二、星期三。。。</li>
+</ul>
+<p><code>week-map</code> <em>Object</em><br>周一到周日对应的映射，若传入有效对象则以该对象的key显示星期标题</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#BABED8">周六周日标题会分别显示成 “星期6” 和 “星期天”，忽略对应的翻译文本</span></span>
+<span class="line"><span style="color:#BABED8">:week</span><span style="color:#89DDFF">-</span><span style="color:#BABED8">map</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">{0: '星期天', 6: '星期6'}</span><span style="color:#89DDFF">"</span></span></code></pre>
+<h2>emits</h2>
+<p><code>click-day</code> (item, index)<br>点击日期单元格触发。<code>item</code>: 点中日期单元</p>
+<p><code>select-range</code> ([begin, end], ranged)<br>选择范围后触发。<code>begin</code>：范围开始，<code>end</code>：范围结束，<code>ranged</code>：包含起止范围的所有日期</p>
+<p><code>dblclick-day</code> (item, index)<br>双击日期单元格触发。<code>item</code>: 点中日期单元</p>
+<h2>slots</h2>
+<p><code>cell({ item, index })</code><br>单元格内容。<code>item</code>: 单个日期</p>

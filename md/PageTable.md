@@ -1,6 +1,6 @@
-# PageTable
+## PageTable
 
-远程分页/本地分页的Table
+远程分页/本地分页的el-table
 
 ```vue
 <template>

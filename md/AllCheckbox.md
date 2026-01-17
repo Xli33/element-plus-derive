@@ -1,6 +1,6 @@
-# AllCheckbox
+## AllCheckbox
 
-提供全选功能的CheckboxGroup
+提供全选功能的el-checkbox-group
 
 ```vue
 <template>

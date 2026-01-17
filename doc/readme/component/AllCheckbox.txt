@@ -1,0 +1,33 @@
+<h2>AllCheckbox</h2>
+<p>提供全选功能的el-checkbox-group</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">AllCheckbox</span><span style="color:#C792EA"> v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">checkeds</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> v-model:all</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">checkAll</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> :list</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">list</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">AllCheckbox</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> ref</span><span style="color:#89DDFF">,</span><span style="color:#BABED8"> shallowRef</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> checkeds </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> shallowRef</span><span style="color:#BABED8">([</span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">1</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">3</span><span style="color:#89DDFF">'</span><span style="color:#BABED8">])</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#BABED8">  checkAll </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> ref</span><span style="color:#BABED8">()</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#BABED8">  list </span><span style="color:#89DDFF">=</span><span style="color:#BABED8"> Object</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">entries</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#F78C6C">    1</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">周一</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F78C6C">    2</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">周二</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F78C6C">    3</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">周三</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F78C6C">    4</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">周四</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F78C6C">    5</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">周五</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F78C6C">    6</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">周六</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F78C6C">    7</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">周日</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p><code>modelValue</code> <em>Array</em><br>双向绑定选中值</p>
+<p><code>all</code> <em>Boolean</em><br>v-model:all双向绑定全选框的值，若全选中应为 true，否则 false</p>
+<p><code>title</code> <em>String</em><br>全选框显示文本，默认“全选”</p>
+<p><code>list</code> <em>Array</em><br>选项数组，数组成员可以是数组或对象</p>
+<p><code>value-key</code> <em>String | Number</em> （default <code>0</code>）<br>各选项值对应list中的value键。如list是[{v:1,k:2}]，valueKey为 v 且 labelKey为 k, 则选项绑定值为 1，显示文本是 2</p>
+<p><code>label-key</code> <em>String | Number</em> （default <code>1</code>）<br>各选项值对应list中的label键。如list是[{v:1,k:2}]，valueKey为 v 且 labelKey为 k, 则选项绑定值为 1，显示文本是 2</p>
+<p><code>key-map</code> <em>Object</em><br>同时设置valueKey &amp; labelKey，优先级相对更高</p>
+<p><code>hide-all</code> <em>Boolean</em><br>是否隐藏全选框</p>
+<h2>emits</h2>
+<p><code>change</code> (value, checkAll)<br>更改checkbox时触发。<code>value</code> ：当前选中值数组 <code>checkAll</code> ：是否全选</p>
+<h2>slots</h2>
+<p><code>default({item})</code><br>checkbox选项文本</p>

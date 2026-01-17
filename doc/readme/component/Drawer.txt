@@ -1,0 +1,42 @@
+<h2>Drawer</h2>
+<p>默认带footer的el-drawer</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">Drawer</span></span>
+<span class="line"><span style="color:#C792EA">    v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">drawer.show</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    v-loading</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">drawer.loading</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    title</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Drawer</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    @ok</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">confirm</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    @cancel</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">cancel</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">Drawer</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> reactive</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> drawer </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> reactive</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#F07178">    show</span><span style="color:#89DDFF">:</span><span style="color:#FF9CAC"> false</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">    loading</span><span style="color:#89DDFF">:</span><span style="color:#FF9CAC"> false</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span><span style="color:#BABED8">)</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#BABED8">  confirm </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> ()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BABED8">    drawer</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">loading</span><span style="color:#89DDFF"> =</span><span style="color:#FF9CAC"> true</span></span>
+<span class="line"><span style="color:#82AAFF">    setTimeout</span><span style="color:#F07178">(</span><span style="color:#89DDFF">()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BABED8">      drawer</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">show</span><span style="color:#89DDFF"> =</span><span style="color:#FF9CAC"> false</span></span>
+<span class="line"><span style="color:#82AAFF">      setTimeout</span><span style="color:#F07178">(</span><span style="color:#89DDFF">()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BABED8">        drawer</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">loading</span><span style="color:#89DDFF"> =</span><span style="color:#FF9CAC"> false</span></span>
+<span class="line"><span style="color:#89DDFF">      },</span><span style="color:#F78C6C"> 200</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span><span style="color:#F78C6C"> 2000</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">  },</span></span>
+<span class="line"><span style="color:#BABED8">  cancel </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> ()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">    alert</span><span style="color:#F07178">(</span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">cancel</span><span style="color:#89DDFF">'</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#BABED8">    drawer</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">show</span><span style="color:#89DDFF"> =</span><span style="color:#FF9CAC"> false</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p><code>modelValue</code> <em>Boolean</em><br>双向绑定</p>
+<p><code>has-footer</code> <em>Boolean</em> （default <code>true</code>）<br>是否显示footer</p>
+<p><code>footer-attrs</code> <em>Object</em><br>传递给ModalFooter的props</p>
+<h2>emits</h2>
+<p><code>ok</code><br>点击确定按钮触发</p>
+<p><code>cancel</code><br>点击取消按钮触发。未监听该事件时会直接关闭Drawer</p>
+<h2>slots</h2>
+<p><code>header()</code><br>header</p>
+<p><code>default()</code><br>body</p>
+<p><code>footer()</code><br>footer</p>

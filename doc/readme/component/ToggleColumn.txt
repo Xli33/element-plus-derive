@@ -1,0 +1,52 @@
+<h2>ToggleColumn</h2>
+<p>用于切换el-table列的显示状态</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">ToggleColumn</span><span style="color:#C792EA"> v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.columns</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ToggleColumn</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">el-table</span><span style="color:#C792EA"> :data</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.list</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">ElColumn</span><span style="color:#C792EA"> :columns</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.columns</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ElColumn</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">el-table</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> reactive</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> table </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> reactive</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#F07178">  list</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      year</span><span style="color:#89DDFF">:</span><span style="color:#F78C6C"> 2000</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">2000-01-01</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      year</span><span style="color:#89DDFF">:</span><span style="color:#F78C6C"> 1000</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">1000-01-01</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#BABED8">  ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">  columns</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      type</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">selection</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">selection</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      width</span><span style="color:#89DDFF">:</span><span style="color:#F78C6C"> 60</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      _switchable</span><span style="color:#89DDFF">:</span><span style="color:#FF9CAC"> false</span><span style="color:#676E95;font-style:italic"> // 让该列不可被切换</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">year</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">year</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#BABED8">  ]</span></span>
+<span class="line"><span style="color:#89DDFF">}</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p><code>modelValue</code> <em>Array</em><br>v-model双向绑定Table列</p>
+<p><code>title</code> <em>String</em><br>全选框文本</p>
+<p><code>icon</code> <em>String</em><br>传入iview icon名则仅显示图标</p>
+<p><code>cache-id</code> <em>String | Number</em><br>绑定columns对应的唯一标识，一般在v-for中绑定了固定某列且列配置中带有 <code>_visible:false</code> 时用到</p>
+<p><code>all</code> <em>Boolean</em> （default <code>true</code>）<br>是否显示全选框</p>
+<p><code>transfer</code> <em>Boolean</em><br>el-dropdown的transfer</p>
+<p><code>store-at</code> <em>String</em><br>将状态缓存至localStorage中的key，支持a.b形式<br>如<code>store-at=&#39;app.main.cols&#39;</code>，组件会尝试将显示状态读写至 localStorage.app.main.cols</p>
+<h2>emits</h2>
+<p><code>change</code> (value)<br>切换列状态时触发。<code>value</code>: 切换的列</p>
+<h2>slots</h2>
+<p><code>default()</code><br>替换默认显示的Button</p>

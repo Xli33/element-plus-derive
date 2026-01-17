@@ -1,11 +1,13 @@
-# ToggleColumn
+## ToggleColumn
 
-用于切换Table列的显示状态
+用于切换el-table列的显示状态
 
 ```vue
 <template>
   <ToggleColumn v-model="table.columns"></ToggleColumn>
-  <Table :columns="table.columns" :data="table.list"></Table>
+  <el-table :data="table.list">
+    <ElColumn :columns="table.columns"></ElColumn>
+  </el-table>
 </template>
 <script setup>
 import { reactive } from 'vue'

@@ -1,0 +1,62 @@
+<h2>RemoteSelect</h2>
+<p>获取远程数据的ElSelect，默认在展开时才触发请求</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">RemoteSelect</span></span>
+<span class="line"><span style="color:#C792EA">    v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">selectModel</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :method</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">getList</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    filterable</span></span>
+<span class="line"><span style="color:#C792EA">    style</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">width: 200px</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    @change</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">$message.info($event)</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">RemoteSelect</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> ref</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> selectModel </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> ref</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">''</span><span style="color:#BABED8">)</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#BABED8">  getList </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> ()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> new</span><span style="color:#FFCB6B"> Promise</span><span style="color:#BABED8">(</span><span style="color:#BABED8;font-style:italic">resolve</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">      setTimeout</span><span style="color:#F07178">(</span><span style="color:#89DDFF">()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">          resolve</span><span style="color:#F07178">([</span></span>
+<span class="line"><span style="color:#89DDFF">              {</span><span style="color:#F07178">value</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">a</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">一</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">              {</span><span style="color:#F07178">value</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">b</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">二</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">              {</span><span style="color:#F07178">value</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">c</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">三</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#F07178">          ])</span></span>
+<span class="line"><span style="color:#89DDFF">      },</span><span style="color:#F78C6C"> 2000</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p>除以下prop，可传递el-select的其它prop，如filterable</p>
+<p><code>modelValue</code> <em>String | Array | Number</em><br>v-model双向绑定选中值</p>
+<p><code>list</code> <em>Array</em><br>可通过v-model:list双向绑定选项列表</p>
+<p><code>multiple</code> <em>Boolean</em><br>是否多选</p>
+<p><code>value-as-key</code> <em>Boolean</em><br>是否将选项的value作为Option的key，默认以v-for的index作为key</p>
+<p><code>value-key</code> <em>String</em> （default <code>&#39;value&#39;</code>）<br>选项对应value的key</p>
+<p><code>label-key</code> <em>String</em> （default <code>&#39;label&#39;</code>）<br>选项对应文本的key</p>
+<p><code>key-map</code> <em>Object</em><br>同时设置 valueKey 与 labelKey，优先级更高</p>
+<p><code>method</code> <em>Function</em><br>查询数据的函数/方法，结果为Falsy则认为请求失败，可返回一个Promise<result>。例如使用axios.get()</p>
+<p><code>refresh</code> <em>Function</em><br>可通过v-model:refresh获取组件内部的查询方法</p>
+<p><code>process</code> <em>Function</em><br>处理 method 成功返回后的结果</p>
+<p><code>param</code> <em>Object | Function | String</em><br>调用method时的参数</p>
+<p><code>chosen</code> <em>Object | Array</em><br>通过v-model:chosen获取选中对象</p>
+<p><code>auto-get</code> <em>Boolean</em><br>是否挂载后立即请求，否则在点开时请求</p>
+<p><code>format-label</code> <em>Function</em><br>修改Option的label，参数分别为：当前项，当前项索引</p>
+<p><code>check</code> <em>Function</em><br>点开获取数据时根据该函数返回值确定可否发送请求</p>
+<p><code>text-mode</code> <em>Boolean</em><br>是否仅显示选中项的文本</p>
+<p><code>text-format</code> <em>Function</em><br>修改当启用textMode时显示的文本，参数：选中项</p>
+<p><code>parent-code</code> <em>String | Array | Number</em><br>关联值，该值变化后会清空绑定值与选项</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#BABED8">当 some 变化后，</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#BABED8">RemoteSelect</span><span style="color:#89DDFF">></span><span style="color:#BABED8">的值与选项都会清空</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">select</span><span style="color:#C792EA"> v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">some</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">option</span><span style="color:#C792EA"> value</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span><span style="color:#BABED8">1</span><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">option</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">select</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">RemoteSelect</span><span style="color:#89DDFF"> :parentCode="some" /></span></span></code></pre>
+<p><code>option-disabled</code> <em>Function</em><br>用于判断是否禁用每一项Option，参数：当前项，当前项索引</p>
+<p><code>get-selected</code> <em>Function</em><br>手动处理获取选中项的过程，参数：<code>{ multiple, keyMap, list, value }</code></p>
+<p><code>cache</code> <em>Boolean</em><br>启用则根据绑定的list判断是否需要在展开时发送请求</p>
+<p><code>loader</code> <em>Function</em><br>手动获取数据，此时method和param不生效</p>
+<p><code>strict</code> <em>Boolean</em><br>开启后则展开时仅当parentCode有效才会发送请求</p>
+<p><code>all</code> <em>Boolean</em> （default <code>false</code>）<br>是否使用 <code>v-el-select:all</code> 增加一键全选功能，仅多选模式生效</p>
+<h2>emits</h2>
+<p>除以下事件，可监听Select的其它事件，如change</p>
+<p><code>load</code> (value)<br>成功加载数据后触发。<code>value</code>: 返回的列表结果，应该是数组</p>
+<h2>slots</h2>
+<p><code>default({ item, index })</code><br>选项显示的内容。<code>item</code>: 单个选项，<code>index</code>: 选项index</p>
+<p><code>dropdown({ list })</code><br>替换<code>&lt;el-select&gt;&lt;el-option /&gt;&lt;/el-select&gt;</code>中的整个Option。<code>list</code>: 选项数组</p>
+<p><code>text({ text })</code><br>textMode对应的文本内容。<code>text</code>: 选中项</p>

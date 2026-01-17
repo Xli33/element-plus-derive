@@ -1,0 +1,100 @@
+<h2>PageTable</h2>
+<p>远程分页/本地分页的el-table</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">button</span><span style="color:#C792EA"> :loading</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTable.loading</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> @click</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">search</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span><span style="color:#BABED8">查询</span><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">button</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">PageTable</span></span>
+<span class="line"><span style="color:#C792EA">    ref</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTableRef</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    v-model:selection</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTable.selection</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    v-model:loading</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTable.loading</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :columns</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTable.columns</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :method</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">getList</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    page-key</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">current</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    size-key</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">size</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    data-key</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">list</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    total-key</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">total</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    use-page-num</span></span>
+<span class="line"><span style="color:#C792EA">    :max-height</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">400</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    show-header</span></span>
+<span class="line"><span style="color:#89DDFF">    border</span></span>
+<span class="line"><span style="color:#C792EA">    stripe</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF"> #</span><span style="color:#C792EA">num</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">{</span><span style="color:#BABED8"> column </span><span style="color:#89DDFF">}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span><span style="color:#BABED8">{{ column.title }}</span><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">PageTable</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> shallowReactive</span><span style="color:#89DDFF">,</span><span style="color:#BABED8"> useTemplateRef</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> refPageTable </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> useTemplateRef</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">pageTableRef</span><span style="color:#89DDFF">'</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> pageTable </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> shallowReactive</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#F07178">  loading</span><span style="color:#89DDFF">:</span><span style="color:#FF9CAC"> false</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">  selection</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> []</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">  columns</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#BABED8">  ]</span></span>
+<span class="line"><span style="color:#89DDFF">}</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#C792EA">function</span><span style="color:#82AAFF"> search</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BABED8">  refPageTable</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">value</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">search</span><span style="color:#F07178">()</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#C792EA">function</span><span style="color:#82AAFF"> getList</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">  return</span><span style="color:#89DDFF"> new</span><span style="color:#FFCB6B"> Promise</span><span style="color:#F07178">(</span><span style="color:#89DDFF">(</span><span style="color:#BABED8;font-style:italic">resolve</span><span style="color:#89DDFF">)</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">    setTimeout</span><span style="color:#F07178">(</span><span style="color:#89DDFF">()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">      resolve</span><span style="color:#F07178">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#F07178">        ress</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Array</span><span style="color:#F07178">(</span><span style="color:#F78C6C">30</span><span style="color:#F07178">)</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">fill</span><span style="color:#F07178">(</span><span style="color:#F78C6C">0</span><span style="color:#F07178">)</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">map</span><span style="color:#F07178">(</span><span style="color:#89DDFF">(</span><span style="color:#BABED8;font-style:italic">e</span><span style="color:#89DDFF">,</span><span style="color:#BABED8;font-style:italic"> i</span><span style="color:#89DDFF">)</span><span style="color:#C792EA"> =></span><span style="color:#F07178"> (</span><span style="color:#89DDFF">{</span><span style="color:#F07178"> num</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> i</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">1010</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> time</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">----</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF"> }</span><span style="color:#F07178">))</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">        total</span><span style="color:#89DDFF">:</span><span style="color:#F78C6C"> 30</span></span>
+<span class="line"><span style="color:#89DDFF">      }</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p><code>columns</code> <em>Array</em> （default <code>[]</code>）<br>列配置</p>
+<p><code>modelValue</code> <em>Array</em> （default <code>[]</code>）<br>双向绑定列表数据</p>
+<p><code>method</code> <em>Function</em><br>远程请求方法</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> getResult </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> ()</span><span style="color:#C792EA"> =></span><span style="color:#BABED8"> axios</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">get</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">''</span><span style="color:#BABED8">)</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">then</span><span style="color:#BABED8">(</span><span style="color:#BABED8;font-style:italic">res</span><span style="color:#C792EA"> =></span><span style="color:#BABED8"> res</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">data)</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">PageTable</span><span style="color:#89DDFF"> :</span><span style="color:#BABED8">method</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">getResult</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> /></span></span></code></pre>
+<p><code>param</code> <em>Object | Function</em><br>调用 method 时传入的参数或者返回参数的函数</p>
+<p><code>data-key</code> <em>String</em><br>返回值中对应的列表数据key<br>如返回结构是 <code>{ result: [1,2,3], total: 100 }</code>，则<code>dataKey=&#39;result&#39;</code></p>
+<p><code>total-key</code> <em>String</em><br>返回值中对应的分页总条数key<br>如返回结构是 <code>{ result: [1,2,3], total: 100 }</code>，则<code>totalKey=&#39;total&#39;</code></p>
+<p><code>page-key</code> <em>String</em><br>请求时传递的分页参数中 first 对应 key<br>后端分页一般要求指定起始数据索引或者“页码”，以及获取多少条数据<br>如后端接口给定的分页参数是 firstIndex 对应起始索引<code>pageKey=&#39;firstIndex&#39;</code></p>
+<p><code>size-key</code> <em>String</em><br>请求时传递的分页参数中 size 对应 key。<br>后端分页一般要求指定起始数据索引或者“页码”，以及获取多少条数据<br>如后端接口给定的分页参数是 amount 对应需要获取的条数<code>sizeKey=&#39;amount&#39;</code></p>
+<p><code>page-map</code> <em>Object</em><br>对象形式传递分页参数映射</p>
+<p><code>border</code> <em>Boolean</em><br>对应el-table的border</p>
+<p><code>process</code> <em>Function</em><br>处理接口返回列表数据的函数</p>
+<p><code>is-local</code> <em>Boolean</em><br>是否本地分页</p>
+<p><code>page-size-opts</code> <em>Array</em> （default <code>[30, 50, 100]</code>）<br>分页条数选项</p>
+<p><code>auto-remain</code> <em>Boolean</em><br>查询失败时不清除之前获取到的结果</p>
+<p><code>bottom-dis</code> <em>Number | String</em> （default <code>45</code>）<br>计算Table的maxHeight时，Table距离视口底部的距离</p>
+<p><code>init-size</code> <em>Number</em><br>初始分页条数</p>
+<p><code>check</code> <em>Function</em><br>远程查询时额外检测的方法</p>
+<p><code>use-page-num</code> <em>Boolean</em> （default <code>true</code>）<br>查询时是否用页码而不是用当页第一条的索引</p>
+<p><code>title</code> <em>String</em><br>head title</p>
+<p><code>show-header</code> <em>Boolean</em><br>是否显示header</p>
+<p><code>transfer</code> <em>Boolean</em> （default <code>true</code>）<br>Transfer</p>
+<p><code>fullscreen</code> <em>Boolean</em><br>最大化时是否全屏</p>
+<p><code>store-at</code> <em>String</em><br>传至ToggleColumn组件的storeAt</p>
+<p><code>hide-page</code> <em>Boolean</em><br>隐藏分页</p>
+<p><code>auto-max-height</code> <em>Boolean</em> （default <code>true</code>）<br>自动设置el-table的maxHeight</p>
+<p><code>max-height</code> <em>Number | String</em><br>el-table的maxHeight</p>
+<p><code>height</code> <em>Number | String</em><br>el-table的height</p>
+<p><code>auto-height</code> <em>Boolean</em><br>自动设置Table的height</p>
+<p><code>maximize-height-type</code> <em>String</em> （default <code>&#39;maxHeight&#39;</code>）<br>最大化时自动计算哪种高度</p>
+<h2>emits</h2>
+<p><code>load</code> (res)<br>成功加载列表后触发。<code>res</code>: 获取到的结果</p>
+<p><code>reload</code><br>点击刷新图标触发，仅本地分页时生效</p>
+<p><code>change-col</code> (checked)<br>内部组件切换列后触发。<code>checked</code>: 切换的列</p>
+<p><code>maximize-change</code> (maximized)<br>切换最大化后触发。<code>maximized</code>: 是否最大化</p>
+<h2>slots</h2>
+<p><code>title()</code><br>左上角的标题</p>
+<p><code>headerAction()</code><br>右上角功能区</p>
+<p><code>headerActionEnd()</code><br>右上角功能区右侧</p>
+<p><code>name({row, index})</code><br>传给Table的动态slot，需要列配置中指定slot。e.g. <code>[{ slot: &#39;name&#39; }]</code></p>

@@ -1,0 +1,104 @@
+<h2>CurdTable</h2>
+<p>具有增删功能的el-table</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">CurdTable</span></span>
+<span class="line"><span style="color:#C792EA">    v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.list</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :columns</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.columns</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    size</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">small</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :action-width</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">130</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :add-row</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.add</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF"> #</span><span style="color:#C792EA">num</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">{</span><span style="color:#BABED8"> row</span><span style="color:#89DDFF">,</span><span style="color:#BABED8"> index </span><span style="color:#89DDFF">}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">      &#x3C;</span><span style="color:#F07178">Input</span><span style="color:#C792EA"> v-model.trim</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.list[index].num</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">Input</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF"> #</span><span style="color:#C792EA">moreAction</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">{</span><span style="color:#BABED8"> row </span><span style="color:#89DDFF">}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">      &#x3C;</span><span style="color:#F07178">Button</span><span style="color:#C792EA"> size</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">small</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">ivu-mr-8</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span><span style="color:#BABED8">查看</span><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">Button</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">CurdTable</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> table </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F07178">  columns</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">emoji</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">emoji</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      type</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">selection</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">exp</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">exp</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      slot</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#82AAFF">      renderHeader</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> (</span><span style="color:#BABED8;font-style:italic">h</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8;font-style:italic"> column</span><span style="color:#89DDFF"> })</span><span style="color:#C792EA"> =></span><span style="color:#BABED8"> (</span></span>
+<span class="line"><span style="color:#89DDFF">        &#x3C;></span></span>
+<span class="line"><span style="color:#89DDFF">          {</span><span style="color:#BABED8">column</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">title</span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">          &#x3C;</span><span style="color:#F07178">input</span><span style="color:#C792EA"> value</span><span style="color:#89DDFF">={</span><span style="color:#BABED8">column</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">title</span><span style="color:#89DDFF">} </span><span style="color:#C792EA">onInput</span><span style="color:#89DDFF">={(</span><span style="color:#BABED8;font-style:italic">e</span><span style="color:#89DDFF">)</span><span style="color:#C792EA"> =></span><span style="color:#BABED8"> (column</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">title </span><span style="color:#89DDFF">=</span><span style="color:#BABED8"> e</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">target</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">value)</span><span style="color:#89DDFF">} /></span></span>
+<span class="line"><span style="color:#89DDFF">        &#x3C;/></span></span>
+<span class="line"><span style="color:#BABED8">      )</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#BABED8">  ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">  list</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      emoji</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">😶‍🌫️🤨😐</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      exp</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">ԅ(¯﹃¯ԅ)</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      num</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> Math</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">random</span><span style="color:#BABED8">()</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      time</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Date</span><span style="color:#BABED8">()</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">toLocaleString</span><span style="color:#BABED8">()</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      emoji</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">😠😪</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      exp</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">ヾ(•ω•`)o</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      num</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> Math</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">random</span><span style="color:#BABED8">()</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      time</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Date</span><span style="color:#BABED8">()</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">toLocaleString</span><span style="color:#BABED8">()</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#BABED8">  ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#82AAFF">  add</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> ()</span><span style="color:#C792EA"> =></span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    {</span></span>
+<span class="line"><span style="color:#F07178">      emoji</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D"> 😏🤤</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      exp</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">Σ(っ °Д °;)っ</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      num</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> Math</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">random</span><span style="color:#BABED8">()</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      time</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Date</span><span style="color:#BABED8">()</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">toLocaleString</span><span style="color:#BABED8">()</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#BABED8">  ]</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p><code>modelValue</code> <em>Array</em> （default <code>[]</code>）<br>v-model双向绑定列表数据</p>
+<p><code>columns</code> <em>Array</em> （default <code>[]</code>）<br>iview Table columns</p>
+<p><code>disabled</code> <em>Boolean</em><br>隐藏控制列</p>
+<p><code>addable</code> <em>Boolean</em> （default <code>true</code>）<br>可否增加数据</p>
+<p><code>action-width</code> <em>Number</em> （default <code>90</code>）<br>控制列宽度</p>
+<p><code>action-align</code> <em>String</em> （default <code>&#39;center&#39;</code>）<br>控制列水平对齐</p>
+<p><code>action-fixed</code> <em>String</em><br>控制列是否固定</p>
+<p><code>action-text</code> <em>String</em><br>控制列表头文本</p>
+<p><code>action-col</code> <em>Object</em><br>右侧控制列</p>
+<p><code>add-row</code> <em>Function</em> （default <code>() =&gt; []</code>）<br>新增行时需要添加的数据</p>
+<p><code>border</code> <em>Boolean</em><br>Table的border</p>
+<p><code>size</code> <em>String</em><br>Table的size</p>
+<p><code>before-add</code> <em>Function</em><br>返回Promise以决定何时新增数据</p>
+<p><code>before-remove</code> <em>Function</em><br>返回Promise以决定何时删除数据</p>
+<p><code>add-btn-type</code> <em>String</em> （default <code>&#39;default&#39;</code>）<br>新增按钮type</p>
+<p><code>add-btn-size</code> <em>String</em><br>新增按钮size</p>
+<p><code>add-btn-ghost</code> <em>Boolean</em> （default <code>false</code>）<br>新增按钮的ghost</p>
+<p><code>add-btn-disabled</code> <em>Boolean</em><br>新增按钮的disabled</p>
+<p><code>add-btn</code> <em>Object</em><br>传给新增Button的prop</p>
+<p><code>del-btn-type</code> <em>String</em> （default <code>&#39;warning&#39;</code>）<br>删除按钮type</p>
+<p><code>del-btn-size</code> <em>String</em> （default <code>&#39;small&#39;</code>）<br>删除按钮size</p>
+<p><code>del-btn-ghost</code> <em>Boolean</em> （default <code>true</code>）<br>删除按钮的ghost</p>
+<p><code>del-btn</code> <em>Object</em><br>传给删除按钮的prop</p>
+<p><code>add-text</code> <em>String</em><br>新增按钮文本</p>
+<p><code>hide-del-btn</code> <em>Function</em><br>是否隐藏每行的删除按钮，通过函数返回值决定</p>
+<p><code>del-btn-disabled</code> <em>Function</em> （default <code>() =&gt; false</code>）<br>是否禁用每行删除按钮，通过函数返回值决定</p>
+<h2>emits</h2>
+<p><code>add</code> (row)<br>新增后触发。<code>row</code>：新增的行</p>
+<p><code>remove</code> (row)<br>删除后触发。<code>row</code>：删除的行</p>
+<p><code>change</code> (isAdd)<br>增加或删除后触发。<code>isAdd</code>：是否新增了数据</p>
+<h2>slots</h2>
+<p><code>columns</code><br>直接传递 <code>&lt;el-table-column&gt;</code></p>
+<p><code>name({row, index})</code><br>通过数组配置传递动态slot，需要列配置中指定slot。e.g. <code>[{ slot: &#39;name&#39; }]</code></p>
+<p><code>moreAction({ row, index })</code><br>每行删除按钮旁的更多内容。<code>row</code>：行，<code>index</code>：索引</p>

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>apollo-element-plus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/theme-chalk/dark/css-vars.css" />
+    <link
+      id="markdown-css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.5.26/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.6.4/dist/vue-router.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/index.full.min.js"></script>
+    <style>
+      /* html.dark {
+        .shiki,
+        .shiki span {
+          color: var(--shiki-dark) !important;
+          background-color: var(--shiki-dark-bg) !important;
+        }
+      } */
+      body {
+        margin: 0;
+        font-family:
+          'Microsoft YaHei', '微软雅黑', 'PingFang SC', ' Hiragino Sans GB', 'SimSun', 'sans-serif';
+      }
+
+      #app {
+        width: 70vw;
+        height: 100vh;
+        margin: 0 auto;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      [v-cloak] {
+        display: none;
+      }
+
+      .el-container {
+        height: 100%;
+      }
+
+      .el-aside {
+        height: 100%;
+        padding: 2vh 0;
+      }
+
+      .el-menu {
+        border-right: none;
+      }
+    </style>
+    <script>
+      const matchDark = window.matchMedia('(prefers-color-scheme: dark)')
+      matchDark.addEventListener('change', (e) => {
+        const $markdownCss = document.getElementById('markdown-css')
+        if (e.target.matches) {
+          $markdownCss.href = $markdownCss.href.replace(
+            'github-markdown.min.css',
+            'github-markdown-dark.min.css'
+          )
+        } else {
+          $markdownCss.href = $markdownCss.href.replace(
+            'github-markdown-dark.min.css',
+            'github-markdown.min.css'
+          )
+        }
+        document.documentElement.classList.toggle('dark', e.target.matches)
+      })
+      matchDark.dispatchEvent(new Event('change'))
+    </script>
+  </head>
+
+  <body>
+    <div id="app" v-cloak>
+      <el-container>
+        <el-aside width="200px">
+          <el-scrollbar>
+            <el-menu v-if="menus.length" :default-active="activeMenu" :default-openeds="autoOpends">
+              <template v-for="(item, index) in menus" :key="index">
+                <!-- 一级菜单 -->
+                <el-menu-item v-if="!item.sub" :index="item.route || item.name" @click="open(item)">
+                  {{ item.name }}
+                </el-menu-item>
+                <el-sub-menu v-else :index="item.name">
+                  <!-- 二级菜单 -->
+                  <template #title>
+                    <span>{{ item.name }}</span>
+                  </template>
+                  <template v-for="(subMenu, subMenuIndex) in item.sub" :key="subMenuIndex">
+                    <el-menu-item v-if="!subMenu.sub" :index="subMenu.name" @click="open(subMenu)">
+                      {{ subMenu.name }}
+                    </el-menu-item>
+
+                    <!-- 三级菜单 -->
+                    <el-sub-menu v-else :index="subMenu.name">
+                      <template #title>
+                        <span>{{ subMenu.name }}</span>
+                      </template>
+                      <el-menu-item
+                        v-for="(thirdMenu, thirdMenuIndex) in subMenu.sub"
+                        :key="thirdMenuIndex"
+                        :index="thirdMenu.name"
+                        @click="open(thirdMenu)">
+                        {{ thirdMenu.name }}
+                      </el-menu-item>
+                    </el-sub-menu>
+                  </template>
+                </el-sub-menu>
+              </template>
+            </el-menu>
+          </el-scrollbar>
+        </el-aside>
+        <el-main class="markdown-body">
+          <el-scrollbar>
+            <router-view v-slot="{ Component, route }">
+              <keep-alive>
+                <component
+                  v-if="route.name"
+                  :is="Component"
+                  :key="route.name"
+                  :content="route.meta.content"></component>
+              </keep-alive>
+            </router-view>
+          </el-scrollbar>
+        </el-main>
+      </el-container>
+    </div>
+
+    <script>
+      const { createApp, onMounted, shallowRef, computed } = Vue
+      const app = createApp({
+        setup() {
+          const menus = shallowRef([]),
+            autoOpends = []
+          const ViewMD = {
+            template: `<div v-html='content' class='md-content'></div>`,
+            props: {
+              content: String
+            },
+            setup(props) {
+              // onMounted(() => {
+              //   // document
+              //   //   .getElementById('app')
+              //   //   .querySelectorAll('.md-content pre code')
+              //   //   .forEach((block) => {
+              //   //     hljs.highlightElement(block)
+              //   //   })
+              // })
+              return {}
+            }
+          }
+          const route = VueRouter.useRoute()
+          const activeMenu = computed(() => route.name)
+
+          const open = (e) => {
+            if (e.name === router.currentRoute.value.name) return
+            // console.log(e);
+            router.replace({
+              name: e.route || e.name
+            })
+          }
+
+          onMounted(async () => {
+            const res = await fetch('menus.json').then((res) => res.json())
+            menus.value = res
+
+            const recursiveAddRoute = (menus) => {
+              menus.forEach((e, i) => {
+                if (!e.sub) {
+                  router.addRoute({
+                    name: e.route || e.name,
+                    path: '/' + (e.route || e.url.replace(/\.txt$/, '')),
+                    meta: {
+                      url: e.url
+                    },
+                    component: ViewMD
+                  })
+                  return
+                }
+                autoOpends.push(e.name)
+                recursiveAddRoute(e.sub)
+              })
+            }
+            recursiveAddRoute(menus.value)
+            router.addRoute({
+              path: '/',
+              redirect: { name: 'start' }
+            })
+            loadingRoutes = null
+            router.replace(route.fullPath)
+            console.log(menus, autoOpends, router.getRoutes(), route)
+          })
+
+          return {
+            activeMenu,
+            menus,
+            autoOpends,
+            open
+          }
+        }
+      })
+      const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
+        routes: []
+      })
+      let loadingRoutes = true
+      router.beforeEach(async (to, from) => {
+        // console.log(to, from);
+        const toRoute = to.matched[to.matched.length - 1]
+        // 当未获取到路由配置时允许跳转不存在的地址，以免始终会重定向到 /start。当路由配置加载后会通过 replace 尝试导航到存在的路由
+        if (to.fullPath !== '/' && !toRoute) return loadingRoutes
+        // 若加载过对应txt则不重复获取
+        if (!toRoute || toRoute.meta.loaded) return
+        try {
+          const res = await fetch('readme/' + to.meta.url).then((res) => res.text())
+          to.meta.content = toRoute.meta.content = res
+          to.meta.loaded = toRoute.meta.loaded = true
+        } catch (err) {
+          console.error(err)
+        }
+      })
+      router.afterEach((to) => {
+        // activeMenu.value = to.name;
+      })
+      app.use(router)
+      app.use(ElementPlus)
+      app.mount('#app')
+    </script>
+  </body>
+</html>

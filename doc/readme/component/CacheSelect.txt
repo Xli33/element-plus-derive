@@ -1,0 +1,38 @@
+<h2>CacheSelect</h2>
+<p>避免重复调用远程接口的RemoteSelect，同一个cacheId对应只触发一次请求</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">CacheSelect</span></span>
+<span class="line"><span style="color:#C792EA">    v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">selectModel</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :method</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">getList</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    style</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">width: 200px</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    @change</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">$message.info($event)</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">CacheSelect</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">CacheSelect</span></span>
+<span class="line"><span style="color:#C792EA">    v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">selectModel</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    :method</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">getList</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    style</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">width: 200px</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">    @change</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">$message.info($event)</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">CacheSelect</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> ref</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> selectModel </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> ref</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">''</span><span style="color:#BABED8">)</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#BABED8">      getList </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> ()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> new</span><span style="color:#FFCB6B"> Promise</span><span style="color:#BABED8">(</span><span style="color:#BABED8;font-style:italic">resolve</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">          setTimeout</span><span style="color:#F07178">(</span><span style="color:#89DDFF">()</span><span style="color:#C792EA"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">              resolve</span><span style="color:#F07178">([</span></span>
+<span class="line"><span style="color:#89DDFF">                  {</span><span style="color:#F07178">value</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">a</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">一</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">                  {</span><span style="color:#F07178">value</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">b</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">二</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">                  {</span><span style="color:#F07178">value</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">c</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">三</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#F07178">              ])</span></span>
+<span class="line"><span style="color:#89DDFF">          }</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">      },</span><span style="color:#F78C6C"> 2000</span><span style="color:#BABED8">)</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<h2>props</h2>
+<p>除以下prop，可传递RemoteSelect与Select的其它prop</p>
+<p><code>modelValue</code> <em>String | Array | Number</em><br>v-model双向绑定选中值</p>
+<p><code>cache-id</code> <em>String</em> （default <code>&#39;list&#39;</code>）<br>缓存的唯一键，当页面上同时用到多个不同数据源的CacheSelect时需传入不同值</p>
+<h2>emits</h2>
+<p>除以下事件，可监听RemoteSelect与Select的其它事件</p>
+<p><code>load</code> (list)<br>加载数据时触发。<code>list</code>：加载的数据</p>
+<p><code>change</code> (value)<br>更改选中项时触发。<code>value</code>：当前选中项</p>
+<h2>slots</h2>
+<p>同RemoteSelect</p>
