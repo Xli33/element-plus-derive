@@ -135,16 +135,17 @@
     </div>
 
     <script>
+      const contentCache = {}
       const { createApp, onMounted, shallowRef, computed } = Vue
       const app = createApp({
         setup() {
           const menus = shallowRef([]),
             autoOpends = []
           const ViewMD = {
-            template: `<div v-html='content' class='md-content'></div>`,
-            props: {
-              content: String
-            },
+            template: `<div v-once v-html='content' class='md-content'></div>`,
+            // props: {
+            //   content: String
+            // },
             setup(props) {
               // onMounted(() => {
               //   // document
@@ -154,7 +155,13 @@
               //   //     hljs.highlightElement(block)
               //   //   })
               // })
-              return {}
+              const content = contentCache[route.name]
+              if (content) {
+                delete contentCache[route.name]
+              }
+              return {
+                content
+              }
             }
           }
           const route = VueRouter.useRoute()
@@ -221,7 +228,8 @@
         if (!toRoute || toRoute.meta.loaded) return
         try {
           const res = await fetch('readme/' + to.meta.url).then((res) => res.text())
-          to.meta.content = toRoute.meta.content = res
+          // to.meta.content = toRoute.meta.content = res
+          contentCache[to.name] = res
           to.meta.loaded = toRoute.meta.loaded = true
         } catch (err) {
           console.error(err)
