@@ -27,12 +27,12 @@
         margin: 0;
         font-family:
           'Microsoft YaHei', '微软雅黑', 'PingFang SC', ' Hiragino Sans GB', 'SimSun', 'sans-serif';
+        -webkit-tap-highlight-color: transparent;
       }
 
       #app {
-        width: 70vw;
         height: 100vh;
-        margin: 0 auto;
+        margin: 0;
       }
 
       ul {
@@ -46,15 +46,66 @@
 
       .el-container {
         height: 100%;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100%;
+          visibility: hidden;
+          background-color: rgba(0, 0, 0, 0);
+          transition:
+            visibility 0.3s ease-out,
+            background-color 0.3s ease-out;
+        }
+
+        &.show {
+          .el-aside {
+            box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
+            transform: translateX(0);
+          }
+
+          &::after {
+            visibility: visible;
+            background-color: rgba(0, 0, 0, 0.2);
+          }
+        }
       }
 
       .el-aside {
+        position: fixed;
+        z-index: 1;
         height: 100%;
         padding: 2vh 0;
+        transform: translateX(-100%);
+        background: var(--el-bg-color);
+        transition: transform 0.3s ease-out;
       }
 
       .el-menu {
         border-right: none;
+      }
+
+      .markdown-body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media screen and (min-width: 1200px) {
+        #app {
+          margin: 0 10vw;
+        }
+        .el-aside {
+          transform: translateX(0);
+        }
+        .el-main {
+          margin-left: 200px;
+        }
+        .menu-toggle {
+          display: none;
+        }
       }
     </style>
     <script>
@@ -80,7 +131,7 @@
 
   <body>
     <div id="app" v-cloak>
-      <el-container>
+      <el-container :class="showMenu && 'show'">
         <el-aside width="200px">
           <el-scrollbar>
             <el-menu v-if="menus.length" :default-active="activeMenu" :default-openeds="autoOpends">
@@ -119,6 +170,7 @@
           </el-scrollbar>
         </el-aside>
         <el-main class="markdown-body">
+          <el-icon class="menu-toggle" @click="showMenu = !showMenu">📓</el-icon>
           <el-scrollbar>
             <router-view v-slot="{ Component, route }">
               <keep-alive>
@@ -136,7 +188,7 @@
 
     <script>
       const contentCache = {}
-      const { createApp, onMounted, shallowRef, computed } = Vue
+      const { createApp, onMounted, ref, shallowRef, computed } = Vue
       const app = createApp({
         setup() {
           const menus = shallowRef([]),
@@ -166,6 +218,7 @@
           }
           const route = VueRouter.useRoute()
           const activeMenu = computed(() => route.name)
+          const showMenu = ref(false)
 
           const open = (e) => {
             if (e.name === router.currentRoute.value.name) return
@@ -204,9 +257,20 @@
             loadingRoutes = null
             router.replace(route.fullPath)
             console.log(menus, autoOpends, router.getRoutes(), route)
+
+            document.querySelector('.el-container').onclick = (e) => {
+              if (
+                showMenu.value &&
+                !e.target.classList.contains('menu-toggle') &&
+                !e.target.closest('.el-sub-menu__title')
+              ) {
+                showMenu.value = false
+              }
+            }
           })
 
           return {
+            showMenu,
             activeMenu,
             menus,
             autoOpends,

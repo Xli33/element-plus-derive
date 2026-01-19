@@ -101,11 +101,11 @@ async function buildComponentHtml() {
       },
       files = (await glob('**/*.md', { cwd: srcDir, posix: true })).sort()
     menus.push(first)
-    const { route: apiDir, sub: apiSub } = first
+    const { sub: apiSub } = first
 
     for (const file of files) {
       const apiUrl = file.replace(/\.md$/, suffix)
-      const relativeTxtPath = apiDir + '/' + apiUrl
+      const relativeTxtPath = first.route + '/' + apiUrl
 
       //  构造菜单
       const each = apiUrl.split('/')
