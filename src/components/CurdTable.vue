@@ -12,7 +12,8 @@
         :label="actionText || $i18n.t('curdTable.actionText')"
         :width="actionCol.width"
         :align="actionCol.align"
-        :fixed="actionCol.fixed">
+        :fixed="actionCol.fixed"
+        :prop="actionCol.prop">
         <template #default="{ row, $index }">
           <slot name="moreAction" :row="row" :index="$index"></slot>
           <el-button
@@ -113,6 +114,7 @@ const props = defineProps({
     default(props: Obj) {
       return {
         // title: props.actionText,
+        prop: '_action',
         width: props.actionWidth,
         align: props.actionAlign,
         fixed: props.actionFixed
