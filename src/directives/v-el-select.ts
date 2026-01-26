@@ -31,7 +31,12 @@ export const elSelect: Directive = {
     el.classList.add('with-all', 'el-select-multiple')
     el.children[0]!.children[1]!.appendChild(icon)
   },
-  updated: (el: HTMLElement) => {
-    el.classList.add('with-all', 'el-select-multiple')
+  updated: (el: HTMLElement, binding, vnode) => {
+    el.classList.add('with-all')
+    if (binding.arg !== 'all') return
+    el.classList.toggle(
+      'el-select-multiple',
+      (binding.value == null || binding.value) && (vnode as Obj).ctx.props.multiple
+    )
   }
 }
