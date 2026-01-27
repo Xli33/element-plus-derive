@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-table :border="border" :data="list" :size="size" style="z-index: 0">
+    <el-table
+      v-bind="omitOwnKeys($attrs, ['style', 'class', 'id'])"
+      :border="border"
+      :data="list"
+      :size="size"
+      style="z-index: 0">
       <ElColumn v-if="columns.length" :columns="columns">
         <template v-for="item in slotColumns" #[item.slot]="params">
           <slot :name="item.slot" v-bind="params"></slot>
@@ -52,6 +57,7 @@
 import type { BtnSize, BtnType, Obj } from '@/type'
 import { type PropType, computed, ref, watch } from 'vue'
 import { ElTable, ElTableColumn, ElButton } from 'element-plus'
+import { omitOwnKeys } from 'utils-where'
 import ElColumn from './ElColumn.vue'
 import { $i18n } from '@/locale/i18n'
 
