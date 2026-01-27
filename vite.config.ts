@@ -30,6 +30,7 @@ export default defineConfig(({ command }) => {
 
     Object.entries({
       epDerive: 'src/index.ts',
+      epMod: 'src/ep-mod.ts',
       epDeriveZhCn: 'src/locale/zh-CN.ts',
       epDeriveEnUs: 'public/locale/en-US.js'
     }).forEach(async (e) => {
@@ -107,6 +108,7 @@ export default defineConfig(({ command }) => {
         },
         afterBuild() {
           // console.log(fileMap)
+          unlinkSync('dist/ep-mod.d.ts')
           unlinkSync('dist/zh-CN.d.ts')
           cpSync('src/styles', 'dist/scss', { recursive: true })
         }
@@ -119,6 +121,7 @@ export default defineConfig(({ command }) => {
       lib: {
         entry: [
           'src/index.ts',
+          'src/ep-mod.ts',
           'src/directives/index.ts',
           'src/locale/zh-CN.ts'
           // 'src/components/Combi.vue'
@@ -148,10 +151,10 @@ export default defineConfig(({ command }) => {
             if (id.includes('.vue?vue&type=style&index=0&lang.scss' /* '/components/' */)) {
               return id.match(/[a-zA-Z]+\.vue/)![0]
             }
-            // 分离iview-mods/*
-            // if (/src\/iview-mods\/[a-z-]+\.ts/.test(id)) {
-            //   return id.match(/[a-z-]+\.ts/)![0].slice(0, -3)
-            // }
+            // 分离ep-mods/*
+            if (/src\/ep-mods\/[a-z-]+\.ts/.test(id)) {
+              return id.match(/[a-z-]+\.ts/)![0].slice(0, -3)
+            }
             // 分离语言文件
             // if (/src\/locale\/\w+-\w+\.ts$/.test(id)) {
             //   const file = id.match(/[a-zA-Z-]+.ts/)![0]
@@ -183,9 +186,9 @@ export default defineConfig(({ command }) => {
             // 分离到对应文件夹
 
             const mid = chunkInfo.moduleIds[0]
-            // let matched = /src\/iview-mods\/.+\.ts$/.test(mid)
-            // if (matched) return 'iview-mods/[name].js'
-            let matched = /src\/locale\/.+\.ts$/.test(mid)
+            let matched = /src\/ep-mods\/.+\.ts$/.test(mid)
+            if (matched) return 'ep-mods/[name].js'
+            matched = /src\/locale\/.+\.ts$/.test(mid)
             if (matched) return 'locale/[name].js'
             matched = /src\/directives\/.+\.ts$/.test(mid)
             if (matched) return 'directives/[name].js'
