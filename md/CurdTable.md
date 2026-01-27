@@ -74,6 +74,8 @@ const table = {
 
 ## props
 
+除以下内容，可传递其它el-table的prop
+
 `modelValue` _Array_ （default `[]`）  
 v-model双向绑定列表数据
 

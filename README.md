@@ -287,6 +287,59 @@ import { elSelect as vElSelect } from "element-plus-derive";
 <el-select v-el-select:all="true" multiple></el-select>
 ```
 
+- 为 ElTable 添加prop：`cache-cols`，启用列宽缓存功能
+
+```js
+import 'element-plus-derive/ep-mods/table-cache-cols'
+```
+
+```vue
+<template>
+  <el-table border :cache-cols="cacheCols">
+    <!-- 直接使用ElColumn -->
+    <ElColumn :columns="columns"></ElColumn>
+    <!-- 或者使用ElTableColumn -->
+    <ElTableColumn
+      v-for="col in columns"
+      :key="col.prop"
+      :prop="col.prop"
+      :label="col.label"></ElTableColumn>
+  </el-table>
+</template>
+
+<script setup>
+const columns = [
+  {
+    prop: 'name',
+    label: '名称'
+  },
+  {
+    prop: 'age',
+    label: '年龄'
+  }
+]
+// keys 决定存储路径，cols 为列配置
+const cacheCols = {
+  // 若路径较深，建议适当扁平以简化存取的对象结构
+  // 如下会以 app.userA['page.list.cols'] 的形式读写 localStorage。若去掉中括号，对象将为 app.userA.page.list.cols 的形式
+  keys: 'app.userA.[page.list.cols]', // 或者不使用点，如 'app.userA.page_list_cols' | 'app.userA.page-list-cols'
+  cols: columns
+}
+</script>
+```
+
+也可一次性引入ep-mods下的所有模块
+
+```js
+// 本地引入
+import 'element-plus-derive/ep-mod'
+```
+
+```html
+<!-- CDN引入 -->
+<script src="https://unpkg.com/element-plus-derive/dist/umd/ep-mod.js"></script>
+```
+
 ## 组件
 
 [AllCheckbox](./md/AllCheckbox.md)  

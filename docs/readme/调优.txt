@@ -25,3 +25,44 @@
 <span class="line"></span>
 <span class="line"><span style="color:#676E95;font-style:italic">// 使用</span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">el-select</span><span style="color:#C792EA"> v-el-select</span><span style="color:#89DDFF">:</span><span style="color:#C792EA">all</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">true</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> multiple</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#FFCB6B">el-select</span><span style="color:#89DDFF">></span></span></code></pre>
+<ul>
+<li>为 ElTable 添加prop：<code>cache-cols</code>，启用列宽缓存功能</li>
+</ul>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">element-plus-derive/ep-mods/table-cache-cols</span><span style="color:#89DDFF">'</span></span></code></pre>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">el-table</span><span style="color:#89DDFF"> border </span><span style="color:#C792EA">:cache-cols</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">cacheCols</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">    &#x3C;!-- 直接使用ElColumn --></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">ElColumn</span><span style="color:#C792EA"> :columns</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">columns</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ElColumn</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">    &#x3C;!-- 或者使用ElTableColumn --></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">ElTableColumn</span></span>
+<span class="line"><span style="color:#C792EA">      v-for</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col in columns</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">      :key</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.prop</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">      :prop</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.prop</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">      :label</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.label</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ElTableColumn</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">el-table</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> columns </span><span style="color:#89DDFF">=</span><span style="color:#BABED8"> [</span></span>
+<span class="line"><span style="color:#89DDFF">  {</span></span>
+<span class="line"><span style="color:#F07178">    prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">name</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">    label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">名称</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">  },</span></span>
+<span class="line"><span style="color:#89DDFF">  {</span></span>
+<span class="line"><span style="color:#F07178">    prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">age</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">    label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">年龄</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#BABED8">]</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">// keys 决定存储路径，cols 为列配置</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> cacheCols </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">  // 若路径较深，建议适当扁平以简化存取的对象结构</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">  // 如下会以 app.userA['page.list.cols'] 的形式读写 localStorage。若去掉中括号，对象将为 app.userA.page.list.cols 的形式</span></span>
+<span class="line"><span style="color:#F07178">  keys</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">app.userA.[page.list.cols]</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#676E95;font-style:italic"> // 或者不使用点，如 'app.userA.page_list_cols' | 'app.userA.page-list-cols'</span></span>
+<span class="line"><span style="color:#F07178">  cols</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> columns</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<p>也可一次性引入ep-mods下的所有模块</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#676E95;font-style:italic">// 本地引入</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">element-plus-derive/ep-mod</span><span style="color:#89DDFF">'</span></span></code></pre>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#676E95;font-style:italic">&#x3C;!-- CDN引入 --></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> src</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">https://unpkg.com/element-plus-derive/dist/umd/ep-mod.js</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>

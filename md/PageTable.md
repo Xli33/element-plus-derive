@@ -63,6 +63,8 @@ function getList() {
 
 ## props
 
+除以下内容，可传递其它el-table的prop
+
 `columns` _Array_ （default `[]`）  
 列配置
 

@@ -68,6 +68,7 @@
 <span class="line"><span style="color:#89DDFF">}</span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
 <h2>props</h2>
+<p>除以下内容，可传递其它el-table的prop</p>
 <p><code>modelValue</code> <em>Array</em> （default <code>[]</code>）<br>v-model双向绑定列表数据</p>
 <p><code>columns</code> <em>Array</em> （default <code>[]</code>）<br>iview Table columns</p>
 <p><code>disabled</code> <em>Boolean</em><br>隐藏控制列</p>
