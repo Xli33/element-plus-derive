@@ -38,7 +38,8 @@
 <span class="line"><span style="color:#C792EA">      v-for</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col in columns</span><span style="color:#89DDFF">"</span></span>
 <span class="line"><span style="color:#C792EA">      :key</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.prop</span><span style="color:#89DDFF">"</span></span>
 <span class="line"><span style="color:#C792EA">      :prop</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.prop</span><span style="color:#89DDFF">"</span></span>
-<span class="line"><span style="color:#C792EA">      :label</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.label</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ElTableColumn</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#C792EA">      :label</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.label</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C792EA">      :width</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">col.width</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ElTableColumn</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">el-table</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
 <span class="line"></span>

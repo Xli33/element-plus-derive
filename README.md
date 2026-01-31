@@ -303,7 +303,8 @@ import 'element-plus-derive/ep-mods/table-cache-cols'
       v-for="col in columns"
       :key="col.prop"
       :prop="col.prop"
-      :label="col.label"></ElTableColumn>
+      :label="col.label"
+      :width="col.width"></ElTableColumn>
   </el-table>
 </template>
 
