@@ -258,7 +258,9 @@ function setColumns(init?: boolean) {
     config = getPathValue(JSON.parse(localStorage[first]), restKeys)
   ;(initial[props.cacheId!]?.cols || props.modelValue).forEach((e: Obj) => {
     if (!e.hasOwnProperty('_visible')) {
-      e._visible = props.storeAt ? config[e.prop] == undefined || config[e.prop].visible : true
+      e._visible = props.storeAt
+        ? config[e.prop] == undefined || (config[e.prop].visible ?? true) //== undefined || config[e.prop].visible
+        : true
     }
     if (!e.hasOwnProperty('_switchable')) {
       e._switchable = true
