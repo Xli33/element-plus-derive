@@ -7,9 +7,9 @@
 <span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">el-table</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
-<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> reactive</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> ref</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> table </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> reactive</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> table </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> ref</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">{</span></span>
 <span class="line"><span style="color:#F07178">  list</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
 <span class="line"><span style="color:#89DDFF">    {</span></span>
 <span class="line"><span style="color:#F07178">      year</span><span style="color:#89DDFF">:</span><span style="color:#F78C6C"> 2000</span><span style="color:#89DDFF">,</span></span>
