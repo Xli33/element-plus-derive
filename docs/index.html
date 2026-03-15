@@ -16,35 +16,25 @@
       id="markdown-css"
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown.min.css" />
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@3.5.26/dist/vue.global.prod.js"></script> -->
-    <script type="importmap">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.5.29/dist/vue.global.prod.js"></script>
+    <!-- <script type="importmap">
       {
         "imports": {
-          "vue": "https://cdn.jsdelivr.net/npm/vue@3.5.29/dist/vue.esm-browser.js"
+          "vue": "https://cdn.jsdelivr.net/npm/vue@3.5.29/dist/vue.esm-browser.prod.js"
         }
       }
-    </script>
-    <script type="module">
+    </script> -->
+    <!-- <script type="module">
       import * as Vue from 'vue'
       window.Vue = Vue
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/vue-router@4.6.4/dist/vue-router.global.prod.js"></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/index.full.min.js"></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/locale/zh-cn.min.js"></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.3.2/dist/index.iife.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/element-plus-derive/dist/umd/index.js"></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.6.4/dist/vue-router.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/index.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/locale/zh-cn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.3.2/dist/index.iife.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus-derive/dist/umd/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
     <style>
       /* html.dark {
         .shiki,
@@ -105,7 +95,7 @@
           }
 
           &::after {
-            z-index: 1;
+            z-index: 3;
             visibility: visible;
             background-color: rgba(0, 0, 0, 0.2);
           }
@@ -291,7 +281,7 @@
       </el-container>
     </div>
 
-    <script type="module">
+    <script>
       const contentCache = {}
       const {
         createApp,
