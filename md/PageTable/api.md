@@ -1,66 +1,3 @@
-## PageTable
-
-远程分页/本地分页的el-table
-
-```vue
-<template>
-  <button :loading="pageTable.loading" @click="search">查询</button>
-  <PageTable
-    ref="pageTableRef"
-    v-model:selection="pageTable.selection"
-    v-model:loading="pageTable.loading"
-    :columns="pageTable.columns"
-    :method="getList"
-    page-key="current"
-    size-key="size"
-    data-key="list"
-    total-key="total"
-    use-page-num
-    :max-height="400"
-    show-header
-    border
-    stripe>
-    <template #num="{ column }">{{ column.title }}</template>
-  </PageTable>
-</template>
-<script setup>
-import { shallowReactive, useTemplateRef } from 'vue'
-
-const refPageTable = useTemplateRef('pageTableRef')
-const pageTable = shallowReactive({
-  loading: false,
-  selection: [],
-  columns: [
-    {
-      title: 'num',
-      key: 'num'
-    },
-    {
-      title: 'date',
-      key: 'date'
-    },
-    {
-      title: 'time',
-      key: 'time'
-    }
-  ]
-})
-function search() {
-  refPageTable.value.search()
-}
-function getList() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        ress: new Array(30).fill(0).map((e, i) => ({ num: i, date: '1010', time: '----' })),
-        total: 30
-      })
-    })
-  })
-}
-</script>
-```
-
 ## props
 
 除以下内容，可传递其它el-table的prop
@@ -188,5 +125,5 @@ el-table的height
 `headerActionEnd()`  
 右上角功能区右侧
 
-`name({row, index})`  
-传给Table的动态slot，需要列配置中指定slot。e.g. `[{ slot: 'name' }]`
+`[name]({row, index})`  
+传给Table的动态slot，对应列的插槽名，需要列配置中指定slot。e.g. `[{ slot: 'name' }]`

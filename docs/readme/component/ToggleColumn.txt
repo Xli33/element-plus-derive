@@ -1,7 +1,14 @@
 <h2>ToggleColumn</h2>
 <p>用于切换el-table列的显示状态</p>
-<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
-<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">ToggleColumn</span><span style="color:#C792EA"> v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.columns</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ToggleColumn</span><span style="color:#89DDFF">></span></span>
+<h4>基本用法</h4>
+
+          <div class="demo-block">
+            <live-preview demo-code="%3Ctemplate%3E%0A%20%20%3CToggleColumn%20v-model=%22table.columns%22%20style=%22float:right;margin-bottom:10px%22%3E%3C/ToggleColumn%3E%0A%20%20%3Cel-table%20:data=%22table.list%22%3E%0A%20%20%20%20%3CElColumn%20:columns=%22table.columns%22%3E%3C/ElColumn%3E%0A%20%20%3C/el-table%3E%0A%3C/template%3E%0A%3Cscript%20setup%3E%0Aimport%20%7B%20ref%20%7D%20from%20'vue'%0A%0Aconst%20table%20=%20ref(%7B%0A%20%20list:%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20year:%202000,%0A%20%20%20%20%20%20date:%20'2000-01-01'%0A%20%20%20%20%7D,%0A%20%20%20%20%7B%0A%20%20%20%20%20%20year:%201000,%0A%20%20%20%20%20%20date:%20'1000-01-01'%0A%20%20%20%20%7D%0A%20%20%5D,%0A%20%20columns:%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20type:%20'selection',%0A%20%20%20%20%20%20prop:%20'selection',%0A%20%20%20%20%20%20width:%2060,%0A%20%20%20%20%20%20_switchable:%20false%20//%20%E8%AE%A9%E8%AF%A5%E5%88%97%E4%B8%8D%E5%8F%AF%E8%A2%AB%E5%88%87%E6%8D%A2%0A%20%20%20%20%7D,%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label:%20'year',%0A%20%20%20%20%20%20prop:%20'year'%0A%20%20%20%20%7D,%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label:%20'date',%0A%20%20%20%20%20%20prop:%20'date'%0A%20%20%20%20%7D%0A%20%20%5D%0A%7D)%0A%3C/script%3E"></live-preview>
+            <div class="demo-code-wrapper">
+              <details>
+                <summary>查看源码</summary>
+                <pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">ToggleColumn</span><span style="color:#C792EA"> v-model</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.columns</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> style</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">float:right;margin-bottom:10px</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ToggleColumn</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">el-table</span><span style="color:#C792EA"> :data</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.list</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">ElColumn</span><span style="color:#C792EA"> :columns</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">table.columns</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ElColumn</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">el-table</span><span style="color:#89DDFF">></span></span>
@@ -23,21 +30,25 @@
 <span class="line"><span style="color:#F07178">  columns</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
 <span class="line"><span style="color:#89DDFF">    {</span></span>
 <span class="line"><span style="color:#F07178">      type</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">selection</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">selection</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">selection</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#F07178">      width</span><span style="color:#89DDFF">:</span><span style="color:#F78C6C"> 60</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#F07178">      _switchable</span><span style="color:#89DDFF">:</span><span style="color:#FF9CAC"> false</span><span style="color:#676E95;font-style:italic"> // 让该列不可被切换</span></span>
 <span class="line"><span style="color:#89DDFF">    },</span></span>
 <span class="line"><span style="color:#89DDFF">    {</span></span>
-<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">year</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">year</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F07178">      label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">year</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">year</span><span style="color:#89DDFF">'</span></span>
 <span class="line"><span style="color:#89DDFF">    },</span></span>
 <span class="line"><span style="color:#89DDFF">    {</span></span>
-<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F07178">      label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span></span>
 <span class="line"><span style="color:#89DDFF">    }</span></span>
 <span class="line"><span style="color:#BABED8">  ]</span></span>
 <span class="line"><span style="color:#89DDFF">}</span><span style="color:#BABED8">)</span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+              </details>
+            </div>
+          </div>
+          
 <h2>props</h2>
 <p><code>modelValue</code> <em>Array</em><br>v-model双向绑定Table列</p>
 <p><code>title</code> <em>String</em><br>全选框文本</p>

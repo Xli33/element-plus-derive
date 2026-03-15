@@ -1,26 +1,3 @@
-## MCalendar
-
-月度日历组件
-
-```vue
-<template>
-  <MCalendar v-model:range="calendar.range" :date="calendar.date" has-range>
-    <template #cell="{ day }"> <Badge status="success"></Badge>{{ day._text }} </template>
-  </MCalendar>
-</template>
-<script setup>
-import { shallowReactive } from 'vue'
-
-const caledar = shallowReactive({
-  range: [
-    { _date: new Date(Date.now() - 86400000 * 7) },
-    { _date: new Date(Date.now() - 86400000) }
-  ],
-  date: new Date('2000-01-01')
-})
-</script>
-```
-
 ## props
 
 `date` _Date_  
@@ -94,5 +71,5 @@ const caledar = shallowReactive({
 
 ## slots
 
-`cell({ item, index })`  
-单元格内容。`item`: 单个日期
+`cell({ day, index })`  
+单元格内容。`day`: 单个日期

@@ -1,77 +1,3 @@
-## CurdTable
-
-具有增删功能的el-table
-
-```vue
-<template>
-  <CurdTable
-    v-model="table.list"
-    :columns="table.columns"
-    size="small"
-    :action-width="130"
-    :add-row="table.add">
-    <template #num="{ row, index }">
-      <Input v-model.trim="table.list[index].num"></Input>
-    </template>
-    <template #moreAction="{ row }">
-      <Button size="small" class="ivu-mr-8">查看</Button>
-    </template>
-  </CurdTable>
-</template>
-<script setup>
-const table = {
-  columns: [
-    {
-      title: 'emoji',
-      key: 'emoji',
-      type: 'selection'
-    },
-    {
-      title: 'exp',
-      key: 'exp'
-    },
-    {
-      title: 'num',
-      key: 'num',
-      slot: 'num',
-      renderHeader: (h, { column }) => (
-        <>
-          {column.title}
-          <input value={column.title} onInput={(e) => (column.title = e.target.value)} />
-        </>
-      )
-    },
-    {
-      title: 'time',
-      key: 'time'
-    }
-  ],
-  list: [
-    {
-      emoji: '😶‍🌫️🤨😐',
-      exp: 'ԅ(¯﹃¯ԅ)',
-      num: Math.random(),
-      time: new Date().toLocaleString()
-    },
-    {
-      emoji: '😠😪',
-      exp: 'ヾ(•ω•`)o',
-      num: Math.random(),
-      time: new Date().toLocaleString()
-    }
-  ],
-  add: () => [
-    {
-      emoji: ' 😏🤤',
-      exp: 'Σ(っ °Д °;)っ',
-      num: Math.random(),
-      time: new Date().toLocaleString()
-    }
-  ]
-}
-</script>
-```
-
 ## props
 
 除以下内容，可传递其它el-table的prop
@@ -170,8 +96,8 @@ Table的size
 `columns`  
 直接传递 `<el-table-column>`
 
-`name({row, index})`  
-通过数组配置传递动态slot，需要列配置中指定slot。e.g. `[{ slot: 'name' }]`
+`[name]({row, index})`  
+通过数组配置传递动态slot，对应列的插槽名，需要列配置中指定slot。e.g. `[{ slot: 'name' }]`
 
 `moreAction({ row, index })`  
 每行删除按钮旁的更多内容。`row`：行，`index`：索引

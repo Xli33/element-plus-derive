@@ -1,6 +1,4 @@
-## ElColumn
-
-通过数组形式使用el-table-column
+#### 基本用法
 
 ```vue
 <template>
@@ -24,10 +22,8 @@
   </el-table>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="jsx">
 import { ref } from 'vue'
-import { ElButton, ElMessage } from 'element-plus'
-import { User, Timer, Edit } from '@element-plus/icons-vue'
 
 const tableData = ref([
   { date: '2024-01-01', name: 'Tom', address: 'No. 189, Grove St, Los Angeles' },
@@ -72,7 +68,7 @@ const columns = [
         prop: 'address',
         label: 'address',
         // render 函数接收 scope 参数: { row, column, $index }
-        render: ({ row }: any) => <span style="color: #666;">{row.address}</span>
+        render: ({ row }) => <span style="color: #666;">{row.address}</span>
       }
     ]
   },
@@ -83,7 +79,7 @@ const columns = [
     width: 150,
     fixed: 'right',
     // renderHeader 函数接收 scope 参数: { column, $index }
-    renderHeader: ({ column }: any) => (
+    renderHeader: ({ column }) => (
       <div style="color: #f56c6c; font-weight: bold;">
         <el-icon>
           <Timer />
@@ -92,7 +88,7 @@ const columns = [
       </div>
     ),
     // render 函数渲染操作按钮
-    render: ({ row }: any) => (
+    render: ({ row }) => (
       <ElButton type="primary" link onClick={() => ElMessage.success(`Clicked ${row.name}`)}>
         View
       </ElButton>
@@ -101,13 +97,3 @@ const columns = [
 ]
 </script>
 ```
-
-## props
-
-`columns` _Array_ （default `[]`）  
-列配置
-
-## slots
-
-`name({row, index})`  
-传给Table的动态slot，需要列配置中指定slot。e.g. `[{ slot: 'name' }]`

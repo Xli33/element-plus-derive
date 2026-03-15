@@ -1,20 +1,50 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>element-plus-derive</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/index.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/theme-chalk/dark/css-vars.css" />
     <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/element-plus-derive/dist/umd/index.css" />
+    <link
       id="markdown-css"
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.5.26/dist/vue.global.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.6.4/dist/vue-router.global.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/index.full.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@3.5.26/dist/vue.global.prod.js"></script> -->
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://cdn.jsdelivr.net/npm/vue@3.5.29/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as Vue from 'vue'
+      window.Vue = Vue
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/vue-router@4.6.4/dist/vue-router.global.prod.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/index.full.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/element-plus@2.13.1/dist/locale/zh-cn.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.3.2/dist/index.iife.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/element-plus-derive/dist/umd/index.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
     <style>
       /* html.dark {
         .shiki,
@@ -75,6 +105,7 @@
           }
 
           &::after {
+            z-index: 1;
             visibility: visible;
             background-color: rgba(0, 0, 0, 0.2);
           }
@@ -83,7 +114,7 @@
 
       .el-aside {
         position: fixed;
-        z-index: 1;
+        z-index: 9;
         height: 100%;
         padding: 2vh 0;
         transform: translateX(-100%);
@@ -93,6 +124,63 @@
 
       .el-menu {
         border-right: none;
+      }
+
+      .el-scrollbar__bar {
+        z-index: 3;
+      }
+
+      .el-anchor {
+        display: none;
+        margin-top: 5vh;
+      }
+
+      table.el-table__header,
+      table.el-table__body {
+        margin-bottom: 0;
+      }
+
+      h1.page-table-header-title {
+        border: none;
+        margin: 0;
+        font-size: medium;
+      }
+
+      ul.el-pager {
+        margin-bottom: 0;
+      }
+
+      ul.el-dropdown-menu {
+        margin: 0;
+        padding: 5px 0;
+      }
+
+      .demo-part {
+        display: flow-root;
+        position: relative;
+      }
+
+      .demo-part > .demo-code-copy {
+        position: absolute;
+        right: 0;
+        margin-top: 10px;
+        color: #fff;
+      }
+
+      .demo-code-wrapper {
+        margin-top: 10px;
+      }
+
+      .demo-code-wrapper summary {
+        margin-bottom: 5px;
+        font-size: smaller;
+        color: gray;
+      }
+
+      .demo-code-copy {
+        float: right;
+        margin-right: 10px;
+        font-size: 20px;
       }
 
       .markdown-body {
@@ -112,6 +200,9 @@
         }
         .menu-toggle {
           display: none;
+        }
+        .anchor {
+          display: block;
         }
       }
     </style>
@@ -178,28 +269,85 @@
         </el-aside>
         <el-main class="markdown-body">
           <el-icon class="menu-toggle" @click="showMenu = !showMenu">📓</el-icon>
-          <el-scrollbar>
-            <router-view v-slot="{ Component, route }">
-              <keep-alive>
-                <component
-                  v-if="route.name"
-                  :is="Component"
-                  :key="route.name"
-                  :content="route.meta.content"></component>
-              </keep-alive>
-            </router-view>
+          <el-scrollbar ref="scrollbarRef">
+            <div class="md-box">
+              <router-view v-slot="{ Component, route }">
+                <keep-alive>
+                  <component
+                    v-if="route.name"
+                    :is="Component"
+                    :key="route.name"
+                    :content="route.meta.content"></component>
+                </keep-alive>
+              </router-view>
+            </div>
           </el-scrollbar>
         </el-main>
+        <el-anchor ref="anchorRef" :offset="0" class="anchor" @click="gotoAnchor">
+          <el-anchor-link v-for="(anchor, i) in anchors" :key="i" :href="anchor.href">
+            {{ anchor.text }}
+          </el-anchor-link>
+        </el-anchor>
       </el-container>
     </div>
 
-    <script>
+    <script type="module">
       const contentCache = {}
-      const { createApp, onMounted, ref, shallowRef, computed } = Vue
+      const {
+        createApp,
+        ref,
+        shallowRef,
+        computed,
+        getCurrentInstance,
+        useTemplateRef,
+        onMounted,
+        onActivated,
+        onDeactivated
+      } = Vue
+
+      const { loadModule } = window['vue3-sfc-loader']
+      let /* sectionObserver, */ manualLink, sections
+
+      /**
+       * 挂载vue3-sfc
+       * @param {string} source - 你的 .vue 源码字符串
+       * @param {HTMLElement} el - 挂载点
+       */
+      async function mountLiveDemo(source, el) {
+        try {
+          // 将源码包装成一个伪路径
+          const component = await loadModule(Date.now() + '.vue', {
+            moduleCache: { vue: Vue }, // 共享主应用的 Vue 实例
+            getFile: () => source,
+            addStyle(textContent) {
+              //   const style = document.createElement('style')
+              //   style.textContent = textContent
+              //   const ref = document.head.getElementsByTagName('style')[0] || null
+              //   document.head.insertBefore(style, ref)
+            }
+          })
+          const app = createApp(component)
+          app
+            .use(ElementPlus, {
+              locale: ElementPlusLocaleZhCn
+            })
+            .use(epDerive)
+          for (const iconName in ElementPlusIconsVue) {
+            app.component(iconName, ElementPlusIconsVue[iconName])
+          }
+          app.mount(el)
+        } catch (err) {
+          console.error('SFC Load Error:', err)
+        }
+      }
+
       const app = createApp({
         setup() {
           const menus = shallowRef([]),
-            autoOpends = []
+            autoOpends = [],
+            refScrollbar = useTemplateRef('scrollbarRef'),
+            refAnchor = useTemplateRef('anchorRef')
+
           const ViewMD = {
             template: `<div v-once v-html='content' class='md-content'></div>`,
             // props: {
@@ -218,14 +366,117 @@
               if (content) {
                 delete contentCache[route.name]
               }
+              onMounted(() => {
+                // const demoApp = createApp({
+                //   components: {
+                //     livePreview: {
+                //       template: `<component :is="dynamicComponent" />`,
+                //       props: {
+                //         demoCode: String
+                //       },
+                //       setup(props) {
+                //         const dynamicComponent = shallowRef(null)
+                //         onMounted(async () => {
+                //           const decodedJs = decodeURI(props.demoCode)
+                //           console.log(decodedJs)
+                //           // 利用 Blob 和 URL.createObjectURL 动态导入模块
+                //           const blob = new Blob([decodedJs], { type: 'application/javascript' })
+                //           const url = URL.createObjectURL(blob)
+                //           const module = await import(url)
+                //           dynamicComponent.value = module.default
+                //           URL.revokeObjectURL(url)
+                //         })
+
+                //         return {
+                //           dynamicComponent
+                //         }
+                //       }
+                //     }
+                //   }
+                // })
+
+                // demoApp.use(ElementPlus).use(epDerive)
+                // for (const iconName in ElementPlusIconsVue) {
+                //   demoApp.component(iconName, ElementPlusIconsVue[iconName])
+                // }
+                // demoApp.mount(getCurrentInstance().proxy.$el.querySelector('.demo-block'))
+
+                // 调整结构
+                const mdHeads = Array.from(
+                    document.querySelector('.md-content').querySelectorAll('h2,h3,h4')
+                  ),
+                  cpIcon = document.createElement('i')
+                cpIcon.className = 'el-icon demo-code-copy'
+                cpIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                      <path fill="currentColor" d="M128 320v576h576V320zm-32-64h640a32 32 0 0 1 32 32v640a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V288a32 32 0 0 1 32-32M960 96v704a32 32 0 0 1-32 32h-96v-64h64V128H384v64h-64V96a32 32 0 0 1 32-32h576a32 32 0 0 1 32 32M256 672h320v64H256zm0-192h320v64H256z"></path>
+                    </svg>`
+
+                mdHeads.forEach((h) => {
+                  const div = document.createElement('div')
+                  div.className = 'demo-part'
+                  let nextElement = h.nextElementSibling
+                  while (!mdHeads.includes(nextElement)) {
+                    const tmp = nextElement.nextElementSibling
+                    div.append(nextElement)
+                    nextElement.tagName === 'PRE' && nextElement.before(cpIcon.cloneNode(true))
+                    if (!tmp) break
+                    nextElement = tmp
+                  }
+                  h.before(div)
+                  div.prepend(h)
+                })
+
+                // 上面使用@vue/compiler-sfc预编译vue到js后存在插槽提升问题，用到嵌套插槽的demo无法正常渲染
+                // 故改为直接使用vue3-sfc-loader动态渲染vue
+                const demoBlocks = getCurrentInstance().proxy.$el.querySelectorAll('.demo-block')
+
+                demoBlocks.forEach((demoBlock) => {
+                  const div = document.createElement('div'),
+                    liveDemo = demoBlock.querySelector('live-preview')
+                  div.className = 'live-demo'
+                  div.append(liveDemo)
+                  demoBlock.prepend(div)
+                  demoBlock
+                    .querySelector('.demo-code-wrapper>details>summary')
+                    .append(cpIcon.cloneNode(true))
+                  mountLiveDemo(decodeURI(liveDemo.getAttribute('demo-code')), div)
+                })
+              })
+              onActivated(() => {
+                // 生成锚点
+                anchors.value = []
+                sections = Array.from(
+                  document.querySelector('.md-box').querySelectorAll('.demo-part :is(h2,h3,h4)')
+                )
+                sections.forEach((e, i) => {
+                  e.parentElement.id = e.textContent
+                  anchors.value.push({
+                    text: e.innerText,
+                    href: e.parentElement.id
+                  })
+                  sections[i] = e.parentElement
+                  // sectionObserver.observe(e.parentElement)
+                })
+                manualLink = true
+                setTimeout(() => {
+                  manualLink = false
+                }, 500)
+                refScrollbar.value.setScrollTop(0)
+              })
+              onDeactivated(() => {
+                // sectionObserver.disconnect()
+                sections = null
+              })
+
               return {
                 content
               }
             }
           }
           const route = VueRouter.useRoute()
-          const activeMenu = computed(() => route.name)
           const showMenu = ref(false)
+          const anchors = shallowRef([])
+          const activeMenu = computed(() => route.name)
 
           const open = (e) => {
             if (e.name === router.currentRoute.value.name) return
@@ -233,6 +484,41 @@
             router.replace({
               name: e.route || e.name
             })
+            refAnchor.value.scrollTo('0')
+          }
+
+          const gotoAnchor = (e, href) => {
+            manualLink = true
+            e.preventDefault()
+            const scroller = document.querySelector('.el-main .el-scrollbar>.el-scrollbar__wrap')
+            if ('onscrollend' in window) {
+              scroller.addEventListener(
+                'scrollend',
+                () => {
+                  manualLink = false
+                },
+                { once: true }
+              )
+            } else {
+              //  备选方案：通过监听滚动是否停止来解锁
+              let lastPos = null
+              const checkScroll = () => {
+                const currentPos = scroller.scrollTop
+                if (lastPos === currentPos) {
+                  manualLink = false
+                  return
+                }
+                lastPos = currentPos
+                requestAnimationFrame(checkScroll)
+              }
+              requestAnimationFrame(checkScroll)
+            }
+            router.replace({
+              query: {
+                anchor: href
+              }
+            })
+            document.querySelector('.md-box #' + href).scrollIntoView({ behavior: 'smooth' })
           }
 
           onMounted(async () => {
@@ -262,7 +548,20 @@
               redirect: { name: 'start' }
             })
             loadingRoutes = null
-            router.replace(route.fullPath)
+            router.replace(route.fullPath).then(() => {
+              if (route.query.anchor) {
+                manualLink = true
+                refAnchor.value.scrollTo(route.query.anchor)
+                setTimeout(() => {
+                  document
+                    .querySelector('.md-box #' + route.query.anchor)
+                    .scrollIntoView({ behavior: 'smooth' })
+                  setTimeout(() => {
+                    manualLink = false
+                  }, 500)
+                })
+              }
+            })
             console.log(menus, autoOpends, router.getRoutes(), route)
 
             document.querySelector('.el-container').onclick = (e) => {
@@ -274,14 +573,94 @@
                 showMenu.value = false
               }
             }
+
+            let isTicking
+            const refMdBox = document.querySelector('.md-box'),
+              refScrollBox = refMdBox.parentElement.parentElement
+            refMdBox.onclick = (e) => {
+              let target = e.target.closest('.demo-code-copy')
+              if (!target) return
+              // live demo内的复制按钮在<summary>中
+              if (target.closest('summary')) {
+                e.preventDefault()
+                target = target.closest('.demo-code-wrapper').querySelector('details>pre')
+              } else {
+                target = target.nextElementSibling
+              }
+
+              navigator.clipboard.writeText(target.textContent).then(() => {
+                ElementPlus.ElMessage.success('代码已复制到剪贴板')
+              })
+            }
+
+            let last = 0
+            refScrollBox.addEventListener('scroll', () => {
+              if (Date.now() - last < 50) return
+              last = Date.now()
+              if (!manualLink && !isTicking) {
+                window.requestAnimationFrame(setActiveAnchor)
+                isTicking = true
+              }
+            })
+
+            function setActiveAnchor() {
+              const scrollPos = refScrollBox.scrollTop
+              for (const v of sections) {
+                if (scrollPos >= v.offsetTop && scrollPos < v.offsetTop + v.offsetHeight) {
+                  refAnchor.value.scrollTo(v.id)
+                  break
+                }
+              }
+              isTicking = null
+              // sections.forEach((section, index) => {
+              //   if (
+              //     scrollPos >= section.offsetTop &&
+              //     scrollPos < section.offsetTop + section.offsetHeight
+              //   ) {
+              //     ElementPlus.ElMessage('当前章节:', section.id)
+              //   }
+              // })
+            }
+
+            // sectionObserver = new IntersectionObserver(
+            //   (entries) => {
+            //     // let maxRatioEntry = {
+            //     //   intersectionRatio: 0
+            //     // }
+            //     entries.forEach((entry) => {
+            //       if (manualLink || !entry.isIntersecting) return
+            //       console.log(entry)
+
+            //       // if (entry.intersectionRatio > maxRatioEntry.intersectionRatio) {
+            //       //   maxRatioEntry = entry
+            //       // }
+            //       // if (entry.isIntersecting) {
+            //       // ElementPlus.ElMessage('当前激活章节:' + entry.target.id)
+            //       // refAnchor.value.scrollTo(entry.target.id)
+            //       // }
+            //     })
+            //     // console.log(entries)
+            //     // ElementPlus.ElMessage('当前激活最大章节:' + maxRatioEntry.target.id)
+            //     // refAnchor.value.scrollTo(maxRatioEntry.target.id)
+            //   },
+            //   {
+            //     root: document.querySelector('.md-box').parentElement
+            //       .parentElement /* refScrollbar.value */,
+            //     // "-0px 0px -99% 0px" 意味着只有元素进入容器顶部 1% 时才算 intersects
+            //     // rootMargin: '1px 0px -100% 0px',
+            //     threshold: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+            //   }
+            // )
           })
 
           return {
             showMenu,
             activeMenu,
             menus,
+            anchors,
             autoOpends,
-            open
+            open,
+            gotoAnchor
           }
         }
       })
@@ -291,6 +670,7 @@
       })
       let loadingRoutes = true
       router.beforeEach(async (to, from) => {
+        NProgress.start()
         // console.log(to, from);
         const toRoute = to.matched[to.matched.length - 1]
         // 当未获取到路由配置时允许跳转不存在的地址，以免始终会重定向到 /start。当路由配置加载后会通过 replace 尝试导航到存在的路由
@@ -308,6 +688,7 @@
       })
       router.afterEach((to) => {
         // activeMenu.value = to.name;
+        NProgress.done()
       })
       app.use(router)
       app.use(ElementPlus)

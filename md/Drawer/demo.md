@@ -1,13 +1,14 @@
-## Drawer
-
-默认带footer的el-drawer
+#### 基本用法
 
 ```vue
 <template>
+  <el-button v-loading="drawer.loading" @click="drawer.show = true">show drawer</el-button>
   <Drawer
     v-model="drawer.show"
-    v-loading="drawer.loading"
     title="Drawer"
+    :footer-attrs="{
+      okLoading: drawer.loading
+    }"
     @ok="confirm"
     @cancel="cancel"></Drawer>
 </template>
@@ -33,33 +34,3 @@ const drawer = reactive({
   }
 </script>
 ```
-
-## props
-
-`modelValue` _Boolean_  
-双向绑定
-
-`has-footer` _Boolean_ （default `true`）  
-是否显示footer
-
-`footer-attrs` _Object_  
-传递给ModalFooter的props
-
-## emits
-
-`ok`  
-点击确定按钮触发
-
-`cancel`  
-点击取消按钮触发。未监听该事件时会直接关闭Drawer
-
-## slots
-
-`header()`  
-header
-
-`default()`  
-body
-
-`footer()`  
-footer

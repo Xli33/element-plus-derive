@@ -1,7 +1,14 @@
 <h2>PageTable</h2>
 <p>远程分页/本地分页的el-table</p>
-<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
-<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">button</span><span style="color:#C792EA"> :loading</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTable.loading</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> @click</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">search</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span><span style="color:#BABED8">查询</span><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">button</span><span style="color:#89DDFF">></span></span>
+<h4>基本用法</h4>
+
+          <div class="demo-block">
+            <live-preview demo-code="%3Ctemplate%3E%0A%20%20%3Cel-button%20:loading=%22pageTable.loading%22%20style=%22margin-bottom:5px%22%20@click=%22search%22%3E%E6%9F%A5%E8%AF%A2%3C/el-button%3E%0A%20%20%3CPageTable%0A%20%20%20%20ref=%22pageTableRef%22%0A%20%20%20%20v-model:selection=%22pageTable.selection%22%0A%20%20%20%20v-model:loading=%22pageTable.loading%22%0A%20%20%20%20:columns=%22pageTable.columns%22%0A%20%20%20%20:method=%22getList%22%0A%20%20%20%20page-key=%22current%22%0A%20%20%20%20size-key=%22size%22%0A%20%20%20%20data-key=%22list%22%0A%20%20%20%20total-key=%22total%22%0A%20%20%20%20use-page-num%0A%20%20%20%20:max-height=%22400%22%0A%20%20%20%20show-header%0A%20%20%20%20border%0A%20%20%20%20stripe%3E%0A%20%20%20%20%3Ctemplate%20#num=%22%7B%20column%20%7D%22%3E%7B%7B%20column.title%20%7D%7D%3C/template%3E%0A%20%20%3C/PageTable%3E%0A%3C/template%3E%0A%3Cscript%20setup%3E%0Aimport%20%7B%20shallowReactive,%20useTemplateRef%20%7D%20from%20'vue'%0A%0Aconst%20refPageTable%20=%20useTemplateRef('pageTableRef')%0Aconst%20pageTable%20=%20shallowReactive(%7B%0A%20%20loading:%20false,%0A%20%20selection:%20%5B%5D,%0A%20%20columns:%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label:%20'num',%0A%20%20%20%20%20%20prop:%20'num'%0A%20%20%20%20%7D,%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label:%20'date',%0A%20%20%20%20%20%20prop:%20'date'%0A%20%20%20%20%7D,%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label:%20'time',%0A%20%20%20%20%20%20prop:%20'time'%0A%20%20%20%20%7D%0A%20%20%5D%0A%7D)%0Afunction%20search()%20%7B%0A%20%20refPageTable.value.search()%0A%7D%0Afunction%20getList()%20%7B%0A%20%20return%20new%20Promise((resolve)%20=%3E%20%7B%0A%20%20%20%20setTimeout(()%20=%3E%20%7B%0A%20%20%20%20%20%20resolve(%7B%0A%20%20%20%20%20%20%20%20ress:%20new%20Array(30).fill(0).map((e,%20i)%20=%3E%20(%7B%20num:%20i,%20date:%20'1010',%20time:%20'----'%20%7D)),%0A%20%20%20%20%20%20%20%20total:%2030%0A%20%20%20%20%20%20%7D)%0A%20%20%20%20%7D,%203000)%0A%20%20%7D)%0A%7D%0A%3C/script%3E"></live-preview>
+            <div class="demo-code-wrapper">
+              <details>
+                <summary>查看源码</summary>
+                <pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">el-button</span><span style="color:#C792EA"> :loading</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTable.loading</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> style</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">margin-bottom:5px</span><span style="color:#89DDFF">"</span><span style="color:#C792EA"> @click</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">search</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span><span style="color:#BABED8">查询</span><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">el-button</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">PageTable</span></span>
 <span class="line"><span style="color:#C792EA">    ref</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTableRef</span><span style="color:#89DDFF">"</span></span>
 <span class="line"><span style="color:#C792EA">    v-model:selection</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">pageTable.selection</span><span style="color:#89DDFF">"</span></span>
@@ -29,16 +36,16 @@
 <span class="line"><span style="color:#F07178">  selection</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> []</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#F07178">  columns</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span></span>
 <span class="line"><span style="color:#89DDFF">    {</span></span>
-<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F07178">      label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">num</span><span style="color:#89DDFF">'</span></span>
 <span class="line"><span style="color:#89DDFF">    },</span></span>
 <span class="line"><span style="color:#89DDFF">    {</span></span>
-<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F07178">      label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">date</span><span style="color:#89DDFF">'</span></span>
 <span class="line"><span style="color:#89DDFF">    },</span></span>
 <span class="line"><span style="color:#89DDFF">    {</span></span>
-<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#F07178">      key</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F07178">      label</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      prop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">time</span><span style="color:#89DDFF">'</span></span>
 <span class="line"><span style="color:#89DDFF">    }</span></span>
 <span class="line"><span style="color:#BABED8">  ]</span></span>
 <span class="line"><span style="color:#89DDFF">}</span><span style="color:#BABED8">)</span></span>
@@ -52,10 +59,14 @@
 <span class="line"><span style="color:#F07178">        ress</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#82AAFF"> Array</span><span style="color:#F07178">(</span><span style="color:#F78C6C">30</span><span style="color:#F07178">)</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">fill</span><span style="color:#F07178">(</span><span style="color:#F78C6C">0</span><span style="color:#F07178">)</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">map</span><span style="color:#F07178">(</span><span style="color:#89DDFF">(</span><span style="color:#BABED8;font-style:italic">e</span><span style="color:#89DDFF">,</span><span style="color:#BABED8;font-style:italic"> i</span><span style="color:#89DDFF">)</span><span style="color:#C792EA"> =></span><span style="color:#F07178"> (</span><span style="color:#89DDFF">{</span><span style="color:#F07178"> num</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> i</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">1010</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#F07178"> time</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">----</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF"> }</span><span style="color:#F07178">))</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#F07178">        total</span><span style="color:#89DDFF">:</span><span style="color:#F78C6C"> 30</span></span>
 <span class="line"><span style="color:#89DDFF">      }</span><span style="color:#F07178">)</span></span>
-<span class="line"><span style="color:#89DDFF">    }</span><span style="color:#F07178">)</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span><span style="color:#F78C6C"> 3000</span><span style="color:#F07178">)</span></span>
 <span class="line"><span style="color:#89DDFF">  }</span><span style="color:#F07178">)</span></span>
 <span class="line"><span style="color:#89DDFF">}</span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+              </details>
+            </div>
+          </div>
+          
 <h2>props</h2>
 <p>除以下内容，可传递其它el-table的prop</p>
 <p><code>columns</code> <em>Array</em> （default <code>[]</code>）<br>列配置</p>
@@ -98,4 +109,4 @@
 <p><code>title()</code><br>左上角的标题</p>
 <p><code>headerAction()</code><br>右上角功能区</p>
 <p><code>headerActionEnd()</code><br>右上角功能区右侧</p>
-<p><code>name({row, index})</code><br>传给Table的动态slot，需要列配置中指定slot。e.g. <code>[{ slot: &#39;name&#39; }]</code></p>
+<p><code>[name]({row, index})</code><br>传给Table的动态slot，对应列的插槽名，需要列配置中指定slot。e.g. <code>[{ slot: &#39;name&#39; }]</code></p>
