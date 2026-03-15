@@ -264,8 +264,8 @@
               <router-view v-slot="{ Component, route }">
                 <keep-alive>
                   <component v-if="route.name" :is="Component" :key="route.name"></component>
-                  <!-- :content="route.meta.content" -->
                 </keep-alive>
+                <!-- :content="route.meta.content" -->
               </router-view>
             </div>
           </el-scrollbar>
