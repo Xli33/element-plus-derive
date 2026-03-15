@@ -56,10 +56,9 @@ body.clip {
     .toggle-column {
       vertical-align: middle;
 
-      // > .ivu-dropdown-rel,
-      // .el-icon {
-      //   vertical-align: top;
-      // }
+      .el-icon {
+        vertical-align: top;
+      }
     }
   }
 
