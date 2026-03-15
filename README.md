@@ -343,37 +343,39 @@ import 'element-plus-derive/ep-mod'
 
 ## 组件
 
-[AllCheckbox](./md/AllCheckbox.md)  
+[文档](https://xli33.github.io/element-plus-derive)
+
+`AllCheckbox`  
 提供全选功能的CheckboxGroup
 
-[CacheSelect](./md/CacheSelect.md)  
+`CacheSelect`  
 避免重复调用远程接口的RemoteSelect，同一个cacheId对应只触发一次请求
 
-[Combi](./md/Combi.md)  
+`Combi`  
 类似ElInput[append prepend]样式的组合框
 
-[CurdTable](./md/CurdTable.md)  
+`CurdTable`  
 具有增删功能的ElTable
 
-[Drawer](./md/Drawer.md)  
+`Drawer`  
 默认带footer的ElDrawer
 
-[ElColumn](./md/ElColumn.md)  
+`ElColumn`  
 通过数组形式使用ElTableColumn
 
-[MCalendar](./md/MCalendar.md)  
+`MCalendar`  
 月度日历组件
 
-[ModalFooter](./md/ModalFooter.md)  
+`ModalFooter`  
 代替ElDialog自带的底栏部分，按钮易于控制，自定义度更高
 
-[PageTable](./md/PageTable.md)  
+`PageTable`  
 远程分页/本地分页的ElTable
 
-[RemoteSelect](./md/RemoteSelect.md)  
+`RemoteSelect`  
 获取远程数据的ElSelect，默认在展开时才触发请求
 
-[ToggleColumn](./md/ToggleColumn.md)  
+`ToggleColumn`  
 用于切换ElTable列的显示状态
 
 ## License
