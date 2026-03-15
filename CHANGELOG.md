@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.0.4](https://github.com/Xli33/element-plus-derive/compare/v0.0.3...v0.0.4) (2026-03-15)
+
+
+### Bug Fixes
+
+* 优化PageTable工具样式 ([459edb1](https://github.com/Xli33/element-plus-derive/commit/459edb1c2282c877c6ab0e33de1176c0a0fd7ccd))
+
 ## [0.0.3](https://github.com/Xli33/element-plus-derive/compare/v0.0.2...v0.0.3) (2026-01-31)
 
 
