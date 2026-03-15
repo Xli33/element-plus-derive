@@ -120,11 +120,6 @@
         z-index: 3;
       }
 
-      .el-anchor {
-        display: none;
-        margin-top: 5vh;
-      }
-
       table.el-table__header,
       table.el-table__body {
         margin-bottom: 0;
@@ -143,6 +138,11 @@
       ul.el-dropdown-menu {
         margin: 0;
         padding: 5px 0;
+      }
+
+      .anchor {
+        display: none;
+        margin-top: 5vh;
       }
 
       .demo-part {
@@ -263,11 +263,8 @@
             <div class="md-box">
               <router-view v-slot="{ Component, route }">
                 <keep-alive>
-                  <component
-                    v-if="route.name"
-                    :is="Component"
-                    :key="route.name"
-                    :content="route.meta.content"></component>
+                  <component v-if="route.name" :is="Component" :key="route.name"></component>
+                  <!-- :content="route.meta.content" -->
                 </keep-alive>
               </router-view>
             </div>
