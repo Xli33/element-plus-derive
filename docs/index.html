@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>element-plus-derive</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.13.5/dist/index.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/element-plus@2.13.5/theme-chalk/dark/css-vars.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/element-plus-derive/dist/umd/index.css" />
     <link
       id="markdown-css"
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.5.29/dist/vue.global.prod.js"></script>
+      href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.9.0/github-markdown-light.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.13.6/dist/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/element-plus@2.13.6/theme-chalk/dark/css-vars.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/element-plus-derive/dist/umd/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.5.31/dist/vue.global.prod.js"></script>
     <!-- <script type="importmap">
       {
         "imports": {
@@ -29,9 +29,9 @@
       window.Vue = Vue
     </script> -->
     <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.6.4/dist/vue-router.global.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.5/dist/index.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.5/dist/locale/zh-cn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@5.0.4/dist/vue-router.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.6/dist/index.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.6/dist/locale/zh-cn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.3.2/dist/index.iife.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/element-plus-derive/dist/umd/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
@@ -179,6 +179,14 @@
       }
 
       @media screen and (min-width: 1200px) {
+        ::-webkit-scrollbar {
+          width: 10px;
+          height: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: rgb(193 193 193 / .5);
+          border-radius: 5px;
+        }
         #app {
           margin: 0 10vw;
         }
@@ -202,13 +210,13 @@
         const $markdownCss = document.getElementById('markdown-css')
         if (e.target.matches) {
           $markdownCss.href = $markdownCss.href.replace(
-            'github-markdown.min.css',
+            'github-markdown-light.min.css',
             'github-markdown-dark.min.css'
           )
         } else {
           $markdownCss.href = $markdownCss.href.replace(
             'github-markdown-dark.min.css',
-            'github-markdown.min.css'
+            'github-markdown-light.min.css'
           )
         }
         document.documentElement.classList.toggle('dark', e.target.matches)
