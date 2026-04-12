@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-bind="$attrs" v-model="showDrawer">
+  <el-drawer :before-close="toCancel" v-bind="$attrs" v-model="showDrawer">
     <template #header>
       <slot name="header"></slot>
     </template>
