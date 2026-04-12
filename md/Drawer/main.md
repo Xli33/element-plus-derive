@@ -1,3 +1,6 @@
 ## Drawer
 
-默认带footer的el-drawer
+默认带footer的el-drawer，更便于控制易于使用
+
+- `0.0.5+`  
+  统一默认的关闭行为，通过图标`X`以及点击遮罩时尝试触发 `cancel` 事件，若未监听该事件则直接关闭，效果同点击footer的取消按钮

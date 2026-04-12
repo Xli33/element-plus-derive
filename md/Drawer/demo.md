@@ -6,8 +6,10 @@
   <Drawer
     v-model="drawer.show"
     title="Drawer"
+    :show-close="!drawer.loading"
     :footer-attrs="{
-      okLoading: drawer.loading
+      okLoading: drawer.loading,
+      cancelDisabled: drawer.loading
     }"
     @ok="confirm"
     @cancel="cancel"></Drawer>

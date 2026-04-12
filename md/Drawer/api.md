@@ -17,6 +17,9 @@
 `cancel`  
 点击取消按钮触发。未监听该事件时会直接关闭Drawer
 
+- `0.0.5+`
+  点击遮罩与关闭icon时也会触发该事件，若需分开处理可以使用 el-drawer 的 `before-close`
+
 ## slots
 
 `header()`  
