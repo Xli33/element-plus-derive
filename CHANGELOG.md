@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [0.0.5](https://github.com/Xli33/element-plus-derive/compare/v0.0.4...v0.0.5) (2026-04-12)
+
+
+### Features
+
+* **Drawer:** 统一Drawer的默认关闭行为，点击遮罩与关闭icon时效果与取消按钮一致 ([5e65135](https://github.com/Xli33/element-plus-derive/commit/5e65135077aa139a71e0c52044b70ea93e551a40))
+* **theme:** `MCalendar`与`PageTable`适配暗色模式 ([f73bc96](https://github.com/Xli33/element-plus-derive/commit/f73bc96f5c2530b5fc34f59239b7bb0b8e3b1714))
+
 ## [0.0.4](https://github.com/Xli33/element-plus-derive/compare/v0.0.3...v0.0.4) (2026-03-15)
 
 
