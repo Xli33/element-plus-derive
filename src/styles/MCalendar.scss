@@ -1,7 +1,8 @@
 @use 'common.scss' as *;
+@use 'sass:color';
 
 $prefix: get-block-name(mcalendar);
-$border: 1px solid #f5f5f5;
+$border: 1px solid var(--epd-title-bg);
 $width: 14.2857%;
 $timing: 0.15s ease-out;
 
@@ -10,9 +11,24 @@ $timing: 0.15s ease-out;
   background-color: $color;
 }
 
+html.dark {
+  .#{$prefix} {
+    --epd-title-bg: #333;
+    --epd-title-weekend-bg: #{color.scale(coral, $lightness: -10%)};
+    --epd-cell-range-bg: #{color.scale(#333, $lightness: 5%)};
+    --epd-cell-range-ends-bg: var(--epd-title-bg);
+    --epd-cell-today-bg: #2c2f4a;
+  }
+}
+
 .#{$prefix} {
+  --epd-title-bg: #efefef;
+  --epd-title-weekend-bg: coral;
+  --epd-cell-range-bg: #e6eafd;
+  --epd-cell-range-ends-bg: #b9c6ff;
+  --epd-cell-today-bg: #f2faff;
   position: relative;
-  color: #333;
+  color: var(--el-text-color-primary);
 
   &- {
     &title {
@@ -21,11 +37,11 @@ $timing: 0.15s ease-out;
       padding: 10px 0;
       line-height: 1;
       text-align: center;
-      background: #efefef;
+      background: var(--epd-title-bg);
 
       &.weekend {
         color: #fff;
-        background: coral;
+        background: var(--epd-title-weekend-bg);
       }
     }
 
@@ -54,17 +70,17 @@ $timing: 0.15s ease-out;
       }
 
       &.in-range {
-        @include bg-color(#e6eafd);
+        @include bg-color(var(--epd-cell-range-bg));
       }
 
       &.range-start,
       &.range-end {
-        @include bg-color(#b9c6ff);
+        @include bg-color(var(--epd-cell-range-ends-bg));
       }
     }
 
     &cell_today {
-      background-color: #f2faff;
+      background: var(--epd-cell-today-bg);
     }
   }
 }

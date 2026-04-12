@@ -11,7 +11,7 @@ body.clip {
     border-radius: 4px;
 
     &:not(.#{$prefix}maximized) {
-      border: 1px solid #e8eaec;
+      border: 1px solid var(--el-border-color-light);
     }
 
     > .#{$prefix} {
@@ -19,7 +19,7 @@ body.clip {
         padding: 15px;
       }
       &header {
-        border-bottom: 1px solid #e8eaec;
+        border-bottom: 1px solid var(--el-border-color-light);
         padding-top: 10px;
         padding-left: 15px;
         padding-right: 15px;
@@ -28,7 +28,7 @@ body.clip {
   }
 
   &maximized {
-    background: #fff;
+    background: var(--el-bg-color);
     border-radius: 0;
 
     &:not(.#{$prefix}bordered),
