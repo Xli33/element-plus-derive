@@ -2,9 +2,9 @@
 @use 'sass:color';
 
 $prefix: get-block-name(mcalendar);
-$border: 1px solid var(--epd-title-bg);
+// $border: 1px solid var(--epd-title-bg);
 $width: 14.2857%;
-$timing: 0.15s ease-out;
+$timing: 0.1s ease-in;
 
 @mixin bg-color($color) {
   border-color: $color;
@@ -18,6 +18,7 @@ html.dark {
     --epd-cell-range-bg: #{color.scale(#333, $lightness: 5%)};
     --epd-cell-range-ends-bg: var(--epd-title-bg);
     --epd-cell-today-bg: #2c2f4a;
+    // --epd-cell-hover-bg: #1a1a1a;
   }
 }
 
@@ -27,6 +28,7 @@ html.dark {
   --epd-cell-range-bg: #e6eafd;
   --epd-cell-range-ends-bg: #b9c6ff;
   --epd-cell-today-bg: #f2faff;
+  // --epd-cell-hover-bg: #f7f7f7;
   position: relative;
   color: var(--el-text-color-primary);
 
@@ -53,17 +55,19 @@ html.dark {
       max-width: $width;
       min-height: 100px;
       padding: 5px;
-      border-bottom: $border;
-      border-left: $border;
+      // border-bottom: $border;
+      // border-left: $border;
       word-break: break-all;
-      transition:
-        border-color $timing,
-        background-color $timing;
+      transition: background-color $timing; // border-color $timing
       // font-size: 14px;
 
-      &:nth-child(7n) {
-        border-right: $border;
-      }
+      // &:nth-child(7n) {
+      //   border-right: $border;
+      // }
+
+      // &:hover {
+      //   background-color: var(--epd-cell-hover-bg);
+      // }
 
       &.outer:not(.in-range) {
         color: #aaa;
