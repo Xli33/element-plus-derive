@@ -51,10 +51,18 @@
         -moz-osx-font-smoothing: grayscale;
         -webkit-tap-highlight-color: transparent;
       }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+        }
+      }
       body {
         margin: 0;
         font-family:
           'Microsoft YaHei', '微软雅黑', 'PingFang SC', ' Hiragino Sans GB', 'SimSun', 'sans-serif';
+      }
+      :focus-visible {
+        outline: none;
       }
 
       #app {
@@ -69,6 +77,10 @@
 
       [v-cloak] {
         display: none;
+      }
+
+      .cursor-pointer {
+        cursor: pointer;
       }
 
       .el-container {
@@ -102,7 +114,11 @@
         }
       }
 
-      .el-aside {
+      .el-dropdown-menu__item.selected {
+        color: var(--el-dropdown-menuItem-hover-color);
+      }
+
+      .side-menu {
         position: fixed;
         z-index: 9;
         height: 100%;
@@ -140,8 +156,11 @@
         padding: 5px 0;
       }
 
-      .anchor {
+      .side-right {
         display: none;
+      }
+
+      .anchor {
         margin-top: 5vh;
       }
 
@@ -184,7 +203,7 @@
           height: 10px;
         }
         ::-webkit-scrollbar-thumb {
-          background-color: rgb(193 193 193 / .5);
+          background-color: rgb(193 193 193 / 0.5);
           border-radius: 5px;
         }
         #app {
@@ -199,36 +218,88 @@
         .menu-toggle {
           display: none;
         }
-        .anchor {
+        .side-right {
           display: block;
         }
       }
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-new(root) {
+        animation-name: theme-expand;
+      }
+      /* ::view-transition-old(root) {
+   animation-name: theme-shrink;
+   z-index: -1;
+ } */
+      @keyframes theme-expand {
+        from {
+          clip-path: circle(0% at 50% 50%);
+        }
+        to {
+          clip-path: circle(150% at 50% 50%);
+        }
+      }
+      /* @keyframes theme-shrink {
+   from {
+     clip-path: circle(150% at 50% 50%);
+   }
+   to {
+     clip-path: circle(0% at 50% 50%);
+   }
+ } */
     </style>
     <script>
+      if (document.startViewTransition === undefined)
+        document.startViewTransition = (callback) => callback()
+      const appTheme = localStorage.theme || 'auto'
       const matchDark = window.matchMedia('(prefers-color-scheme: dark)')
-      matchDark.addEventListener('change', (e) => {
-        const $markdownCss = document.getElementById('markdown-css')
-        if (e.target.matches) {
-          $markdownCss.href = $markdownCss.href.replace(
-            'github-markdown-light.min.css',
-            'github-markdown-dark.min.css'
-          )
-        } else {
-          $markdownCss.href = $markdownCss.href.replace(
-            'github-markdown-dark.min.css',
-            'github-markdown-light.min.css'
-          )
+      const setTheme = (theme, noTransition) => {
+        let goDark
+        const isDark = document.documentElement.classList.contains('dark')
+        if (theme === 'auto') {
+          // 跟随浏览器
+          goDark = matchDark.matches
+        } else if (theme === 'dark') {
+          goDark = true
+        } else if (theme === 'light') {
+          goDark = false
         }
-        document.documentElement.classList.toggle('dark', e.target.matches)
-      })
-      matchDark.dispatchEvent(new Event('change'))
+        if ((isDark && !goDark) || (goDark && !isDark)) {
+          const $markdownCss = document.getElementById('markdown-css')
+          const toggleTheme = () => {
+            if (goDark) {
+              $markdownCss.href = $markdownCss.href.replace(
+                'github-markdown-light.min.css',
+                'github-markdown-dark.min.css'
+              )
+            } else {
+              $markdownCss.href = $markdownCss.href.replace(
+                'github-markdown-dark.min.css',
+                'github-markdown-light.min.css'
+              )
+            }
+            document.documentElement.classList.toggle('dark', goDark)
+          }
+          !noTransition && document.startViewTransition
+            ? setTimeout(() => document.startViewTransition(toggleTheme), 150)
+            : toggleTheme()
+        }
+        setTimeout(() => {
+          localStorage.theme = theme
+        })
+      }
+      setTheme(appTheme, true)
     </script>
   </head>
 
   <body>
     <div id="app" v-cloak>
       <el-container :class="showMenu && 'show'">
-        <el-aside width="200px">
+        <el-aside width="200px" class="side-menu">
           <el-scrollbar>
             <el-menu v-if="menus.length" :default-active="activeMenu" :default-openeds="autoOpends">
               <template v-for="(item, index) in menus" :key="index">
@@ -278,11 +349,47 @@
             </div>
           </el-scrollbar>
         </el-main>
-        <el-anchor ref="anchorRef" :offset="0" class="anchor" @click="gotoAnchor">
-          <el-anchor-link v-for="(anchor, i) in anchors" :key="i" :href="anchor.href">
-            {{ anchor.text }}
-          </el-anchor-link>
-        </el-anchor>
+        <el-aside width="100px" class="side-right">
+          <el-row justify="space-between" :gutter="0" style="margin-top: 10px">
+            <el-col :span="-1">
+              <el-dropdown :show-arrow="false" class="cursor-pointer" @command="changeTheme">
+                <el-icon :size="24"><Element-Plus></Element-Plus></el-icon>
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item command="auto" :class="{ selected: theme === 'auto' }">
+                      <el-icon><Sunrise /></el-icon>自动</el-dropdown-item
+                    >
+                    <el-dropdown-item command="light" :class="{ selected: theme === 'light' }"
+                      ><el-icon><Sunny /></el-icon>日间</el-dropdown-item
+                    >
+                    <el-dropdown-item command="dark" :class="{ selected: theme === 'dark' }"
+                      ><el-icon><Moon /></el-icon>夜间</el-dropdown-item
+                    >
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
+            </el-col>
+            <el-col :span="-1">
+              <a href="https://github.com/Xli33/element-plus-derive" target="_blank">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  color="var(--el-text-color-primary)">
+                  <path
+                    fill="currentColor"
+                    d="M10.226 17.284c-2.965-.36-5.054-2.493-5.054-5.256 0-1.123.404-2.336 1.078-3.144-.292-.741-.247-2.314.09-2.965.898-.112 2.111.36 2.83 1.01.853-.269 1.752-.404 2.853-.404 1.1 0 1.999.135 2.807.382.696-.629 1.932-1.1 2.83-.988.315.606.36 2.179.067 2.942.72.854 1.101 2 1.101 3.167 0 2.763-2.089 4.852-5.098 5.234.763.494 1.28 1.572 1.28 2.807v2.336c0 .674.561 1.056 1.235.786 4.066-1.55 7.255-5.615 7.255-10.646C23.5 6.188 18.334 1 11.978 1 5.62 1 .5 6.188.5 12.545c0 4.986 3.167 9.12 7.435 10.669.606.225 1.19-.18 1.19-.786V20.63a2.9 2.9 0 0 1-1.078.224c-1.483 0-2.359-.808-2.987-2.313-.247-.607-.517-.966-1.034-1.033-.27-.023-.359-.135-.359-.27 0-.27.45-.471.898-.471.652 0 1.213.404 1.797 1.235.45.651.921.943 1.483.943.561 0 .92-.202 1.437-.719.382-.381.674-.718.944-.943"></path>
+                </svg>
+              </a>
+            </el-col>
+          </el-row>
+          <el-anchor ref="anchorRef" :offset="0" class="anchor" @click="gotoAnchor">
+            <el-anchor-link v-for="(anchor, i) in anchors" :key="i" :href="anchor.href">
+              {{ anchor.text }}
+            </el-anchor-link>
+          </el-anchor>
+        </el-aside>
       </el-container>
     </div>
 
@@ -341,7 +448,8 @@
           const menus = shallowRef([]),
             autoOpends = [],
             refScrollbar = useTemplateRef('scrollbarRef'),
-            refAnchor = useTemplateRef('anchorRef')
+            refAnchor = useTemplateRef('anchorRef'),
+            theme = ref(appTheme)
 
           const ViewMD = {
             template: `<div v-once v-html='content' class='md-content'></div>`,
@@ -516,6 +624,8 @@
             document.querySelector('.md-box #' + href).scrollIntoView({ behavior: 'smooth' })
           }
 
+          const changeTheme = (which) => setTheme((theme.value = which))
+
           onMounted(async () => {
             const res = await fetch('menus.json').then((res) => res.json())
             menus.value = res
@@ -649,13 +759,15 @@
           })
 
           return {
+            theme,
             showMenu,
             activeMenu,
             menus,
             anchors,
             autoOpends,
             open,
-            gotoAnchor
+            gotoAnchor,
+            changeTheme
           }
         }
       })
@@ -687,6 +799,9 @@
       })
       app.use(router)
       app.use(ElementPlus)
+      for (const iconName in ElementPlusIconsVue) {
+        app.component(iconName, ElementPlusIconsVue[iconName])
+      }
       app.mount('#app')
     </script>
   </body>
