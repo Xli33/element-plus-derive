@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.0.6](https://github.com/Xli33/element-plus-derive/compare/v0.0.5...v0.0.6) (2026-04-13)
+
+
+### Features
+
+* **borderless:** 优化MCalendar样式，不再显示多余边框 ([130ee2c](https://github.com/Xli33/element-plus-derive/commit/130ee2cf5f1332828d6dfa6691d3478fb94d918e))
+
 ## [0.0.5](https://github.com/Xli33/element-plus-derive/compare/v0.0.4...v0.0.5) (2026-04-12)
 
 
