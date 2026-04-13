@@ -15,7 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/element-plus@2.13.6/theme-chalk/dark/css-vars.css" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/element-plus-derive@latest/dist/umd/index.css" />
+      href="https://cdn.jsdelivr.net/npm/element-plus-derive@0/dist/umd/index.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue@3.5.31/dist/vue.global.prod.js"></script>
     <!-- <script type="importmap">
       {
@@ -33,7 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.6/dist/index.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/element-plus@2.13.6/dist/locale/zh-cn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.3.2/dist/index.iife.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/element-plus-derive@latest/dist/umd/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus-derive@0/dist/umd/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
     <style>
       /* html.dark {
@@ -51,11 +51,11 @@
         -moz-osx-font-smoothing: grayscale;
         -webkit-tap-highlight-color: transparent;
       }
-      @media (prefers-color-scheme: dark) {
+      /* @media (prefers-color-scheme: dark) {
         :root {
           color-scheme: dark;
         }
-      }
+      } */
       body {
         margin: 0;
         font-family:
@@ -255,7 +255,7 @@
     <script>
       if (document.startViewTransition === undefined)
         document.startViewTransition = (callback) => callback()
-      const appTheme = localStorage.theme || 'auto'
+      let appTheme = localStorage.theme || 'auto'
       const matchDark = window.matchMedia('(prefers-color-scheme: dark)')
       const setTheme = (theme, noTransition) => {
         let goDark
@@ -289,10 +289,15 @@
             : toggleTheme()
         }
         setTimeout(() => {
-          localStorage.theme = theme
+          localStorage.theme = appTheme = theme
         })
       }
       setTheme(appTheme, true)
+      setTimeout(() => {
+        matchDark.onchange = () => {
+          setTheme(appTheme)
+        }
+      })
     </script>
   </head>
 
