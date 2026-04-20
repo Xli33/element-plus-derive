@@ -137,11 +137,15 @@ const props = defineProps({
   border: Boolean,
   size: String as PropType<'' | 'default' | 'small' | 'large' | undefined>,
   /**
-   * 返回Promise以决定何时新增数据
+   * 控制何时新增数据
+   * @param done 新增函数
    */
   beforeAdd: Function,
   /**
-   * 返回Promise以决定何时删除数据
+   * 控制何时删除数据
+   * @param row
+   * @param index
+   * @param done 删除函数，传入待删除的index
    */
   beforeRemove: Function,
   addBtnType: {
@@ -231,7 +235,7 @@ const slotColumns = computed(() => {
 // methods
 
 function toAdd() {
-  typeof props.beforeAdd !== 'function' ? add() : props.beforeAdd().then(add).catch()
+  typeof props.beforeAdd !== 'function' ? add() : props.beforeAdd(add)
 }
 function add(args?: Obj[]) {
   list.value.push(...props.addRow(args))
@@ -242,9 +246,7 @@ function add(args?: Obj[]) {
 function toDel(index: number) {
   typeof props.beforeRemove !== 'function'
     ? del(index)
-    : props.beforeRemove(list.value[index], index).then(() => {
-        del(index)
-      })
+    : props.beforeRemove(list.value[index], index, del)
 }
 function del(index: number) {
   const [removed] = list.value.splice(index, 1)
