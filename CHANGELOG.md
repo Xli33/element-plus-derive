@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [0.1.0](https://github.com/Xli33/element-plus-derive/compare/v0.0.6...v0.1.0) (2026-04-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* 优化CurdTable的`beforeAdd`与`beforeRemove`，不再返回Promise，通过传参回调执行新增or删除，避免实际场景可能产生永远pending的Promise
+
+### Features
+
+* 优化CurdTable的`beforeAdd`与`beforeRemove`，不再返回Promise，通过传参回调执行新增or删除，避免实际场景可能产生永远pending的Promise ([2725ce7](https://github.com/Xli33/element-plus-derive/commit/2725ce728b453d3da56f23378e7fb71304f501b5))
+
 ## [0.0.6](https://github.com/Xli33/element-plus-derive/compare/v0.0.5...v0.0.6) (2026-04-13)
 
 
