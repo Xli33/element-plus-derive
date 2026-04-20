@@ -3,7 +3,7 @@
 <h4>基本用法</h4>
 
           <div class="demo-block">
-            <live-preview demo-code="%3Ctemplate%3E%0A%20%20%3CCombi%3E%0A%20%20%20%20%3Ctemplate%20#prepend%3E%0A%20%20%20%20%20%20%3Cel-select%20clearable%20style=%22width:%207em%22%3E%0A%20%20%20%20%20%20%20%20%3Cel-option%20value=%22111%22%3E111%3C/el-option%3E%0A%20%20%20%20%20%20%20%20%3Cel-option%20value=%22222%22%3E222%3C/el-option%3E%0A%20%20%20%20%20%20%3C/el-select%3E%0A%20%20%20%20%3C/template%3E%0A%20%20%20%20%3Cel-select%20clearable%3E%0A%20%20%20%20%20%20%3Cel-option%20value=%222%22%3E2%3C/el-option%3E%0A%20%20%20%20%3C/el-select%3E%0A%20%20%20%20%3Ctemplate%20#append%3E%0A%20%20%20%20%20%20%3Cel-icon%3E%3CDArrowRight%20/%3E%3C/el-icon%3E%0A%20%20%20%20%3C/template%3E%0A%20%20%3C/Combi%3E%0A%3C/template%3E%0A%3Cscript%3E%0Aexport%20default%20%7B%7D%0A%3C/script%3E"></live-preview>
+            <live-preview demo-code="%3Ctemplate%3E%0A%20%20%3CCombi%3E%0A%20%20%20%20%3Ctemplate%20#prepend%3E%0A%20%20%20%20%20%20%3Cel-select%20clearable%20style=%22width:%207em%22%3E%0A%20%20%20%20%20%20%20%20%3Cel-option%20value=%22111%22%3E111%3C/el-option%3E%0A%20%20%20%20%20%20%20%20%3Cel-option%20value=%22222%22%3E222%3C/el-option%3E%0A%20%20%20%20%20%20%3C/el-select%3E%0A%20%20%20%20%3C/template%3E%0A%20%20%20%20%3Cel-select%20clearable%3E%0A%20%20%20%20%20%20%3Cel-option%20value=%222%22%3E2%3C/el-option%3E%0A%20%20%20%20%3C/el-select%3E%0A%20%20%20%20%3Ctemplate%20#append%3E%0A%20%20%20%20%20%20%3Cel-icon%3E%3CDArrowRight%20/%3E%3C/el-icon%3E%0A%20%20%20%20%3C/template%3E%0A%20%20%3C/Combi%3E%0A%3C/template%3E%0A%0A%3Cscript%3E%0Aexport%20default%20%7B%7D%0A%3C/script%3E"></live-preview>
             <div class="demo-code-wrapper">
               <details>
                 <summary>查看源码</summary>
@@ -23,6 +23,7 @@
 <span class="line"><span style="color:#89DDFF">    &#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">Combi</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span>
 <span class="line"><span style="color:#89DDFF;font-style:italic">export</span><span style="color:#89DDFF;font-style:italic"> default</span><span style="color:#89DDFF"> {}</span></span>
 <span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>

@@ -358,7 +358,7 @@ import 'element-plus-derive/ep-mod'
 具有增删功能的ElTable
 
 `Drawer`  
-默认带footer的ElDrawer
+默认带ModalFooter的ElDrawer
 
 `ElColumn`  
 通过数组形式使用ElTableColumn

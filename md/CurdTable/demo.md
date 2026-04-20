@@ -16,6 +16,7 @@
     </template>
   </CurdTable>
 </template>
+
 <script setup lang="jsx">
 const table = {
   columns: [

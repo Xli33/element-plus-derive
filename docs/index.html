@@ -424,7 +424,7 @@
         try {
           // 将源码包装成一个伪路径
           const component = await loadModule(Date.now() + '.vue', {
-            moduleCache: { vue: Vue }, // 共享主应用的 Vue 实例
+            moduleCache: { vue: Vue, 'element-plus': ElementPlus }, // 共享主应用的 Vue 实例
             getFile: () => source,
             addStyle(textContent) {
               //   const style = document.createElement('style')

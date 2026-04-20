@@ -13,6 +13,7 @@
     style="width: 200px"
     @change="$message.info($event)"></CacheSelect>
 </template>
+
 <script setup>
 import { ref } from 'vue'
 

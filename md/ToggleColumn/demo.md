@@ -7,6 +7,7 @@
     <ElColumn :columns="table.columns"></ElColumn>
   </el-table>
 </template>
+
 <script setup>
 import { ref } from 'vue'
 

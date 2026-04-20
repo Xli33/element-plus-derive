@@ -39,10 +39,10 @@ Table的border
 Table的size
 
 `before-add` _Function_  
-返回Promise以决定何时新增数据
+控制何时新增数据，签名：`(done) => void`，调用done()即执行新增
 
 `before-remove` _Function_  
-返回Promise以决定何时删除数据
+控制何时删除数据，签名：`(row, index, done) => void`，调用done(index)即执行删除指定index项
 
 `add-btn-type` _String_ （default `'default'`）  
 新增按钮type

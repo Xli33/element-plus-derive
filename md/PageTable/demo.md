@@ -21,6 +21,7 @@
     <template #num="{ column }">{{ column.title }}</template>
   </PageTable>
 </template>
+
 <script setup>
 import { shallowReactive, useTemplateRef } from 'vue'
 

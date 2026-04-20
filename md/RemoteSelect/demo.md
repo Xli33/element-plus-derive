@@ -9,6 +9,7 @@
     style="width: 200px"
     @change="$message.info($event)"></RemoteSelect>
 </template>
+
 <script setup>
 import { ref } from 'vue'
 
