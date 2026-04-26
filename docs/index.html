@@ -197,6 +197,15 @@
         flex-direction: column;
       }
 
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 0.6s;
+        animation-timing-function: ease-in;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-new(root) {
+        animation-name: theme-expand;
+      }
       @media screen and (min-width: 1200px) {
         ::-webkit-scrollbar {
           width: 10px;
@@ -205,6 +214,11 @@
         ::-webkit-scrollbar-thumb {
           background-color: rgb(193 193 193 / 0.5);
           border-radius: 5px;
+        }
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+          animation-duration: 1s;
+          animation-timing-function: ease-out;
         }
         #app {
           margin: 0 10vw;
@@ -215,21 +229,12 @@
         .el-main {
           margin-left: 200px;
         }
-        .menu-toggle {
+        .header-mob {
           display: none;
         }
         .side-right {
           display: block;
         }
-      }
-      ::view-transition-old(root),
-      ::view-transition-new(root) {
-        animation-duration: 1s;
-        animation-timing-function: ease-out;
-        mix-blend-mode: normal;
-      }
-      ::view-transition-new(root) {
-        animation-name: theme-expand;
       }
       /* ::view-transition-old(root) {
    animation-name: theme-shrink;
@@ -342,7 +347,45 @@
           </el-scrollbar>
         </el-aside>
         <el-main class="markdown-body">
-          <el-icon class="menu-toggle" @click="showMenu = !showMenu">📓</el-icon>
+          <el-row class="header-mob" justify="space-between" :gutter="0">
+            <el-col :span="-1">
+              <el-icon class="menu-toggle" @click="showMenu = !showMenu">📓</el-icon>
+            </el-col>
+            <el-col :span="-1" class="top-tool-right">
+              <el-dropdown
+                :show-arrow="false"
+                class="cursor-pointer"
+                style="margin-right: 2em"
+                @command="changeTheme">
+                <el-icon :size="24"><Element-Plus></Element-Plus></el-icon>
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item command="auto" :class="{ selected: theme === 'auto' }">
+                      <el-icon><Sunrise></Sunrise></el-icon>自动</el-dropdown-item
+                    >
+                    <el-dropdown-item command="light" :class="{ selected: theme === 'light' }"
+                      ><el-icon><Sunny></Sunny></el-icon>日间</el-dropdown-item
+                    >
+                    <el-dropdown-item command="dark" :class="{ selected: theme === 'dark' }"
+                      ><el-icon><Moon></Moon></el-icon>夜间</el-dropdown-item
+                    >
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
+              <a href="https://github.com/Xli33/element-plus-derive" target="_blank">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  color="var(--el-text-color-primary)">
+                  <path
+                    fill="currentColor"
+                    d="M10.226 17.284c-2.965-.36-5.054-2.493-5.054-5.256 0-1.123.404-2.336 1.078-3.144-.292-.741-.247-2.314.09-2.965.898-.112 2.111.36 2.83 1.01.853-.269 1.752-.404 2.853-.404 1.1 0 1.999.135 2.807.382.696-.629 1.932-1.1 2.83-.988.315.606.36 2.179.067 2.942.72.854 1.101 2 1.101 3.167 0 2.763-2.089 4.852-5.098 5.234.763.494 1.28 1.572 1.28 2.807v2.336c0 .674.561 1.056 1.235.786 4.066-1.55 7.255-5.615 7.255-10.646C23.5 6.188 18.334 1 11.978 1 5.62 1 .5 6.188.5 12.545c0 4.986 3.167 9.12 7.435 10.669.606.225 1.19-.18 1.19-.786V20.63a2.9 2.9 0 0 1-1.078.224c-1.483 0-2.359-.808-2.987-2.313-.247-.607-.517-.966-1.034-1.033-.27-.023-.359-.135-.359-.27 0-.27.45-.471.898-.471.652 0 1.213.404 1.797 1.235.45.651.921.943 1.483.943.561 0 .92-.202 1.437-.719.382-.381.674-.718.944-.943"></path>
+                </svg>
+              </a>
+            </el-col>
+          </el-row>
           <el-scrollbar ref="scrollbarRef">
             <div class="md-box">
               <router-view v-slot="{ Component, route }">
