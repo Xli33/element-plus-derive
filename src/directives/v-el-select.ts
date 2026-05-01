@@ -1,8 +1,16 @@
 import type { Obj } from '@/type'
 import type { Directive } from 'vue'
 
+type VElSelectDirective = Directive<HTMLElement, boolean | undefined>
+
+declare module 'vue' {
+  export interface ComponentCustomProperties {
+    vElSelect: VElSelectDirective
+  }
+}
+
 // el-select使用v-el-select:all开启全选
-export const elSelect: Directive = {
+export const vElSelect: VElSelectDirective = {
   beforeMount: (el, binding, vnode: any) => {
     if (binding.arg !== 'all' || (binding.value != null && !binding.value)) return
     if (!vnode.el) return
@@ -19,9 +27,9 @@ export const elSelect: Directive = {
       ctx.$emit('update:modelValue', value)
       ctx.$emit('change', value)
     }
-    if (!document.getElementById('elSelect-css')) {
+    if (!document.getElementById('v-el-select-css')) {
       const style = document.createElement('style')
-      style.id = 'elSelect-css'
+      style.id = 'v-el-select-css'
       style.innerHTML =
         '.with-all.el-select .el-select__suffix .el-icon-folderChecked,' +
         '.with-all.el-select-multiple:hover .el-select__suffix .el-icon:not(.el-icon-folderChecked){display:none;}' +

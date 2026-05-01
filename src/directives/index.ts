@@ -1,1 +1,1 @@
-export { elSelect } from './v-el-select';
+export { vElSelect } from './v-el-select'

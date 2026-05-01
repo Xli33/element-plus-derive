@@ -31,7 +31,7 @@
 import type { Obj } from '@/type'
 import { type PropType, computed, nextTick, onMounted, ref, watch } from 'vue'
 import { ElSelect, ElOption } from 'element-plus'
-import { elSelect as vElSelect } from '@/directives'
+import { vElSelect } from '@/directives'
 
 export default {
   name: 'RemoteSelect',
