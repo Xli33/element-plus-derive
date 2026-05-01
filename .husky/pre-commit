@@ -1,2 +1,29 @@
-npx eslint
-npm run type-check
+npx lint-staged
+
+# #!/bin/bash
+
+# 提取除public/及dist*/下的所有暂存文件
+# ALL_STAGED=$(git diff --cached --name-only --diff-filter=ACMR -- '*.ts' '*.js' '*.vue' '*.tsx' '*.jsx' '*.css' '*.scss' '*.json' | grep -vE '^public/|^dist/')
+
+# 如果没有任何文件，直接退出
+# if [ -z "$ALL_STAGED" ]; then
+#     echo "No staged files to check. Skipping..."
+#     exit 0
+# fi
+
+# 过滤出需要 Lint 的文件 (排除不支持的文件)
+# LINT_FILES=$(echo "$ALL_STAGED" | grep -E '\.(ts|js|vue|tsx|jsx)$')
+
+# echo "🚀 Running checks..."
+
+# if [ -n "$LINT_FILES" ]; then
+#     echo "Linting js(x)/ts(x)/vue files..."
+#
+#     npx oxlint $LINT_FILES
+#     npx eslint --cache $LINT_FILES
+#     npm run type-check
+# fi
+
+# Prettier 检查所有支持的文件
+# echo "Checking formatting..."
+# npx prettier --check --ignore-unknown $ALL_STAGED
