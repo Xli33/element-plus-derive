@@ -51,7 +51,7 @@ export default defineConfig(({ command }) => {
             cssFileName: 'index',
             formats: ['umd']
           },
-          rollupOptions: {
+          rolldownOptions: {
             external: ['vue', 'element-plus', '@element-plus/icons-vue', 'dayjs'],
             // treeshake: {
             //   moduleSideEffects: (id) => !id.includes('utils-where')
