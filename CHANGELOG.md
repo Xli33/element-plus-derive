@@ -1,6 +1,15 @@
 # Changelog
 
 
+## [0.2.0](https://github.com/Xli33/element-plus-derive/compare/v0.1.0...v0.2.0) (2026-05-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* 指令名统一以 `v` 起头，便于识别区分，并添加具体类型声明
+
+* 指令名统一以 `v` 起头，便于识别区分，并添加具体类型声明 ([4ef18ed](https://github.com/Xli33/element-plus-derive/commit/4ef18ed2c73768c50b13018b0083c8ca0216177e))
+
 ## [0.1.0](https://github.com/Xli33/element-plus-derive/compare/v0.0.6...v0.1.0) (2026-04-20)
 
 
