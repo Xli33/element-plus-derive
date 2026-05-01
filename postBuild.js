@@ -1,7 +1,7 @@
 import { rename, cp } from 'node:fs/promises'
 // import { glob } from 'glob'
 import fs from 'fs-extra'
-import chalk from 'chalk'
+import picolor from 'picocolors'
 import { MarkdownTreeParser } from '@kayvan/markdown-tree-parser'
 import { marked } from 'marked'
 import { codeToHtml } from 'shiki'
@@ -222,15 +222,15 @@ async function buildComponentHtml() {
       await fs.writeFile(distPath, htmlFragment)
     }
 
-    console.log(chalk.green('\n/md下的文件全部解析完成!'))
+    console.log(picolor.green('\n/md下的文件全部解析完成!'))
   } catch (err) {
-    console.error(chalk.red(err))
+    console.error(picolor.red(err))
   }
 }
 
 fs.rm(distDir, { recursive: true })
   .catch((err) => {
-    console.error(chalk.redBright(err))
+    console.error(picolor.redBright(err))
   })
   .finally(async () => {
     await buildFromReadme()

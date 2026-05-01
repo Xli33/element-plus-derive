@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "vue", "vitest"],
+  "env": {
+    "browser": true
+  },
+  "categories": {
+    "correctness": "error"
+  },
+  "ignorePatterns": [
+    "**/dist*/**",
+    "**/dist-gz/**",
+    "**/dist-ssr/**",
+    "**/coverage/**",
+    ".husky/",
+    ".vscode/",
+    "public/"
+  ],
+  "rules": {
+    // "unicorn/no-empty-file": "off",
+    "no-unused-expressions": "off"
+  }
+}
