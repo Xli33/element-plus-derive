@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
-import { cpSync /* unlinkSync */ } from 'node:fs'
+import { cpSync, unlinkSync } from 'node:fs'
 // import { resolve } from 'node:path'
 
 import { build, defineConfig } from 'vite'
@@ -118,7 +118,7 @@ export default defineConfig(({ command }) => {
         },
         afterBuild() {
           // console.log(fileMap)
-          // unlinkSync('dist/ep-mod.d.ts')
+          unlinkSync('dist/ep-mod.d.ts')
           // unlinkSync('dist/zh-CN.d.ts')
           cpSync('src/styles', 'dist/scss', { recursive: true })
         }
