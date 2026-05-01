@@ -78,7 +78,7 @@
   "peerDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "element-plus": "^2.13.1",
-    "utils-where": "^0.5.1"
+    "utils-where": "^0.5.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.3",
