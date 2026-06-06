@@ -14,7 +14,8 @@
     "**/coverage/**",
     ".husky/",
     ".vscode/",
-    "public/"
+    "public/",
+    "**/*.d.ts"
   ],
   "rules": {
     // "unicorn/no-empty-file": "off",
