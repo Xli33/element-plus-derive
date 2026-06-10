@@ -86,8 +86,8 @@ app.mount('#app')
 
 ```scss
 <style lang="scss">
-// 导入后并覆盖变量$epd-prefix为需要的前缀名称
-@forward 'styles/common.scss' with (
+// 覆盖内部变量$epd-prefix为需要的前缀名称
+@forward 'element-plus-derive/scss/common.scss' with (
   $epd-prefix: 'my'
 );
 

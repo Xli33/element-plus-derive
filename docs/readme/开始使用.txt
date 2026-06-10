@@ -61,8 +61,8 @@
 <p><strong>此时需要再修改组件共用的scss变量以适配前缀</strong>，无需前缀时建议直接引入<code>element-plus-derive/style</code>中的css</p>
 <p><code>App.vue</code></p>
 <pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#BABED8">&#x3C;</span><span style="color:#FFCB6B">style</span><span style="color:#BABED8"> lang="scss"></span></span>
-<span class="line"><span style="color:#676E95;font-style:italic">// 导入后并覆盖变量$epd-prefix为需要的前缀名称</span></span>
-<span class="line"><span style="color:#89DDFF;font-style:italic">@forward</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">styles/common.scss</span><span style="color:#89DDFF">'</span><span style="color:#82AAFF"> with</span><span style="color:#BABED8"> (</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">// 覆盖内部变量$epd-prefix为需要的前缀名称</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">@forward</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">element-plus-derive/scss/common.scss</span><span style="color:#89DDFF">'</span><span style="color:#82AAFF"> with</span><span style="color:#BABED8"> (</span></span>
 <span class="line"><span style="color:#BABED8">  $epd-prefix: </span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">my</span><span style="color:#89DDFF">'</span></span>
 <span class="line"><span style="color:#BABED8">)</span><span style="color:#89DDFF">;</span></span>
 <span class="line"></span>
