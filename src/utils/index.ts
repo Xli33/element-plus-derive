@@ -1,4 +1,9 @@
-export const classPrefix: [string?] = []
+// export const classPrefix: [string?] = []
 
-export const useClass = (name: string) =>
-  classPrefix[0] ? classPrefix[0].replace(/\B([A-Z])/g, '-$1').toLowerCase() + '-' + name : name
+type UseClass = ((name: string) => string) & { prefix?: string }
+
+export const useClass: UseClass = (name: string) =>
+  useClass.prefix ? useClass.prefix.replace(/\B([A-Z])/g, '-$1').toLowerCase() + '-' + name : name
+
+// config-provider调用vue provide时的key
+export const CPKey = Symbol('epd-c-p')

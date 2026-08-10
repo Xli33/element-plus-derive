@@ -4,7 +4,7 @@ import type { Obj } from './type'
 import * as allComponents from './components'
 import { $i18n } from './locale/i18n'
 import { vElSelect } from './directives' // 用 import * as dirs from './directives'会导致生成额外的chunk，内容是通过Object.freeze处理过的只读对象
-import { classPrefix } from './utils'
+import { useClass } from './utils'
 
 const directives = Object.entries({
     elSelect: vElSelect
@@ -22,7 +22,7 @@ export function install(
 ) {
   // 支持定义组件前缀
   if (opt.prefix) {
-    classPrefix[0] = opt.prefix
+    useClass.prefix = opt.prefix
     components.forEach((e) => (e.name = opt.prefix! + e.name))
   }
   components.forEach((component) => {

@@ -7,7 +7,7 @@ import { ElTable, type TableColumnCtx } from 'element-plus'
 import { deepMerge, getPathValue, makeObjectByPath } from 'utils-where'
 
 // 扩展Crud，添加cacheCols属性
-ElTable.props.cacheCols = Object /* {
+;(ElTable as Obj).props.cacheCols = Object /* {
   type: Object,
   default: () => ({
     keys: '', // 存储路径
@@ -83,21 +83,21 @@ const tableUpdated = function (this: any) {
   selfProps.onHeaderDragend = saveColWidth.bind(this)
 }
 
-if (typeof ElTable.mounted !== 'function') {
-  ElTable.mounted = tableMounted
+if (typeof (ElTable as Obj).mounted !== 'function') {
+  ;(ElTable as Obj).mounted = tableMounted
 } else {
-  const mounted = ElTable.mounted
-  ElTable.mounted = function () {
+  const mounted = (ElTable as Obj).mounted
+  ;(ElTable as Obj).mounted = function () {
     mounted.call(this)
     tableMounted.call(this)
   }
 }
 
-if (typeof ElTable.updated !== 'function') {
-  ElTable.updated = tableUpdated
+if (typeof (ElTable as Obj).updated !== 'function') {
+  ;(ElTable as Obj).updated = tableUpdated
 } else {
-  const updated = ElTable.updated
-  ElTable.updated = function () {
+  const updated = (ElTable as Obj).updated
+  ;(ElTable as Obj).updated = function () {
     updated.call(this)
     tableUpdated.call(this)
   }
