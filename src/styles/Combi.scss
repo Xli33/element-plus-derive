@@ -26,7 +26,8 @@ $prefix: get-block-name(combi);
 
     &.with-append {
       > .el-select .el-select__wrapper,
-      > .el-date-editor .el-input__wrapper {
+      > .el-date-editor .el-input__wrapper,
+      > .el-input-number .el-input__wrapper {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
@@ -34,7 +35,8 @@ $prefix: get-block-name(combi);
 
     &.with-prepend {
       > .el-select .el-select__wrapper,
-      > .el-date-editor .el-input__wrapper {
+      > .el-date-editor .el-input__wrapper,
+      > .el-input-number .el-input__wrapper {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
