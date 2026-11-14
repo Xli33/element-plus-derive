@@ -8,18 +8,18 @@
     :class="useClass('toggle-column')">
     <span :class="useClass('toggle-column-btn')">
       <slot>
-        <el-button type="default" :icon="icon">
-          <template v-if="!icon"
-            >{{ title ?? $i18n.t('toggleColumn.title') }} <el-icon><ArrowDown /></el-icon
-          ></template>
+        <el-button type="default">
+          <el-icon>
+            <component :is="icon" />
+          </el-icon>
         </el-button>
       </slot>
     </span>
     <template #dropdown>
       <div v-if="all" class="el-dropdown-menu__item">
-        <el-checkbox v-model="checkAll" :indeterminate="indeterminate">{{
-          $i18n.t('toggleColumn.checkAll')
-        }}</el-checkbox>
+        <el-checkbox v-model="checkAll" :indeterminate="indeterminate">
+          <span style="padding: 0 1em"></span>
+        </el-checkbox>
       </div>
       <el-dropdown-menu :class="useClass('toggle-column-list')">
         <el-dropdown-item
@@ -51,9 +51,8 @@ import {
   ElDropdownItem,
   ElIcon
 } from 'element-plus'
-import { ArrowDown } from '@element-plus/icons-vue'
+import { Menu } from '@element-plus/icons-vue'
 import { deepMerge, getPathValue, isObject, makeObjectByPath, setPathValue } from 'utils-where'
-import { $i18n } from '@/locale/i18n'
 import { useClass } from '@/utils'
 
 // 用于记录绑定的原始列，配合prop：cacheId使用，避免在v-for中绑定了有 _visible: false 的列时在切换显示后丢失原始列
@@ -69,11 +68,13 @@ const props = defineProps({
   modelValue: {
     type: Array
   },
-  title: String,
   /**
-   * 仅显示图标
+   * element-plus图标组件，默认使用Menu图标
    */
-  icon: String,
+  icon: {
+    type: Object,
+    default: () => Menu
+  },
   /**
    * 绑定columns对应的唯一标识，一般在v-for中绑定了固定某列且列配置中带有 _visible:false 时用到
    */

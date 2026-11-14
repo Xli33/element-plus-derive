@@ -44,10 +44,10 @@ export default {
       reload: '刷新',
       maxmize: '最大化',
       restore: '还原'
-    },
-    toggleColumn: {
-      title: '列',
-      checkAll: '全选'
     }
+    // toggleColumn: {
+    //   title: '列',
+    //   checkAll: '全选'
+    // }
   }
 }
