@@ -4,7 +4,7 @@ $prefix: get-block-name(toggle-column-);
 
 .#{$prefix} {
   &list {
-    max-height: 400px;
+    // max-height: 400px;
     max-height: 60vh;
     padding-top: 0;
     // overflow: auto;

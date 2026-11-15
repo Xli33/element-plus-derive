@@ -3,14 +3,6 @@ export interface Obj {
 }
 
 export type BtnType =
-  | ''
-  | 'default'
-  | 'text'
-  | 'warning'
-  | 'primary'
-  | 'success'
-  | 'info'
-  | 'danger'
-  | undefined
+  '' | 'default' | 'text' | 'warning' | 'primary' | 'success' | 'info' | 'danger' | undefined
 
 export type BtnSize = '' | 'small' | 'default' | 'large' | undefined

@@ -37,7 +37,9 @@
       :class="['hahahah', { hahahah2: true }]"
       id="qqq"
       :style="{ color: 'red', fontSize: false && '20px' }"
-      data-test="test">
+      data-test="test"
+      :before-add="beforeAdd"
+      :before-remove="beforeRemove">
       <template #num="{ $index }">
         <el-input v-model.trim="table.list[$index]!.num"></el-input>
       </template>
@@ -52,6 +54,7 @@
 import { shallowRef } from 'vue'
 import type { Obj } from '@/type'
 import { CurdTable, ElColumn, ToggleColumn } from '@/index'
+import { ElMessageBox } from 'element-plus'
 
 const genCols = () => [
   {
@@ -112,4 +115,27 @@ const table = {
   ]
 }
 const columns = shallowRef(genCols())
+
+function beforeAdd(add: any) {
+  ElMessageBox.confirm('确定要新增吗?', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {
+      add()
+    })
+    .catch()
+}
+function beforeRemove(row: any, index: number, del: any) {
+  ElMessageBox.confirm(`确定要删除${row.emoji}吗?`, '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {
+      del(index)
+    })
+    .catch()
+}
 </script>

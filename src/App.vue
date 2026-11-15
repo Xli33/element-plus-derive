@@ -8,13 +8,19 @@
       </el-menu>
     </el-aside>
     <el-main>
-      <component :is="current"></component>
+      <LangSet />
+      <ConfigProvider :locale="appLocale">
+        <component :is="current"></component>
+      </ConfigProvider>
     </el-main>
   </el-container>
 </template>
 
 <script setup lang="tsx">
-import { shallowRef } from 'vue'
+import { computed, shallowRef } from 'vue'
+import LangSet from './devComponents/LangSet.vue'
+import { ConfigProvider } from '@/index.ts'
+
 import AllCheckboxDemo from './views/AllCheckbox/demo.vue'
 import CacheSelectDemo from './views/CacheSelect/demo.vue'
 import CombiDemo from './views/Combi/demo.vue'
@@ -25,9 +31,16 @@ import MCalendarDemo from './views/MCalendar/demo.vue'
 import ModalFooterDemo from './views/ModalFooter/demo.vue'
 import PageTableDemo from './views/PageTable/demo.vue'
 import RemoteSelectDemo from './views/RemoteSelect/demo.vue'
-// import ToggleColumnDemo from './views/ToggleColumn/demo.vue';
+import ToggleColumnDemo from './views/ToggleColumn/demo.vue'
+import ConfigProviderDemo from './views/ConfigProvider/demo.vue'
+
+import { i18n } from './i18n.ts'
+import { AppLocale } from './store.ts'
+
+const appLocale = computed(() => i18n.global.messages.value[AppLocale.value])
 
 const map = {
+  ConfigProviderDemo,
   AllCheckboxDemo,
   CacheSelectDemo,
   CombiDemo,
@@ -37,8 +50,8 @@ const map = {
   MCalendarDemo,
   ModalFooterDemo,
   PageTableDemo,
-  RemoteSelectDemo
-  // ToggleColumnDemo
+  RemoteSelectDemo,
+  ToggleColumnDemo
 }
 
 const current = shallowRef(AllCheckboxDemo)
