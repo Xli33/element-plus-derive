@@ -5,13 +5,13 @@ export default {
       title: 'All'
     },
     curdTable: {
-      actionText: 'action',
-      addText: 'add',
-      del: 'del'
+      actionText: 'Action',
+      addText: 'Add',
+      del: 'Del'
     },
     mCalendar: {
-      mini: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      short: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      mini: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+      short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     },
     modalFooter: {
