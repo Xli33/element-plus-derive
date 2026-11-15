@@ -7,8 +7,16 @@ $prefix: get-block-name(combi);
   // display: inline-table;
   vertical-align: middle;
 
-  .el-input-group__prepend .el-select .el-select__wrapper {
-    box-shadow: none;
+  .el-input-group__prepend,
+  .el-input-group__append {
+    .el-select .el-select__wrapper {
+      box-shadow: none;
+    }
+    .el-input {
+      --el-input-border-radius: 0;
+      flex: 1;
+      margin: 0 -20px;
+    }
   }
 
   &-cell {
