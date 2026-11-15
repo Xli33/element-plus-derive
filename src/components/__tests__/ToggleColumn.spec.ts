@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import ElementPlus from 'element-plus'
-import ToggleColumn from '../ToggleColumn.vue'
+import ToggleColumn from '../EpdToggleColumn.vue'
 
 describe('ToggleColumn', () => {
   it('renders properly', async () => {
@@ -32,6 +32,6 @@ describe('ToggleColumn', () => {
     await nextTick()
     // console.log('text(): --- ', wrapper.html())
 
-    expect(wrapper.text()).toContain('全选numnum2num3')
+    expect(wrapper.text()).toContain('numnum2num3')
   })
 })

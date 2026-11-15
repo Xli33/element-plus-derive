@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import ElColumn from '../ElColumn.vue'
+import ElColumn from '../EpdElColumn.vue'
 
 describe('ElColumn', () => {
   it('renders properly', () => {

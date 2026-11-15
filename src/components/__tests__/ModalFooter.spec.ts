@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import ModalFooter from '../ModalFooter.vue'
+import ModalFooter from '../EpdModalFooter.vue'
 
 describe('ModalFooter', () => {
   it('renders properly', () => {

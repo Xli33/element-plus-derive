@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import Combi from '../Combi.vue'
+import Combi from '../EpdCombi.vue'
 
 describe('Combi', () => {
   it('renders properly', () => {

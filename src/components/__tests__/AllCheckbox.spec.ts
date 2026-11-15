@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import AllCheckbox from '../AllCheckbox.vue'
+import AllCheckbox from '../EpdAllCheckbox.vue'
 
 describe('AllCheckbox', () => {
   it('renders properly', () => {

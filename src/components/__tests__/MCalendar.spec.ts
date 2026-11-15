@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import elementPlus from 'element-plus'
-import MCalendar from '../MCalendar.vue'
+import MCalendar from '../EpdMCalendar.vue'
 
 describe('MCalendar', () => {
   it('renders properly', () => {
