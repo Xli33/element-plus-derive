@@ -35,7 +35,7 @@ let initOnce: null | (() => void) = () => {
         default: (scope: any) =>
           Array.isArray(col.children) && col.children.length > 0
             ? col.children.map((e) => renderColumn!(e, slots))
-            : col.render?.(scope) || slots[col.slot]?.(scope)
+            : col.render?.(scope, col) || slots[col.slot]?.(scope, col)
       }}
     </ElTableColumn>
   )
