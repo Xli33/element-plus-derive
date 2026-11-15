@@ -1,7 +1,7 @@
 # element-plus-derive
 
 基于vue 3.5+与element-plus的组件&优化扩展，可自定义组件前缀  
-**示例均使用无前缀的默认组件名**
+**示例均使用默认前缀**
 
 ## 安装
 
@@ -59,7 +59,7 @@ app.mount('#app')
 
 #### 自定义组件前缀
 
-为免容易变得冗长，组件名及其样式class默认无前缀，若需要自定义，可传入prefix参数
+为便于使用，组件名及其样式class默认使用Epd与epd前缀，若需要自定义，可传入**PascalCase**的prefix参数
 
 ```js
 import { createApp } from 'vue'
@@ -95,7 +95,7 @@ app.mount('#app')
 @use 'element-plus-derive/scss/index.scss';
 
 // 或者单独导入需要的组件样式
-@use 'element-plus-derive/scss/Combi.scss';
+@use 'element-plus-derive/scss/EpdCombi.scss';
 </style>
 ```
 
@@ -106,8 +106,8 @@ import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { Combi } from 'element-plus-derive'
-import 'element-plus-derive/styles/Combi.css' // 引入需要的组件样式
+import { EpdCombi } from 'element-plus-derive'
+import 'element-plus-derive/styles/EpdCombi.css' // 引入需要的组件样式
 
 import App from './App.vue'
 
@@ -116,7 +116,7 @@ app.use(ElementPlus)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-app.component(Combi.name, Combi)
+app.component(EpdCombi.name, EpdCombi)
 app.mount('#app')
 ```
 
@@ -125,7 +125,7 @@ app.mount('#app')
 
 ## 国际化
 
-目前提供中英翻译，默认显示简体中文。在安装插件时可传入需要显示的语言，若使用vue-i18n，则只需传入vue-i18n实例
+目前提供中英翻译，默认简体中文。在安装时可传入指定语言对象，若使用vue-i18n，则只需传入vue-i18n实例。也可使用`ConfigProvider`进行控制
 
 - 使用插件提供的英文翻译
 
@@ -193,10 +193,6 @@ app
           reload: '重載',
           maxmize: '最大化',
           restore: '還原'
-        },
-        toggleColumn: {
-          title: '列',
-          checkAll: '全選'
         }
       }
     }
@@ -234,11 +230,11 @@ const i18n = createI18n({
   fallbackLocale: 'zh-CN',
   messages: {
     'zh-CN': {
-      ...zh,
+      el: zh,
       ...zhCN
     },
     'en-US': {
-      ...en,
+      el: en,
       ...enUS
     }
   }
@@ -255,6 +251,51 @@ app.use(epDerive, {
   // msgPrefix: 'someKey' // 该值仅针对使用vue-i18n的情况生效
 })
 app.mount('#app')
+```
+
+App.vue
+
+```vue
+<template>
+  <ElConfigProvider :locale="elLocale"></ElConfigProvider>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { ElConfigProvider } from 'element-plus'
+import { i18n } from '@/i18n'
+import { AppLang } from '@/store'
+
+const elLocale = computed(() => i18n.global.messages.value[AppLang.value].el)
+</script>
+```
+
+- 使用`ConfigProvider`
+
+```vue
+<template>
+  <EpdConfigProvider :locale="zhTradMsg">
+    <EpdAllCheckbox></EpdAllCheckbox>
+    <EpdMCalendar week-type="short"></EpdMCalendar>
+  </EpdConfigProvider>
+</template>
+
+<script setup>
+import { EpdConfigProvider, EpdAllCheckbox, EpdMCalendar } from 'element-plus-derive'
+
+const zhTradMsg = {
+  d: {
+    allCheckbox: {
+      title: '全選'
+    },
+    mCalendar: {
+      // mini: ['日', '一', '二', '三', '四', '五', '六'],
+      short: ['週日', '週一', '週二', '週三', '週四', '週五', '週六']
+      // long: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六']
+    }
+  }
+}
+</script>
 ```
 
 ## 调优
@@ -345,37 +386,37 @@ import 'element-plus-derive/ep-mod'
 
 [文档](https://xli33.github.io/element-plus-derive)
 
-`AllCheckbox`  
+`EpdAllCheckbox`  
 提供全选功能的CheckboxGroup
 
-`CacheSelect`  
-避免重复调用远程接口的RemoteSelect，同一个cacheId对应只触发一次请求
+`EpdCacheSelect`  
+防止重复调用远程接口的RemoteSelect，同一个cacheId对应只触发一次请求
 
-`Combi`  
+`EpdCombi`  
 类似ElInput[append prepend]样式的组合框
 
-`CurdTable`  
+`EpdCurdTable`  
 具有增删功能的ElTable
 
-`Drawer`  
+`EpdDrawer`  
 默认带ModalFooter的ElDrawer
 
-`ElColumn`  
+`EpdElColumn`  
 通过数组形式使用ElTableColumn
 
-`MCalendar`  
+`EpdMCalendar`  
 月度日历组件
 
-`ModalFooter`  
+`EpdModalFooter`  
 代替ElDialog自带的底栏部分，按钮易于控制，自定义度更高
 
-`PageTable`  
+`EpdPageTable`  
 远程分页/本地分页的ElTable
 
-`RemoteSelect`  
+`EpdRemoteSelect`  
 获取远程数据的ElSelect，默认在展开时才触发请求
 
-`ToggleColumn`  
+`EpdToggleColumn`  
 用于切换ElTable列的显示状态
 
 ## License

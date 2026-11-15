@@ -1,5 +1,5 @@
 <h2>国际化</h2>
-<p>目前提供中英翻译，默认显示简体中文。在安装插件时可传入需要显示的语言，若使用vue-i18n，则只需传入vue-i18n实例</p>
+<p>目前提供中英翻译，默认简体中文。在安装时可传入指定语言对象，若使用vue-i18n，则只需传入vue-i18n实例。也可使用<code>ConfigProvider</code>进行控制</p>
 <ul>
 <li>使用插件提供的英文翻译</li>
 </ul>
@@ -64,10 +64,6 @@
 <span class="line"><span style="color:#F07178">          reload</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">重載</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#F07178">          maxmize</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">最大化</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#F07178">          restore</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">還原</span><span style="color:#89DDFF">'</span></span>
-<span class="line"><span style="color:#89DDFF">        },</span></span>
-<span class="line"><span style="color:#F07178">        toggleColumn</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
-<span class="line"><span style="color:#F07178">          title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">列</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#F07178">          checkAll</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">全選</span><span style="color:#89DDFF">'</span></span>
 <span class="line"><span style="color:#89DDFF">        }</span></span>
 <span class="line"><span style="color:#89DDFF">      }</span></span>
 <span class="line"><span style="color:#89DDFF">    }</span></span>
@@ -103,11 +99,11 @@
 <span class="line"><span style="color:#F07178">  fallbackLocale</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">zh-CN</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#F07178">  messages</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
 <span class="line"><span style="color:#89DDFF">    '</span><span style="color:#F07178">zh-CN</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
-<span class="line"><span style="color:#89DDFF">      ...</span><span style="color:#BABED8">zh</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      el</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> zh</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#89DDFF">      ...</span><span style="color:#BABED8">zhCN</span></span>
 <span class="line"><span style="color:#89DDFF">    },</span></span>
 <span class="line"><span style="color:#89DDFF">    '</span><span style="color:#F07178">en-US</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
-<span class="line"><span style="color:#89DDFF">      ...</span><span style="color:#BABED8">en</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F07178">      el</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> en</span><span style="color:#89DDFF">,</span></span>
 <span class="line"><span style="color:#89DDFF">      ...</span><span style="color:#BABED8">enUS</span></span>
 <span class="line"><span style="color:#89DDFF">    }</span></span>
 <span class="line"><span style="color:#89DDFF">  }</span></span>
@@ -124,3 +120,42 @@
 <span class="line"><span style="color:#676E95;font-style:italic">  // msgPrefix: 'someKey' // 该值仅针对使用vue-i18n的情况生效</span></span>
 <span class="line"><span style="color:#89DDFF">}</span><span style="color:#BABED8">)</span></span>
 <span class="line"><span style="color:#BABED8">app</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">mount</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">#app</span><span style="color:#89DDFF">'</span><span style="color:#BABED8">)</span></span></code></pre>
+<p>App.vue</p>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">ElConfigProvider</span><span style="color:#89DDFF"> :</span><span style="color:#C792EA">locale</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#BABED8">elLocale</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">ElConfigProvider</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> computed</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">vue</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> ElConfigProvider</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">element-plus</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> i18n</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">@/i18n</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> AppLang</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">@/store</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> elLocale </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> computed</span><span style="color:#BABED8">(</span><span style="color:#89DDFF">()</span><span style="color:#C792EA"> =></span><span style="color:#BABED8"> i18n</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">global</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">messages</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">value[AppLang</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">value]</span><span style="color:#89DDFF">.</span><span style="color:#BABED8">el)</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+<ul>
+<li>使用<code>ConfigProvider</code></li>
+</ul>
+<pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">EpdConfigProvider</span><span style="color:#89DDFF"> :</span><span style="color:#C792EA">locale</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#BABED8">zhTradMsg</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">EpdAllCheckbox</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">EpdAllCheckbox</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">EpdMCalendar</span><span style="color:#C792EA"> week-type</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">short</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">EpdMCalendar</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">EpdConfigProvider</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">import</span><span style="color:#89DDFF"> {</span><span style="color:#BABED8"> EpdConfigProvider</span><span style="color:#89DDFF">,</span><span style="color:#BABED8"> EpdAllCheckbox</span><span style="color:#89DDFF">,</span><span style="color:#BABED8"> EpdMCalendar</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF;font-style:italic"> from</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">element-plus-derive</span><span style="color:#89DDFF">'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> zhTradMsg </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F07178">  d</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F07178">    allCheckbox</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F07178">      title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">全選</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#F07178">    mCalendar</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">      // mini: ['日', '一', '二', '三', '四', '五', '六'],</span></span>
+<span class="line"><span style="color:#F07178">      short</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">週日</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週一</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週二</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週三</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週四</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週五</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週六</span><span style="color:#89DDFF">'</span><span style="color:#BABED8">]</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">      // long: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六']</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
