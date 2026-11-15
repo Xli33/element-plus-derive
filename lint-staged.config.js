@@ -13,15 +13,18 @@ export default {
     const files = filesToLint.join(' ')
 
     return [
-      `oxlint ${files}`,
+      `oxlint --no-error-on-unmatched-pattern ${files}`,
       `eslint --cache --cache-location node_modules/.cache/eslint/ ${files}`,
       `npm run type-check`
     ]
   },
 
-  '*.{js,jsx,ts,tsx,vue,css,scss,json,md}': (filenames) => [
-    `prettier --check --ignore-unknown --experimental-cli ${getRelativePath(filenames)
-      .filter((e) => !/CHANGELOG.md|^public\/|^docs\//.test(e))
-      .join(' ')}`
-  ]
+  '*.{js,jsx,ts,tsx,vue,css,scss,json,md}': (filenames) => {
+    const needFormat = getRelativePath(filenames).filter(
+      (e) => !/CHANGELOG.md|^public\/|^docs\//.test(e)
+    )
+    if (!needFormat.length) return []
+
+    return [`prettier --check --ignore-unknown --experimental-cli ${needFormat.join(' ')}`]
+  }
 }
