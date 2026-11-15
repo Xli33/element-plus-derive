@@ -14,7 +14,7 @@
       <slot v-else name="columns"></slot>
       <el-table-column
         v-if="!disabled"
-        :label="actionText || $i18n.t('curdTable.actionText')"
+        :label="actionText || t('curdTable.actionText')"
         :width="actionCol.width"
         :align="actionCol.align"
         :fixed="actionCol.fixed"
@@ -30,7 +30,7 @@
             v-bind="delBtn"
             :disabled="delBtnDisabled(row, $index)"
             @click="toDel($index)"
-            >{{ $i18n.t('curdTable.del') }}</el-button
+            >{{ t('curdTable.del') }}</el-button
           >
         </template>
       </el-table-column>
@@ -46,7 +46,7 @@
       plain
       style="display: block; position: relative; width: 100%; margin-top: -1px"
       @click="toAdd">
-      {{ addText ?? $i18n.t('curdTable.addText') }}
+      {{ addText ?? t('curdTable.addText') }}
     </el-button>
   </div>
 </template>
@@ -59,7 +59,7 @@ import { type PropType, computed, ref, watch } from 'vue'
 import { ElTable, ElTableColumn, ElButton } from 'element-plus'
 import { omitOwnKeys } from 'utils-where'
 import ElColumn from './ElColumn.vue'
-import { $i18n } from '@/locale/i18n'
+import { useLang } from '@/utils/useLang'
 
 export default {
   name: 'CurdTable'
@@ -212,6 +212,7 @@ const emit = defineEmits<{
 
 // data
 
+const { t } = useLang()
 const list = ref(props.modelValue)
 
 const slotColumns = computed(() => {

@@ -13,7 +13,7 @@
         >{{ day.title }}</el-col
       >
     </el-row>
-    <el-row>
+    <el-row :class="useClass('mcalendar-body')">
       <el-col
         v-for="(item, index) in list"
         :key="index"
@@ -46,7 +46,7 @@ import type { Obj } from '@/type'
 import { type PropType, type Ref, ref, computed, watch, nextTick } from 'vue'
 import { dayjs, ElRow, ElCol } from 'element-plus'
 import type { Dayjs } from 'dayjs'
-import { $i18n } from '@/locale/i18n'
+import { useLang } from '@/utils/useLang'
 import { useClass } from '@/utils'
 
 export default {
@@ -184,6 +184,7 @@ const emit = defineEmits<{
   'dblclick-day': [MCalendarCell, number]
 }>()
 
+const { t } = useLang()
 const list = ref<MCalendarCell[]>() as Ref<MCalendarCell[]>,
   rangeStart = ref<MCalendarCell | null>(null),
   rangeEnd = ref<MCalendarCell | null>(null)
@@ -214,7 +215,7 @@ const week = computed(() => {
   for (let i = weekAt.value; i < max; i++) {
     order = i % 7
     arr.push({
-      title: props.weekMap?.[order] || $i18n.t(`mCalendar.${props.weekType}.${order}`),
+      title: props.weekMap?.[order] || t(`mCalendar.${props.weekType}.${order}`),
       order
     })
   }
