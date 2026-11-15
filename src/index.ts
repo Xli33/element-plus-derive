@@ -21,10 +21,11 @@ export function install(
   } = {}
 ) {
   // 支持定义组件前缀
-  if (opt.prefix) {
+  if (opt.prefix != null) {
     useClass.prefix = opt.prefix
-    components.forEach((e) => (e.name = opt.prefix! + e.name))
+    // components.forEach((e) => (e.name = opt.prefix! + e.name))
   }
+  components.forEach((e) => (e.name = useClass.prefix + e.name))
   components.forEach((component) => {
     app.component(component.name!, component)
   })
