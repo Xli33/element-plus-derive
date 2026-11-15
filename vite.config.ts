@@ -6,7 +6,7 @@ import { build, defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
-import dts from 'vite-plugin-dts'
+import dts from 'unplugin-dts/vite'
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
@@ -39,6 +39,7 @@ export default defineConfig(({ command }) => {
         plugins: [vue(), vueJsx()],
         ...sameOption,
         build: {
+          // sourcemap: true,
           target: 'es2023',
           cssTarget: ['chrome112', 'edge112', 'firefox115', 'safari16.4'],
           outDir: 'dist/umd',
@@ -80,11 +81,24 @@ export default defineConfig(({ command }) => {
       vue(),
       vueJsx(),
       vueDevTools(),
+      {
+        name: 'exclude-locale-sourcemap',
+        generateBundle(_, bundle) {
+          for (const fileName in bundle) {
+            // 匹配所有输出在 locale 目录下的 .js.map 文件
+            if (fileName.startsWith('locale/') && fileName.endsWith('.js.map')) {
+              // 从即将写入磁盘的资产包中直接删除它
+              delete bundle[fileName]
+            }
+          }
+        }
+      },
       dts({
+        // processor: 'vue',
         tsconfigPath: './tsconfig.app.json',
         bundleTypes: true,
-        // 当合并出问题时考虑取消 bundleTypes，并开启下面的 outDir、compilerOptions 配置
-        // outDir: 'dist/types',
+        // 当合并出问题时考虑取消 bundleTypes，并开启下面的 outDirs、compilerOptions 配置
+        // outDirs: 'dist/types',
         // compilerOptions: {
         //   rootDir: './src'
         // },
@@ -97,25 +111,25 @@ export default defineConfig(({ command }) => {
           'src/directives/*.ts'
         ],
         // 写入.d.ts前去除部分组件中内联的其它组件类型声明
-        beforeWriteFile(filePath, content) {
-          if (filePath.includes('CacheSelect.vue')) {
-            // console.log('found:', content.match(/sel:.+?\}\)\s*\|\s*null;/s)?.[0])
-            return {
-              filePath,
-              content: content.replace(/sel:.+?\}\)\s*\|\s*null;/s, 'sel: any')
-            }
-          }
-          if (filePath.includes('PageTable.vue')) {
-            // console.log('found:', content.match(/tableRef:.+\| null;/s)?.[0])
-            return {
-              filePath,
-              content: content.replace(
-                /tableRef:.+\| null;\s*}, HTMLDivElement>/s,
-                'tableRef: any;\npageRef: any;\n}, HTMLDivElement>'
-              )
-            }
-          }
-        },
+        // beforeWriteFile(filePath, content) {
+        //   if (filePath.includes('CacheSelect.vue')) {
+        //     // console.log('found:', content.match(/sel:.+?\}\)\s*\|\s*null;/s)?.[0])
+        //     return {
+        //       filePath,
+        //       content: content.replace(/sel:.+?\}\)\s*\|\s*null;/s, 'sel: any')
+        //     }
+        //   }
+        //   if (filePath.includes('PageTable.vue')) {
+        //     // console.log('found:', content.match(/tableRef:.+\| null;/s)?.[0])
+        //     return {
+        //       filePath,
+        //       content: content.replace(
+        //         /tableRef:.+\| null;\s*}, HTMLDivElement>/s,
+        //         'tableRef: any;\npageRef: any;\n}, HTMLDivElement>'
+        //       )
+        //     }
+        //   }
+        // },
         afterBuild() {
           // console.log(fileMap)
           unlinkSync('dist/ep-mod.d.ts')
@@ -126,6 +140,7 @@ export default defineConfig(({ command }) => {
     ],
     ...sameOption,
     build: {
+      // sourcemap: true,
       emptyOutDir: false,
       cssCodeSplit: true,
       lib: {
