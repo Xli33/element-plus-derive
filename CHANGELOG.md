@@ -1,6 +1,36 @@
 # Changelog
 
 
+## [0.3.0](https://github.com/Xli33/element-plus-derive/compare/v0.2.0...v0.3.0) (2026-11-15)
+
+### ⚠ BREAKING CHANGES
+
+* 调整`CurdTable` `MCalendar`的en-US翻译
+* 简化ToggleColumn，去除title prop与全选文案，默认展示Menu图标
+* 默认组件前缀设为`Epd`，对应class前缀名`epd`
+* 统一适配以`Epd`前缀导出
+* 优化AllCheckbox，去除prop：hideAll，单向数据流改造
+* 优化MCalendar的css var前缀，适配自定义类前缀
+* 原`page-table-`类前缀改为`pagetable-`
+
+* 调整`CurdTable` `MCalendar`的en-US翻译 ([4ecc569](https://github.com/Xli33/element-plus-derive/commit/4ecc5694249adf77a05480c22379a4f97ca7fbdc))
+* 统一适配以`Epd`前缀导出 ([02587ba](https://github.com/Xli33/element-plus-derive/commit/02587bae5bf8dee0f17c9fecb4c8e4d5be8d720e))
+* 优化AllCheckbox，去除prop：hideAll，单向数据流改造 ([f1771e1](https://github.com/Xli33/element-plus-derive/commit/f1771e1f5a6c21fdb945d66a4893a891c5eeb66f))
+* 优化MCalendar的css var前缀，适配自定义类前缀 ([8c61fc9](https://github.com/Xli33/element-plus-derive/commit/8c61fc93413d938612a6dd23530b26e412c22b8d))
+* 原`page-table-`类前缀改为`pagetable-` ([a26a991](https://github.com/Xli33/element-plus-derive/commit/a26a991f9bd7dc514894d99f3712bb139d986423))
+
+### Features
+
+* 简化ToggleColumn，去除title prop与全选文案，默认展示Menu图标 ([9372a53](https://github.com/Xli33/element-plus-derive/commit/9372a53d3ae0ec6f118606122084c2c18d014235))
+* 默认组件前缀设为`Epd`，对应class前缀名`epd` ([e591a55](https://github.com/Xli33/element-plus-derive/commit/e591a55a552ad995aaca35346d873df057cb9644))
+* 新增ConfigProvider组件，提供局部国际化支持 ([d8a8d08](https://github.com/Xli33/element-plus-derive/commit/d8a8d08fd7bfe4ac8628a6136cd4d6cd0f0e0190))
+* 优化ElColumn的列作用域插槽，新增列参数 ([a6c4e68](https://github.com/Xli33/element-plus-derive/commit/a6c4e686c993855d964a77488c045479eb571a27))
+* **Combi:** `<Combi>`适配`<el-input-number>` ([9d581c2](https://github.com/Xli33/element-plus-derive/commit/9d581c29e4bfd23a7ba02aa588fb57f766e499e2))
+
+### Bug Fixes
+
+* 优化Combi适配表单组件 ([941a38b](https://github.com/Xli33/element-plus-derive/commit/941a38b517675ec2cd0453dc699ab86bc707a28b))
+
 ## [0.2.0](https://github.com/Xli33/element-plus-derive/compare/v0.1.0...v0.2.0) (2026-05-01)
 
 
