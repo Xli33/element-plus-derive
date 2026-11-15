@@ -9,9 +9,9 @@
     </el-aside>
     <el-main>
       <LangSet />
-      <ConfigProvider :locale="appLocale">
+      <EpdConfigProvider :locale="appLocale">
         <component :is="current"></component>
-      </ConfigProvider>
+      </EpdConfigProvider>
     </el-main>
   </el-container>
 </template>
@@ -19,7 +19,7 @@
 <script setup lang="tsx">
 import { computed, shallowRef } from 'vue'
 import LangSet from './devComponents/LangSet.vue'
-import { ConfigProvider } from '@/index.ts'
+import { EpdConfigProvider } from '@/index.ts'
 
 import AllCheckboxDemo from './views/AllCheckbox/demo.vue'
 import CacheSelectDemo from './views/CacheSelect/demo.vue'

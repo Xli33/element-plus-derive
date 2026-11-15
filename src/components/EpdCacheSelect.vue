@@ -35,7 +35,7 @@ import {
   useTemplateRef,
   shallowReactive
 } from 'vue'
-import RemoteSelect, { type SelectValue } from './RemoteSelect.vue'
+import RemoteSelect, { type EpdSelectValue } from './EpdRemoteSelect.vue'
 
 // 默认加载标记
 const loadeds: {
@@ -71,7 +71,7 @@ export default {
 
 <script setup lang="ts">
 const props = defineProps({
-  modelValue: [String, Array, Number] as PropType<SelectValue>,
+  modelValue: [String, Array, Number] as PropType<EpdSelectValue>,
   /**
    * 缓存的唯一键，当页面上同时用到多个不同数据源的CacheSelect时需传入不同值
    */
@@ -82,26 +82,26 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  // 'update:modelValue': [val: SelectValue]
+  // 'update:modelValue': [val: EpdSelectValue]
   // 'update:chosen': [item: Obj]
   // 'update:list': [list: Obj[]]
   // load: [res: any]
-  // change: [val: SelectValue]
-  (e: 'update:modelValue', val: SelectValue): void
+  // change: [val: EpdSelectValue]
+  (e: 'update:modelValue', val: EpdSelectValue): void
   (e: 'update:chosen', item: Obj): void
   (e: 'update:list', list: Obj[]): void
   (e: 'load', res: any): void
-  <k extends SelectValue>(e: 'change', val: k): void
+  <k extends EpdSelectValue>(e: 'change', val: k): void
 }>()
 
 // data
 
-const code = ref<SelectValue>('')
+const code = ref<EpdSelectValue>('')
 const selRef = useTemplateRef('sel') //ref<any>(null)
 
 // methods
 // let flag: true | null
-const change = (val: SelectValue) => {
+const change = (val: EpdSelectValue) => {
   // flag = true
   // nextTick(() => {
   //   flag = null

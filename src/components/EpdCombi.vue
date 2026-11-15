@@ -53,5 +53,5 @@ const hasAppend = computed(() => !!props.append || !!slots.append?.().length)
 </script>
 
 <style lang="scss">
-@use '@/styles/Combi.scss';
+@use '@/styles/EpdCombi.scss';
 </style>

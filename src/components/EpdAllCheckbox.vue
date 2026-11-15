@@ -37,7 +37,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-export type CheckValue = (string | number)[]
+export type EpdCheckValue = (string | number)[]
 
 defineSlots<{
   /**
@@ -55,7 +55,7 @@ defineSlots<{
 const { t } = useLang()
 
 const props = defineProps({
-  modelValue: Array as PropType<CheckValue>,
+  modelValue: Array as PropType<EpdCheckValue>,
   /**
    * 全选框显示文本，默认“全选”
    */
@@ -100,9 +100,9 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', val: CheckValue): void
+  (e: 'update:modelValue', val: EpdCheckValue): void
   (e: 'update:all', val: boolean): void
-  <k extends CheckValue>(e: 'change', val: k, all: boolean): void
+  <k extends EpdCheckValue>(e: 'change', val: k, all: boolean): void
 }>()
 
 // 勾选项
@@ -162,5 +162,5 @@ watch(
 </script>
 
 <style lang="scss">
-@use '@/styles/AllCheckbox.scss';
+@use '@/styles/EpdAllCheckbox.scss';
 </style>

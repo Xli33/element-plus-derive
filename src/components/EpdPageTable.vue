@@ -110,8 +110,8 @@ import { RefreshRight, FullScreen, ScaleToOriginal, Setting } from '@element-plu
 import { getPathValue, omitOwnKeys } from 'utils-where'
 import { useLang } from '@/utils/useLang'
 import { useClass } from '@/utils'
-import ToggleColumn from './ToggleColumn.vue'
-import ElColumn from './ElColumn.vue'
+import ToggleColumn from './EpdToggleColumn.vue'
+import ElColumn from './EpdElColumn.vue'
 
 export default {
   name: 'PageTable'
@@ -714,5 +714,5 @@ watch(
 </script>
 
 <style lang="scss">
-@use '@/styles/PageTable.scss';
+@use '@/styles/EpdPageTable.scss';
 </style>

@@ -40,10 +40,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-export type SelectValue = string | number | (string | number)[]
+export type EpdSelectValue = string | number | (string | number)[]
 
 const props = defineProps({
-  modelValue: [String, Array, Number] as PropType<SelectValue>,
+  modelValue: [String, Array, Number] as PropType<EpdSelectValue>,
   list: Array as PropType<Obj[]>,
   multiple: Boolean,
   /**
@@ -114,7 +114,7 @@ const props = defineProps({
       multiple: boolean
       keyMap: { value: string }
       list: Obj[]
-      value: SelectValue
+      value: EpdSelectValue
     }) {
       return !multiple
         ? list.find((e: Obj) => e[keyMap.value] === value) || {}
@@ -137,7 +137,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  'update:modelValue': [val: SelectValue]
+  'update:modelValue': [val: EpdSelectValue]
   'update:chosen': [item: Obj]
   'update:list': [list: Obj[]]
   'update:refresh': [handle: typeof search]
@@ -152,7 +152,7 @@ defineSlots<{
 
 // data
 
-const code = ref<SelectValue>(props.modelValue ?? '')
+const code = ref<EpdSelectValue>(props.modelValue ?? '')
 const codes = ref<Obj[]>([])
 const loading = ref(false)
 const chosenItem = ref<Obj>({})
@@ -211,7 +211,7 @@ async function search() {
   emit('load', res)
 }
 // 变更事件
-function changeCode(val: SelectValue) {
+function changeCode(val: EpdSelectValue) {
   flag = true
   nextTick(() => {
     flag = null

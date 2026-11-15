@@ -55,7 +55,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-export interface MCalendarCell {
+export interface EpdMCalendarCell {
   _date: Date
   _text: string
   _isOuter: boolean
@@ -69,7 +69,7 @@ export interface MCalendarCell {
 // const dayjs = getCurrentInstance()!.appContext.config.globalProperties.$Date
 // if (!dayjs.prototype.isBetween) dayjs.extend(isBetween)
 // defineSlots<{
-//   cell({ item, index }: { item: MCalendarCell, index: number }): any
+//   cell({ item, index }: { item: EpdMCalendarCell, index: number }): any
 // }>()
 
 const props = defineProps({
@@ -178,16 +178,16 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  'update:range': [[MCalendarCell | null, MCalendarCell | null]]
-  'select-range': [[MCalendarCell | null, MCalendarCell | null], MCalendarCell[]]
-  'click-day': [MCalendarCell, number]
-  'dblclick-day': [MCalendarCell, number]
+  'update:range': [[EpdMCalendarCell | null, EpdMCalendarCell | null]]
+  'select-range': [[EpdMCalendarCell | null, EpdMCalendarCell | null], EpdMCalendarCell[]]
+  'click-day': [EpdMCalendarCell, number]
+  'dblclick-day': [EpdMCalendarCell, number]
 }>()
 
 const { t } = useLang()
-const list = ref<MCalendarCell[]>() as Ref<MCalendarCell[]>,
-  rangeStart = ref<MCalendarCell | null>(null),
-  rangeEnd = ref<MCalendarCell | null>(null)
+const list = ref<EpdMCalendarCell[]>() as Ref<EpdMCalendarCell[]>,
+  rangeStart = ref<EpdMCalendarCell | null>(null),
+  rangeEnd = ref<EpdMCalendarCell | null>(null)
 
 // 起始星期（几）
 const weekAt = computed(() => {
@@ -287,7 +287,7 @@ const renderByDate = () => {
 }
 
 let flag: true | null
-const selectDate = (item: MCalendarCell, index: number) => {
+const selectDate = (item: EpdMCalendarCell, index: number) => {
   // console.log(item, index);
   const selectionChanged = props.hasRange && (!item._isOuter || props.outerInRange)
   if (selectionChanged) {
@@ -333,7 +333,7 @@ const selectDate = (item: MCalendarCell, index: number) => {
   }
 }
 // 双击某天
-const dblClick = (item: MCalendarCell, index: number) => {
+const dblClick = (item: EpdMCalendarCell, index: number) => {
   // console.log(item, index);
   emit('dblclick-day', item, index)
 }
@@ -404,8 +404,8 @@ if (props.range) {
   // 传入的范围可能是在当前42格日期之外，在后续setRange中就获取不到对应的rangeStart & rangeEnd
   // 此时虽然界面上范围是高亮的，但选中某一格日期时不会先清除已有范围（当clearable为true时）
   // 所以这里先直接将传入范围赋值给rangeStart & rangeEnd以避免上述问题，如果范围没有超出的话，setRange内部一定会重新对rangeStart、rangeEnd赋值
-  rangeStart.value = props.range[0] as MCalendarCell
-  rangeEnd.value = props.range[1] as MCalendarCell
+  rangeStart.value = props.range[0] as EpdMCalendarCell
+  rangeEnd.value = props.range[1] as EpdMCalendarCell
   setRange(props.range)
 }
 
@@ -434,5 +434,5 @@ watch(() => props.range, setRange)
 </script>
 
 <style lang="scss">
-@use '@/styles/MCalendar.scss';
+@use '@/styles/EpdMCalendar.scss';
 </style>
