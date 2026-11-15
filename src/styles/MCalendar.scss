@@ -2,7 +2,7 @@
 @use 'sass:color';
 
 $prefix: get-block-name(mcalendar);
-// $border: 1px solid var(--epd-title-bg);
+// $border: 1px solid var(--#{$prefix}-title-bg);
 $width: 14.2857%;
 $timing: 0.1s ease-in;
 
@@ -13,78 +13,83 @@ $timing: 0.1s ease-in;
 
 html.dark {
   .#{$prefix} {
-    --epd-title-bg: #333;
-    --epd-title-weekend-bg: #{color.scale(coral, $lightness: -10%)};
-    --epd-cell-range-bg: #{color.scale(#333, $lightness: 5%)};
-    --epd-cell-range-ends-bg: var(--epd-title-bg);
-    --epd-cell-today-bg: #2c2f4a;
-    // --epd-cell-hover-bg: #1a1a1a;
+    --#{$prefix}-title-bg: #333;
+    --#{$prefix}-title-weekend-bg: #{color.scale(coral, $lightness: -10%)};
+    --#{$prefix}-cell-range-bg: #{color.scale(#333, $lightness: 5%)};
+    --#{$prefix}-cell-range-ends-bg: var(--#{$prefix}-title-bg);
+    --#{$prefix}-cell-today-bg: #2c2f4a;
+    // --#{$prefix}-cell-hover-bg: #1a1a1a;
   }
 }
 
 .#{$prefix} {
-  --epd-title-bg: #efefef;
-  --epd-title-weekend-bg: coral;
-  --epd-cell-range-bg: #e6eafd;
-  --epd-cell-range-ends-bg: #b9c6ff;
-  --epd-cell-today-bg: #f2faff;
-  // --epd-cell-hover-bg: #f7f7f7;
+  --#{$prefix}-title-bg: #efefef;
+  --#{$prefix}-title-weekend-bg: coral;
+  --#{$prefix}-cell-range-bg: #e6eafd;
+  --#{$prefix}-cell-range-ends-bg: #b9c6ff;
+  --#{$prefix}-cell-today-bg: #f2faff;
+  --#{$prefix}-cell-height: 100px;
+  // --#{$prefix}-cell-hover-bg: #f7f7f7;
+  display: flex;
+  flex-direction: column;
   position: relative;
   color: var(--el-text-color-primary);
 
-  &- {
-    &title {
-      flex-basis: $width;
-      max-width: $width;
-      padding: 10px 0;
-      line-height: 1;
-      text-align: center;
-      background: var(--epd-title-bg);
+  &-title {
+    flex-basis: $width;
+    max-width: $width;
+    padding: 10px 0;
+    line-height: 1;
+    text-align: center;
+    background: var(--#{$prefix}-title-bg);
 
-      &.weekend {
-        color: #fff;
-        background: var(--epd-title-weekend-bg);
-      }
+    &.weekend {
+      color: #fff;
+      background: var(--#{$prefix}-title-weekend-bg);
+    }
+  }
+
+  &-body {
+    flex: 1;
+  }
+
+  &-cell {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    flex-basis: $width;
+    max-width: $width;
+    min-height: var(--#{$prefix}-cell-height);
+    padding: 5px;
+    // border-bottom: $border;
+    // border-left: $border;
+    word-break: break-all;
+    transition: background-color $timing; // border-color $timing
+    // font-size: 14px;
+
+    // &:nth-child(7n) {
+    //   border-right: $border;
+    // }
+
+    // &:hover {
+    //   background-color: var(--#{$prefix}-cell-hover-bg);
+    // }
+
+    &.outer:not(.in-range) {
+      color: #aaa;
     }
 
-    &cell {
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
-      flex-basis: $width;
-      max-width: $width;
-      min-height: 100px;
-      padding: 5px;
-      // border-bottom: $border;
-      // border-left: $border;
-      word-break: break-all;
-      transition: background-color $timing; // border-color $timing
-      // font-size: 14px;
-
-      // &:nth-child(7n) {
-      //   border-right: $border;
-      // }
-
-      // &:hover {
-      //   background-color: var(--epd-cell-hover-bg);
-      // }
-
-      &.outer:not(.in-range) {
-        color: #aaa;
-      }
-
-      &.in-range {
-        @include bg-color(var(--epd-cell-range-bg));
-      }
-
-      &.range-start,
-      &.range-end {
-        @include bg-color(var(--epd-cell-range-ends-bg));
-      }
+    &.in-range {
+      @include bg-color(var(--#{$prefix}-cell-range-bg));
     }
 
-    &cell_today {
-      background: var(--epd-cell-today-bg);
+    &.range-start,
+    &.range-end {
+      @include bg-color(var(--#{$prefix}-cell-range-ends-bg));
     }
+  }
+
+  &-cell_today {
+    background: var(--#{$prefix}-cell-today-bg);
   }
 }
