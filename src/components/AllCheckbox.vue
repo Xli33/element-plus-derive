@@ -1,14 +1,17 @@
 <template>
   <div :class="useClass('all-checkbox')">
     <el-checkbox
-      v-show="!hideAll"
       v-model="whole"
       :indeterminate="indeterminate"
       :class="useClass('all-checkbox-whole')"
       @change="change"
-      >{{ title ?? $i18n.t('allCheckbox.title') }}</el-checkbox
+      >{{ title ?? t('allCheckbox.title') }}</el-checkbox
     >
-    <el-checkbox-group v-model="inner" :class="useClass('all-checkbox-group')" @change="change">
+    <el-checkbox-group
+      :model-value="modelValue"
+      @update:model-value="$emit('update:modelValue', $event)"
+      :class="useClass('all-checkbox-group')"
+      @change="change">
       <el-checkbox v-for="item in list" :key="item[keyMap.value]" :value="item[keyMap.value]">
         <slot :item="item">{{ item[keyMap.label] }}</slot>
       </el-checkbox>
@@ -20,10 +23,10 @@
 // 全选组件
 
 import type { Obj } from '@/type'
-import { type PropType, computed, onMounted, watch, shallowRef } from 'vue'
+import { type PropType, computed, onMounted, watch } from 'vue'
 import { ElCheckbox, ElCheckboxGroup } from 'element-plus'
-import { $i18n } from '@/locale/i18n'
 import { useClass } from '@/utils'
+import { useLang } from '@/utils/useLang'
 
 // 声明组件 name 不建议用 definOptions，因为 setup 内部有内容时，哪怕只有一行注释，依旧会导致无名组件被赋予 __name 属性
 // 这时若用 defineOptions 声明了 name，组件就会有一个多余的 __name
@@ -48,6 +51,8 @@ defineSlots<{
   default(_: { item: Obj }): any
 }>()
 // console.log(slots);
+
+const { t } = useLang()
 
 const props = defineProps({
   modelValue: Array as PropType<CheckValue>,
@@ -89,10 +94,6 @@ const props = defineProps({
     }
   },
   /**
-   * 是否隐藏全选框
-   */
-  hideAll: Boolean,
-  /**
    * 双向绑定全选框的值，若全选中应为 true，否则 false
    */
   all: Boolean
@@ -105,7 +106,7 @@ const emit = defineEmits<{
 }>()
 
 // 勾选项
-const inner = shallowRef(props.modelValue || [])
+// const inner = shallowRef(props.modelValue || [])
 
 // const options = computed(() => {
 //   const arr: Obj[] = slots.default?.()
@@ -124,18 +125,16 @@ const inner = shallowRef(props.modelValue || [])
 // 是否全选
 const whole = computed({
   get() {
-    return inner.value.length === props.list.length
+    return props.modelValue?.length === props.list.length
   },
   set(val) {
-    inner.value = val
-      ? props.list.map((e: Obj) => e[props.keyMap.value]) // : options.value.map((e: Obj) => e.props.label)
-      : []
+    emit('update:modelValue', val ? props.list.map((e: Obj) => e[props.keyMap.value]) : [])
   }
 })
 
 // 半勾选状态
 const indeterminate = computed(
-  () => inner.value.length > 0 && inner.value.length < props.list.length
+  () => (props.modelValue?.length as number) > 0 && props.modelValue!.length < props.list.length
 )
 
 // let flag: true | null
@@ -145,26 +144,19 @@ function change() {
   // nextTick(() => {
   //   flag = null
   // })
-  emit('update:modelValue', inner.value)
-  emit('update:all', whole.value)
-  emit('change', inner.value, whole.value)
+  // emit('update:modelValue', inner.value)
+  // emit('update:all', whole.value)
+  emit('change', props.modelValue!, whole.value)
 }
 
 onMounted(() => {
   emit('update:all', whole.value)
-  // if (Array.isArray(props.modelValue)) {
-  // inner.value = props.modelValue
-  // emit('update:all', whole.value)
-  // }
 })
 
 watch(
   () => props.modelValue,
-  (val) => {
-    if (inner.value !== val) {
-      inner.value = val || []
-      emit('update:all', whole.value)
-    }
+  () => {
+    emit('update:all', whole.value)
   }
 )
 </script>
