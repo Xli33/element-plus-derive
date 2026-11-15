@@ -1,6 +1,6 @@
 @use 'common.scss' as *;
 
-$prefix: get-block-name(page-table-);
+$prefix: get-block-name(pagetable-);
 
 body.clip {
   overflow: hidden;

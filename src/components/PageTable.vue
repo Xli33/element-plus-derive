@@ -2,20 +2,20 @@
   <div
     ref="elRef"
     :class="[
-      useClass('page-table-container'),
-      border && showHeader && useClass('page-table-bordered'),
-      maximized && useClass('page-table-maximized'),
-      maximized && fullscreen && useClass('page-table-fullscreen')
+      useClass('pagetable-container'),
+      border && showHeader && useClass('pagetable-bordered'),
+      maximized && useClass('pagetable-maximized'),
+      maximized && fullscreen && useClass('pagetable-fullscreen')
     ]">
     <el-row
       v-if="showHeader"
       justify="space-between"
       align="middle"
-      :class="useClass('page-table-header')">
+      :class="useClass('pagetable-header')">
       <div>
         <slot name="title">
-          <h1 :class="useClass('page-table-header-title')">
-            {{ title ?? $i18n.t('pageTable.title') }}
+          <h1 :class="useClass('pagetable-header-title')">
+            {{ title ?? t('pageTable.title') }}
           </h1>
         </slot>
       </div>
@@ -23,20 +23,20 @@
         <slot name="headerAction"></slot>
         <el-tooltip
           placement="top"
-          :content="$i18n.t('pageTable.reload')"
+          :content="t('pageTable.reload')"
           :teleported="isTransfer"
           :showArrow="false">
-          <el-icon :size="20" :class="useClass('page-table-action')" @click="reload">
+          <el-icon :size="20" :class="useClass('pagetable-action')" @click="reload">
             <RefreshRight />
           </el-icon>
         </el-tooltip>
         <el-tooltip
           v-model:visible="showMinMaxTip"
           placement="top"
-          :content="$i18n.t(`pageTable.${maximized ? 'restore' : 'maxmize'}`)"
+          :content="t(`pageTable.${maximized ? 'restore' : 'maxmize'}`)"
           :teleported="isTransfer"
           :showArrow="false">
-          <el-icon :size="20" :class="useClass('page-table-action')" @click="changeFullscreen">
+          <el-icon :size="20" :class="useClass('pagetable-action')" @click="changeFullscreen">
             <component :is="maximized ? ScaleToOriginal : FullScreen" />
           </el-icon>
         </el-tooltip>
@@ -54,7 +54,7 @@
         <slot name="headerActionEnd"></slot>
       </div>
     </el-row>
-    <div :class="useClass('page-table-list')">
+    <div :class="useClass('pagetable-list')">
       <el-table
         ref="tableRef"
         v-bind="omitOwnKeys($attrs, ['style', 'class', 'id'])"
@@ -81,7 +81,7 @@
         :teleported="isTransfer"
         :page-sizes="pageSizeOpts"
         background
-        :class="useClass('page-table-paginator')"
+        :class="useClass('pagetable-paginator')"
         @current-change="changePage"
         @size-change="changePageSize" />
     </div>
@@ -108,7 +108,7 @@ import {
 import { ElRow, ElTooltip, ElIcon, ElTable, ElPagination } from 'element-plus'
 import { RefreshRight, FullScreen, ScaleToOriginal, Setting } from '@element-plus/icons-vue'
 import { getPathValue, omitOwnKeys } from 'utils-where'
-import { $i18n } from '@/locale/i18n'
+import { useLang } from '@/utils/useLang'
 import { useClass } from '@/utils'
 import ToggleColumn from './ToggleColumn.vue'
 import ElColumn from './ElColumn.vue'
@@ -305,6 +305,7 @@ const emit = defineEmits<{
 
 // data
 
+const { t } = useLang()
 let initHeight: number // 未传入height时自动计算出的height
 let initMaxHeight: number // 未传入maxHeight时自动计算出的maxHeight
 const loading = defineModel('loading', { type: Boolean }),
@@ -319,7 +320,7 @@ const loading = defineModel('loading', { type: Boolean }),
     maxHeight: props.maxHeight
     // selectType: {
     //   align: 'center',
-    //   className: 'page-table-mr0',
+    //   className: 'pagetable-mr0',
     //   renderHeader: () => {
     //     const checkableList = table.data.filter(e => e._checkable && !e._disabled),
     //       len = checkableList.length;
