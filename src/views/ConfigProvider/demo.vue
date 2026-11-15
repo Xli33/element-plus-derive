@@ -1,22 +1,22 @@
 <template>
   <h3>使用en-US</h3>
-  <ConfigProvider :locale="enMsg">
+  <EpdConfigProvider :locale="enMsg">
     <AllCheckbox v-model="allCheckeds" :list="allCheckedList"></AllCheckbox>
-  </ConfigProvider>
+  </EpdConfigProvider>
 
   <h3>使用繁体中文</h3>
-  <ConfigProvider :locale="zhTradMsg">
-    <AllCheckbox v-model="allCheckeds" :list="allCheckedList"></AllCheckbox>
-    <MCalendar week-type="short" style="--epd-mcalendar-cell-height: 40px"></MCalendar>
-  </ConfigProvider>
+  <EpdConfigProvider :locale="zhTradMsg">
+    <EpdAllCheckbox v-model="allCheckeds" :list="allCheckedList"></EpdAllCheckbox>
+    <EpdMCalendar week-type="short" style="--epd-mcalendar-cell-height: 40px"></EpdMCalendar>
+  </EpdConfigProvider>
 
   <h3>跟随全局语言切换</h3>
-  <AllCheckbox v-model="allCheckeds" :list="allCheckedList"></AllCheckbox>
+  <EpdAllCheckbox v-model="allCheckeds" :list="allCheckedList"></EpdAllCheckbox>
 </template>
 
 <script setup lang="ts">
 import { shallowRef } from 'vue'
-import { ConfigProvider, AllCheckbox, MCalendar } from '@/index'
+import { EpdConfigProvider, EpdAllCheckbox, EpdMCalendar } from '@/index'
 
 const enMsg = {
   d: {

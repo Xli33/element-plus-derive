@@ -1,14 +1,17 @@
 <template>
   <el-card header="AllCheckbox" class="block">
-    <AllCheckbox v-model="allCheckeds" v-model:all="allCheck" :list="allCheckedList"></AllCheckbox>
-    <AllCheckbox v-model="allCheckeds" :list="allCheckedList">
+    <EpdAllCheckbox
+      v-model="allCheckeds"
+      v-model:all="allCheck"
+      :list="allCheckedList"></EpdAllCheckbox>
+    <EpdAllCheckbox v-model="allCheckeds" :list="allCheckedList">
       <template #default="{ item }">
         <DD>
           <del>{{ item }}</del>
         </DD>
       </template>
       <!-- <DD #default="item">{{ item }}</DD> -->
-    </AllCheckbox>
+    </EpdAllCheckbox>
     <p>
       值：{{ allCheckeds }} <span style="margin-left: 16px">whole: {{ allCheck }}</span>
     </p>
@@ -17,7 +20,7 @@
 
 <script setup lang="ts">
 import { shallowRef, ref } from 'vue'
-import { AllCheckbox } from '@/index'
+import { EpdAllCheckbox } from '@/index'
 import DD from './DD'
 
 const allCheckeds = shallowRef(['1', '3']),

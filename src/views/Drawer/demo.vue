@@ -1,7 +1,7 @@
 <template>
   <el-card header="Drawer" class="block">
     <el-button @click="modal.show = true">show drawer</el-button>
-    <Drawer
+    <EpdDrawer
       v-model="modal.show"
       title="drawer footer"
       :show-close="!modal.loading"
@@ -13,14 +13,14 @@
       @ok="confirm"
       @cancel="cancel">
       body
-    </Drawer>
+    </EpdDrawer>
   </el-card>
 </template>
 
 <script setup lang="ts">
 import { shallowReactive } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { Drawer } from '@/index'
+import { EpdDrawer } from '@/index'
 
 const modal = shallowReactive({
   show: false,

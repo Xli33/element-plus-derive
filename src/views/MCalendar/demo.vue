@@ -1,6 +1,6 @@
 <template>
   <el-card header="MCalendar" class="block">
-    <MCalendar
+    <EpdMCalendar
       v-model:range="calendar.range"
       has-range
       style="text-align: left"
@@ -15,13 +15,13 @@
         <el-badge type="success" is-dot></el-badge>
         <p>{{ day._text }}</p>
       </template>
-    </MCalendar>
+    </EpdMCalendar>
   </el-card>
 </template>
 
 <script setup lang="ts">
 import { shallowReactive } from 'vue'
-import { MCalendar } from '@/index'
+import { EpdMCalendar } from '@/index'
 
 const calendar = shallowReactive({
   range: [

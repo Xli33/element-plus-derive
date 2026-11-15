@@ -1,7 +1,7 @@
 <template>
   <el-card header="CacheSelect" class="block">
     <el-space>
-      <CacheSelect
+      <EpdCacheSelect
         v-model="selectModel"
         v-model:list="selectList"
         :method="getList"
@@ -9,16 +9,16 @@
         style="width: 200px"
         @change="$message.info($event || '')"
         @load="(e: any) => console.log(e)">
-      </CacheSelect>
-      <CacheSelect :model-value="selectModel" :list="selectList" textMode></CacheSelect>
-      <CacheSelect
+      </EpdCacheSelect>
+      <EpdCacheSelect :model-value="selectModel" :list="selectList" textMode></EpdCacheSelect>
+      <EpdCacheSelect
         v-model:list="selectList"
         v-model="selectModel"
         :method="getList"
         filterable
         style="width: 220px"
         @load="(e: any) => console.log(e)">
-      </CacheSelect>
+      </EpdCacheSelect>
       值：{{ selectModel }}
     </el-space>
   </el-card>
@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Obj } from '@/type'
-import { CacheSelect } from '@/index'
+import { EpdCacheSelect } from '@/index'
 
 const selectModel = ref(''),
   selectList = ref([])

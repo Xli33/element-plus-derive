@@ -2,7 +2,7 @@
   <el-card header="PageTable" class="block">
     <el-row align="bottom" :gutter="10">
       <el-col :span="12">
-        <PageTable
+        <EpdPageTable
           ref="pageTableRef"
           v-model:selection="pageTable.selection"
           v-model:loading="pageTable.loading"
@@ -24,10 +24,10 @@
           <template #num="{ column }">
             {{ column.title }}
           </template>
-        </PageTable>
+        </EpdPageTable>
       </el-col>
       <el-col :span="12">
-        <PageTable
+        <EpdPageTable
           v-model="pageTable.list"
           :columns="table.columns"
           is-local
@@ -36,10 +36,14 @@
           style="margin-bottom: 15px" />
       </el-col>
       <el-col :span="12">
-        <PageTable v-model="pageTable.list" :columns="table.columns" is-local :max-height="400" />
+        <EpdPageTable
+          v-model="pageTable.list"
+          :columns="table.columns"
+          is-local
+          :max-height="400" />
       </el-col>
       <el-col :span="12">
-        <PageTable
+        <EpdPageTable
           v-model="pageTable.list"
           :columns="table.columns"
           is-local
@@ -55,7 +59,7 @@
 <script setup lang="ts">
 import type { Obj } from '@/type'
 import { onMounted, reactive, useTemplateRef } from 'vue'
-import { PageTable } from '@/index'
+import { EpdPageTable } from '@/index'
 
 const table = {
   columns: [
@@ -99,7 +103,8 @@ const table = {
 }
 const refPageTable = useTemplateRef('pageTableRef')
 const getBareTableList = () =>
-  new Array(50).fill(0).map((e, i) => JSON.parse(JSON.stringify(table.list[i % 2]!)))
+  Array.from({ length: 50 }, (e, i) => JSON.parse(JSON.stringify(table.list[i % 2]!)))
+
 const pageTable = reactive({
   loading: false,
   selection: [],

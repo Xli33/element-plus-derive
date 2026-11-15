@@ -1,20 +1,20 @@
 <template>
   <el-card header="RemoteSelect" class="block">
     <el-space>
-      <RemoteSelect
+      <EpdRemoteSelect
         v-model="selectModel"
         v-model:list="selectLists"
         :method="getList"
         filterable
         clearable
         style="width: 200px">
-      </RemoteSelect>
-      <RemoteSelect :model-value="selectModel" :list="selectLists" textMode></RemoteSelect>
-      <RemoteSelect
+      </EpdRemoteSelect>
+      <EpdRemoteSelect :model-value="selectModel" :list="selectLists" textMode></EpdRemoteSelect>
+      <EpdRemoteSelect
         :method="getList"
         multiple
         all
-        @change="$message.info(JSON.stringify($event))"></RemoteSelect>
+        @change="$message.info(JSON.stringify($event))"></EpdRemoteSelect>
       值：{{ selectModel }}
     </el-space>
   </el-card>
@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RemoteSelect } from '@/index'
+import { EpdRemoteSelect } from '@/index'
 
 const selectModel = ref(''),
   selectLists = ref([])

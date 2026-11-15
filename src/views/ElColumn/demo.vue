@@ -2,7 +2,7 @@
   <el-card header="Drawer" class="block">
     <el-table :data="tableData" border style="width: 100%">
       <!-- 引入 ElColumn 组件配置列 -->
-      <ElColumn :columns="columns">
+      <EpdElColumn :columns="columns">
         <!-- 1. 内容插槽 (slot) 示例 -->
         <!-- 对应 columns 中配置的 slot: 'nameSlot' -->
         <template #nameSlot="{ row }">
@@ -16,7 +16,7 @@
             {{ column.label }} (Slot)
           </span>
         </template>
-      </ElColumn>
+      </EpdElColumn>
     </el-table>
   </el-card>
 </template>
@@ -25,7 +25,7 @@
 import { ref } from 'vue'
 import { ElButton, ElMessage } from 'element-plus'
 import { Edit, Timer } from '@element-plus/icons-vue'
-import { ElColumn } from '@/index'
+import { EpdElColumn } from '@/index'
 
 const tableData = ref([
   { date: '2024-01-01', name: 'Tom', address: 'No. 189, Grove St, Los Angeles' },

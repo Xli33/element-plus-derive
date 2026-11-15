@@ -1,6 +1,6 @@
 <template>
   <el-card header="CurdTable - ElColumn - ToggleColumn" class="block">
-    <ToggleColumn
+    <EpdToggleColumn
       v-for="n in 2"
       :key="n"
       v-model="columns"
@@ -8,7 +8,7 @@
       transfer
       cache-id="app"
       store-at="app.[user.main.list.cols]"
-      style="margin-right: 10px; margin-bottom: 10px"></ToggleColumn>
+      style="margin-right: 10px; margin-bottom: 10px"></EpdToggleColumn>
     <el-table
       :data="table.list"
       border
@@ -19,13 +19,13 @@
           console.log('header-dragend', newWidth, oldWidth, column, event)
         }
       ">
-      <ElColumn :columns="columns">
+      <EpdElColumn :columns="columns">
         <template #num="{ $index }">
           <el-input v-model.trim="table.list[$index]!.num"></el-input>
         </template>
-      </ElColumn>
+      </EpdElColumn>
     </el-table>
-    <CurdTable
+    <EpdCurdTable
       v-model="table.list"
       :columns="columns"
       size="small"
@@ -46,15 +46,15 @@
       <template #moreAction="{ row }">
         <el-button size="small">查看 {{ row.age }}</el-button>
       </template>
-    </CurdTable>
+    </EpdCurdTable>
   </el-card>
 </template>
 
 <script setup lang="tsx">
 import { shallowRef } from 'vue'
 import type { Obj } from '@/type'
-import { CurdTable, ElColumn, ToggleColumn } from '@/index'
 import { ElMessageBox } from 'element-plus'
+import { EpdCurdTable, EpdElColumn, EpdToggleColumn } from '@/index'
 
 const genCols = () => [
   {
