@@ -24,7 +24,7 @@
 
 import type { Obj } from '@/type'
 import { type PropType, computed, onMounted, watch } from 'vue'
-import { ElCheckbox, ElCheckboxGroup } from 'element-plus'
+import { ElCheckbox, ElCheckboxGroup, type CheckboxGroupValueType } from 'element-plus'
 import { useClass } from '@/utils'
 import { useLang } from '@/utils/useLang'
 
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-export type EpdCheckValue = (string | number)[]
+// export type EpdCheckValue = (string | number)[]
 
 defineSlots<{
   /**
@@ -55,7 +55,7 @@ defineSlots<{
 const { t } = useLang()
 
 const props = defineProps({
-  modelValue: Array as PropType<EpdCheckValue>,
+  modelValue: Array as PropType<CheckboxGroupValueType>,
   /**
    * 全选框显示文本，默认“全选”
    */
@@ -100,9 +100,9 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', val: EpdCheckValue): void
+  (e: 'update:modelValue', val: CheckboxGroupValueType): void
   (e: 'update:all', val: boolean): void
-  <k extends EpdCheckValue>(e: 'change', val: k, all: boolean): void
+  <k extends CheckboxGroupValueType>(e: 'change', val: k, all: boolean): void
 }>()
 
 // 勾选项

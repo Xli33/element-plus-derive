@@ -30,7 +30,12 @@
 
 import type { Obj } from '@/type'
 import { type PropType, computed, nextTick, onMounted, ref, watch } from 'vue'
-import { ElSelect, ElOption } from 'element-plus'
+import {
+  ElSelect,
+  ElOption,
+  type CheckboxValueType,
+  type CheckboxGroupValueType
+} from 'element-plus'
 import { vElSelect } from '@/directives'
 
 export default {
@@ -40,7 +45,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-export type EpdSelectValue = string | number | (string | number)[]
+export type EpdSelectValue = CheckboxValueType | CheckboxGroupValueType //string | number | (string | number)[]
 
 const props = defineProps({
   modelValue: [String, Array, Number] as PropType<EpdSelectValue>,
