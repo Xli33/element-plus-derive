@@ -45,10 +45,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-export type EpdSelectValue = CheckboxValueType | CheckboxGroupValueType //string | number | (string | number)[]
+export type SelectValue = CheckboxValueType | CheckboxGroupValueType //string | number | (string | number)[]
 
 const props = defineProps({
-  modelValue: [String, Array, Number] as PropType<EpdSelectValue>,
+  modelValue: [String, Array, Number] as PropType<SelectValue>,
   list: Array as PropType<Obj[]>,
   multiple: Boolean,
   /**
@@ -119,7 +119,7 @@ const props = defineProps({
       multiple: boolean
       keyMap: { value: string }
       list: Obj[]
-      value: EpdSelectValue
+      value: SelectValue
     }) {
       return !multiple
         ? list.find((e: Obj) => e[keyMap.value] === value) || {}
@@ -142,7 +142,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  'update:modelValue': [val: EpdSelectValue]
+  'update:modelValue': [val: SelectValue]
   'update:chosen': [item: Obj]
   'update:list': [list: Obj[]]
   'update:refresh': [handle: typeof search]
@@ -157,7 +157,7 @@ defineSlots<{
 
 // data
 
-const code = ref<EpdSelectValue>(props.modelValue ?? '')
+const code = ref<SelectValue>(props.modelValue ?? '')
 const codes = ref<Obj[]>([])
 const loading = ref(false)
 const chosenItem = ref<Obj>({})
@@ -216,7 +216,7 @@ async function search() {
   emit('load', res)
 }
 // 变更事件
-function changeCode(val: EpdSelectValue) {
+function changeCode(val: SelectValue) {
   flag = true
   nextTick(() => {
     flag = null
