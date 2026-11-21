@@ -58,7 +58,7 @@ import type { BtnSize, BtnType, Obj } from '@/type'
 import { type PropType, computed, ref, watch } from 'vue'
 import { ElTable, ElTableColumn, ElButton } from 'element-plus'
 import { omitOwnKeys } from 'utils-where'
-import ElColumn from './EpdElColumn.vue'
+import ElColumn from './ElColumn.vue'
 import { useLang } from '@/utils/useLang'
 
 export default {

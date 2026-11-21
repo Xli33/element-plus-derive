@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import CacheSelect from '../EpdCacheSelect.vue'
+import CacheSelect from '../CacheSelect.vue'
 
 describe('CacheSelect', () => {
   it('renders properly', () => {

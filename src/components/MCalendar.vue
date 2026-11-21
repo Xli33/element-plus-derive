@@ -434,5 +434,5 @@ watch(() => props.range, setRange)
 </script>
 
 <style lang="scss">
-@use '@/styles/EpdMCalendar.scss';
+@use '@/styles/MCalendar.scss';
 </style>

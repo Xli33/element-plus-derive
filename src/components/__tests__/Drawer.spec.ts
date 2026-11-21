@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import Drawer from '../EpdDrawer.vue'
+import Drawer from '../Drawer.vue'
 
 describe('Drawer', () => {
   it('renders properly', () => {

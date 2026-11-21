@@ -162,5 +162,5 @@ watch(
 </script>
 
 <style lang="scss">
-@use '@/styles/EpdAllCheckbox.scss';
+@use '@/styles/AllCheckbox.scss';
 </style>

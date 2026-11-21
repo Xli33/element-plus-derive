@@ -35,7 +35,7 @@ import {
   useTemplateRef,
   shallowReactive
 } from 'vue'
-import RemoteSelect, { type EpdSelectValue } from './EpdRemoteSelect.vue'
+import RemoteSelect, { type EpdSelectValue } from './RemoteSelect.vue'
 
 // 默认加载标记
 const loadeds: {

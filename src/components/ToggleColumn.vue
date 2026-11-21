@@ -328,5 +328,5 @@ watch(
 </script>
 
 <style lang="scss">
-@use '@/styles/EpdToggleColumn.scss';
+@use '@/styles/ToggleColumn.scss';
 </style>

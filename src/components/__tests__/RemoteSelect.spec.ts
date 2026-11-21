@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { flushPromises, mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import RemoteSelect from '../EpdRemoteSelect.vue'
+import RemoteSelect from '../RemoteSelect.vue'
 
 describe('RemoteSelect', () => {
   it('renders properly', async () => {

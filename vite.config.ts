@@ -1,5 +1,12 @@
 import { fileURLToPath, URL } from 'node:url'
-import { cpSync, unlinkSync } from 'node:fs'
+import {
+  readdirSync,
+  readFileSync,
+  copyFileSync,
+  writeFileSync,
+  unlinkSync,
+  mkdirSync
+} from 'node:fs'
 // import { resolve } from 'node:path'
 
 import { build, defineConfig } from 'vite'
@@ -131,10 +138,28 @@ export default defineConfig(({ command }) => {
         //   }
         // },
         afterBuild() {
+          const arr = ['index.scss', 'common.scss']
+
           // console.log(fileMap)
           unlinkSync('dist/ep-mod.d.ts')
           // unlinkSync('dist/zh-CN.d.ts')
-          cpSync('src/styles', 'dist/scss', { recursive: true })
+
+          mkdirSync('dist/scss')
+          readdirSync('src/styles').forEach(
+            (f) =>
+              f !== arr[0] &&
+              copyFileSync(`src/styles/${f}`, `dist/scss/${(arr.includes(f) ? '' : 'Epd') + f}`)
+          )
+          // 替换 dist/scss/index.scss 里的引用路径
+          const indexScss = readFileSync('src/styles/index.scss', 'utf-8').replace(
+            /\.\/(\w+\.scss)/g,
+            './Epd$1'
+          )
+          writeFileSync('dist/scss/index.scss', indexScss)
+          // cpSync('src/styles', 'dist/scss', {
+          //   recursive: true,
+          //   ilter: (src) => !arr.includes(src)
+          // })
         }
       })
     ],
@@ -238,7 +263,12 @@ export default defineConfig(({ command }) => {
             //   folder = 'fonts'
             // }
             // return `${folder}/[name]-[hash][extname]`
-            return `${assetInfo.names[0] !== 'ep-mod.css' ? 'styles/' : ''}[name][extname]`
+            let prefix
+            if (assetInfo.names[0] === 'ep-mod.css') prefix = ''
+            else
+              prefix =
+                'styles/' + (['index.css', 'common.scss'].includes(assetInfo.names[0]) ? '' : 'Epd')
+            return `${prefix}[name][extname]`
           },
           chunkFileNames: (/* chunkInfo */) => {
             // 分离到对应文件夹

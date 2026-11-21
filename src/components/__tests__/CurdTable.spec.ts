@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import CurdTable from '../EpdCurdTable.vue'
+import CurdTable from '../CurdTable.vue'
 
 describe('CurdTable', () => {
   it('renders properly', () => {

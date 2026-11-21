@@ -10,7 +10,7 @@
     <el-main>
       <LangSet />
       <EpdConfigProvider :locale="appLocale">
-        <component :is="current"></component>
+        <component :is="current" />
       </EpdConfigProvider>
     </el-main>
   </el-container>

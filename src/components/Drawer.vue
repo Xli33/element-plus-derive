@@ -19,7 +19,7 @@
 
 import { getCurrentInstance } from 'vue'
 import { ElDrawer } from 'element-plus'
-import ModalFooter from './EpdModalFooter.vue'
+import ModalFooter from './ModalFooter.vue'
 
 export default {
   name: 'Drawer',

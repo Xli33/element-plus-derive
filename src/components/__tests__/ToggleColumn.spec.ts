@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import ElementPlus from 'element-plus'
-import ToggleColumn from '../EpdToggleColumn.vue'
+import ToggleColumn from '../ToggleColumn.vue'
 
 describe('ToggleColumn', () => {
   it('renders properly', async () => {
