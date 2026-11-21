@@ -263,12 +263,7 @@ export default defineConfig(({ command }) => {
             //   folder = 'fonts'
             // }
             // return `${folder}/[name]-[hash][extname]`
-            let prefix
-            if (assetInfo.names[0] === 'ep-mod.css') prefix = ''
-            else
-              prefix =
-                'styles/' + (['index.css', 'common.scss'].includes(assetInfo.names[0]) ? '' : 'Epd')
-            return `${prefix}[name][extname]`
+            return `${assetInfo.names[0] !== 'ep-mod.css' ? 'styles/Epd' : ''}[name][extname]`
           },
           chunkFileNames: (/* chunkInfo */) => {
             // 分离到对应文件夹
