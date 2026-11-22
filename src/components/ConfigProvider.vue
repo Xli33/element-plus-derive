@@ -16,19 +16,19 @@ const props = defineProps({
   /**
    * 语言包对象
    */
-  locale: Object,
+  locale: Object
   /**
    * 语言包对象键名前缀
    */
-  msgPrefix: {
-    type: String,
-    default: 'd'
-  }
+  // msgPrefix: {
+  //   type: String,
+  //   default: 'd'
+  // }
 })
 
 // 向下层所有子组件注入当前配置
 provide(CPKey, {
-  locale: computed(() => props.locale),
-  msgPrefix: props.msgPrefix
+  locale: computed(() => props.locale)
+  // msgPrefix: props.msgPrefix
 })
 </script>

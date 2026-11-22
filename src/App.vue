@@ -9,9 +9,11 @@
     </el-aside>
     <el-main>
       <LangSet />
-      <EpdConfigProvider :locale="appLocale">
-        <component :is="current" />
-      </EpdConfigProvider>
+      <el-config-provider :locale="appLocale.el">
+        <EpdConfigProvider :locale="appLocale.d">
+          <component :is="current" />
+        </EpdConfigProvider>
+      </el-config-provider>
     </el-main>
   </el-container>
 </template>

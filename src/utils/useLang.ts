@@ -11,7 +11,7 @@ export function useLang() {
   const t = (key: string, ...args: any[]) => {
     const currentMsg = configContext?.locale?.value
     return currentMsg
-      ? (getPathValue(currentMsg, configContext!.msgPrefix + '.' + key) ?? key)
+      ? (getPathValue(currentMsg /* [configContext!.msgPrefix] */, key) ?? key)
       : $i18n.t(key, ...args)
   }
 

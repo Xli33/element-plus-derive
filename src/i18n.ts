@@ -18,11 +18,11 @@ export const i18n = createI18n({
   messages: {
     'zh-CN': {
       el: zh,
-      ...zhCN
+      d: zhCN
     },
     'en-US': {
       el: en,
-      ...enUS
+      d: enUS
     }
   }
 })

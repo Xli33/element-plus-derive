@@ -18,7 +18,7 @@ export const $i18n: Translator = {
   t(key: string, ...args: any[]) {
     return (
       $i18n.i18n?.global.t($i18n.prefix + '.' + key, ...args) ??
-      getPathValue($i18n.msg, $i18n.prefix + '.' + key) ??
+      getPathValue($i18n.msg /* [$i18n.prefix] */, key) ??
       key
     )
   }
