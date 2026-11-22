@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.4.0](https://github.com/Xli33/element-plus-derive/compare/v0.3.0...v0.4.0) (2026-11-22)
+
+### ⚠ BREAKING CHANGES
+
+* **type:** 使用element-plus的type，不再从主入口导出额外的`EpdCheckValue` `EpdSelectValue` ([9e319b8](https://github.com/Xli33/element-plus-derive/commit/9e319b8696107c6a79e6255358869710fbc92cb7))
+
+### Features
+
+* **locale:** 优化语言配置，传入语言包无需放在`d`节点下 ([549672e](https://github.com/Xli33/element-plus-derive/commit/549672e0a017ed43b66d78cd8644148691a17f51))
+* **style:** 优化`PageTable` `ToggleColumn`样式 ([2a8c918](https://github.com/Xli33/element-plus-derive/commit/2a8c918a9d67f89109706cc09c2fc15fe35d7a95))
+
+### Bug Fixes
+
+* **install:** 修复多次安装同一个epDerive时，组件name的前缀会重复叠加 ([781bd05](https://github.com/Xli33/element-plus-derive/commit/781bd058b53a10a7d938681efc4a50e1c1e3d671))
+* **table-cache-cols:** 适配高版本element-plus ([4664e66](https://github.com/Xli33/element-plus-derive/commit/4664e66eda6592eae7fc7cb50d013cc10497d261))
 
 ## [0.3.0](https://github.com/Xli33/element-plus-derive/compare/v0.2.0...v0.3.0) (2026-11-15)
 
