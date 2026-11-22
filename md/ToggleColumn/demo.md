@@ -4,7 +4,7 @@
 <template>
   <EpdToggleColumn v-model="table.columns" style="float:right;margin-bottom:10px"></EpdToggleColumn>
   <el-table :data="table.list">
-    <ElColumn :columns="table.columns"></ElColumn>
+    <EpdElColumn :columns="table.columns"></EpdElColumn>
   </el-table>
 </template>
 
