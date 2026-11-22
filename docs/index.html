@@ -47,6 +47,7 @@
         overscroll-behavior-y: contain;
       }
       :root {
+        interpolate-size: allow-keywords;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         -webkit-tap-highlight-color: transparent;
@@ -56,6 +57,21 @@
           color-scheme: dark;
         }
       } */
+      details {
+        /* overflow: hidden; */
+
+        &::details-content {
+          block-size: 0;
+          overflow: hidden;
+          transition:
+            block-size 0.3s ease,
+            content-visibility 0.3s allow-discrete;
+        }
+
+        &[open]::details-content {
+          block-size: auto;
+        }
+      }
       body {
         margin: 0;
         font-family:
@@ -683,7 +699,10 @@
                 if (!e.sub) {
                   router.addRoute({
                     name: e.route || e.name,
-                    path: '/' + (e.route || e.url.replace('component/', 'component/Epd').replace(/\.txt$/, '')),
+                    path:
+                      '/' +
+                      (e.route ||
+                        e.url.replace('component/', 'component/Epd').replace(/\.txt$/, '')),
                     meta: {
                       url: e.url
                     },
