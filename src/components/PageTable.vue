@@ -14,9 +14,9 @@
       :class="useClass('pagetable-header')">
       <div>
         <slot name="title">
-          <h1 :class="useClass('pagetable-header-title')">
+          <div :class="useClass('pagetable-header-title')">
             {{ title ?? t('pageTable.title') }}
-          </h1>
+          </div>
         </slot>
       </div>
       <div>

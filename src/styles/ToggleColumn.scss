@@ -1,9 +1,11 @@
 @use 'common.scss' as *;
 
-$prefix: get-block-name(toggle-column-);
+$prefix: get-block-name(toggle-column);
 
 .#{$prefix} {
-  &list {
+  vertical-align: middle;
+
+  &-list {
     // max-height: 400px;
     max-height: 60vh;
     padding-top: 0;
@@ -11,7 +13,7 @@ $prefix: get-block-name(toggle-column-);
     user-select: none;
   }
 
-  &btn .el-icon {
+  &-btn .el-icon {
     // line-height: 1;
     // font-size: 16px;
 
@@ -20,7 +22,7 @@ $prefix: get-block-name(toggle-column-);
     // }
   }
 
-  &pop {
+  &-pop {
     // text-align: left;
   }
 }
