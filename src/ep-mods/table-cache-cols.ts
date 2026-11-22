@@ -55,7 +55,7 @@ const tableMounted = function (this: any) {
   const currentData = appData && getPathValue(JSON.parse(appData), targetKey)
   if (!currentData || !Object.keys(currentData).length) return
   this.$nextTick(() => {
-    this.columns.forEach((e: Obj) => {
+    this.$.store.states.columns.value.forEach((e: Obj) => {
       if (currentData[e.property]?.width) {
         e.realWidth = null
         e.width = currentData[e.property].width
