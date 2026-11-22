@@ -169,31 +169,29 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app
   .use(epDerive, {
     msg: {
-      d: {
-        lang: 'zh-Hant',
-        allCheckbox: {
-          title: '全選'
-        },
-        curdTable: {
-          actionText: '操作',
-          addText: '新增',
-          del: '刪除'
-        },
-        mCalendar: {
-          mini: ['日', '一', '二', '三', '四', '五', '六'],
-          short: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
-          long: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六']
-        },
-        modalFooter: {
-          ok: '確定',
-          cancel: '取消'
-        },
-        pageTable: {
-          title: '列表',
-          reload: '重載',
-          maxmize: '最大化',
-          restore: '還原'
-        }
+      lang: 'zh-Hant',
+      allCheckbox: {
+        title: '全選'
+      },
+      curdTable: {
+        actionText: '操作',
+        addText: '新增',
+        del: '刪除'
+      },
+      mCalendar: {
+        mini: ['日', '一', '二', '三', '四', '五', '六'],
+        short: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
+        long: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六']
+      },
+      modalFooter: {
+        ok: '確定',
+        cancel: '取消'
+      },
+      pageTable: {
+        title: '列表',
+        reload: '重載',
+        maxmize: '最大化',
+        restore: '還原'
       }
     }
   })
@@ -216,12 +214,6 @@ import enUS from 'element-plus-derive/locale/en-US'
 
 import App from './App.vue'
 
-// 需要时可手动修改语言主要key，并在安装插件时传入参数msgPrefix，如 {msgPrefix: 'someKey'}
-// zhCN.someKey = zhCN.d
-// delete zhCN.d
-// enUS.someKey = enUS.d
-// delete enUS.d
-
 const i18n = createI18n({
   allowComposition: true,
   // globalInjection: true,
@@ -231,11 +223,11 @@ const i18n = createI18n({
   messages: {
     'zh-CN': {
       el: zh,
-      ...zhCN
+      d: zhCN // 默认key为d，需要时可手动修改，并在安装插件时传入参数msgPrefix，如 {msgPrefix: 'someKey'}
     },
     'en-US': {
       el: en,
-      ...enUS
+      d: enUS
     }
   }
 })
@@ -284,15 +276,13 @@ const elLocale = computed(() => i18n.global.messages.value[AppLang.value].el)
 import { EpdConfigProvider, EpdAllCheckbox, EpdMCalendar } from 'element-plus-derive'
 
 const zhTradMsg = {
-  d: {
-    allCheckbox: {
-      title: '全選'
-    },
-    mCalendar: {
-      // mini: ['日', '一', '二', '三', '四', '五', '六'],
-      short: ['週日', '週一', '週二', '週三', '週四', '週五', '週六']
-      // long: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六']
-    }
+  allCheckbox: {
+    title: '全選'
+  },
+  mCalendar: {
+    // mini: ['日', '一', '二', '三', '四', '五', '六'],
+    short: ['週日', '週一', '週二', '週三', '週四', '週五', '週六']
+    // long: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六']
   }
 }
 </script>

@@ -1,0 +1,33 @@
+<h2>EpdConfigProvider</h2>
+<p>为其它组件提供provide注入，例如翻译内容</p>
+<h4>基本用法</h4>
+
+          <div class="demo-block">
+            <live-preview demo-code="%3Ctemplate%3E%0A%20%20%3CEpdConfigProvider%20:locale=%22zhTradMsg%22%3E%0A%20%20%20%20%3CEpdAllCheckbox%3E%3C/EpdAllCheckbox%3E%0A%20%20%20%20%3CEpdMCalendar%20week-type=%22short%22%3E%3C/EpdMCalendar%3E%0A%20%20%3C/EpdConfigProvider%3E%0A%3C/template%3E%0A%3Cscript%20setup%3E%0Aconst%20zhTradMsg%20=%20%7B%0A%20%20allCheckbox:%20%7B%0A%20%20%20%20title:%20'%E5%85%A8%E9%81%B8'%0A%20%20%7D,%0A%20%20mCalendar:%20%7B%0A%20%20%20%20//%20mini:%20%5B'%E6%97%A5',%20'%E4%B8%80',%20'%E4%BA%8C',%20'%E4%B8%89',%20'%E5%9B%9B',%20'%E4%BA%94',%20'%E5%85%AD'%5D,%0A%20%20%20%20short:%20%5B'%E9%80%B1%E6%97%A5',%20'%E9%80%B1%E4%B8%80',%20'%E9%80%B1%E4%BA%8C',%20'%E9%80%B1%E4%B8%89',%20'%E9%80%B1%E5%9B%9B',%20'%E9%80%B1%E4%BA%94',%20'%E9%80%B1%E5%85%AD'%5D%0A%20%20%20%20//%20long:%20%5B'%E7%A6%AE%E6%8B%9C%E6%97%A5',%20'%E7%A6%AE%E6%8B%9C%E4%B8%80',%20'%E7%A6%AE%E6%8B%9C%E4%BA%8C',%20'%E7%A6%AE%E6%8B%9C%E4%B8%89',%20'%E7%A6%AE%E6%8B%9C%E5%9B%9B',%20'%E7%A6%AE%E6%8B%9C%E4%BA%94',%20'%E7%A6%AE%E6%8B%9C%E5%85%AD'%5D%0A%20%20%7D%0A%7D%0A%3C/script%3E"></live-preview>
+            <div class="demo-code-wrapper">
+              <details>
+                <summary>查看源码</summary>
+                <pre class="shiki material-theme-palenight" style="background-color:#292D3E;color:#babed8" tabindex="0"><code><span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;</span><span style="color:#F07178">EpdConfigProvider</span><span style="color:#89DDFF"> :</span><span style="color:#C792EA">locale</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#BABED8">zhTradMsg</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">EpdAllCheckbox</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">EpdAllCheckbox</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">    &#x3C;</span><span style="color:#F07178">EpdMCalendar</span><span style="color:#C792EA"> week-type</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">short</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">>&#x3C;/</span><span style="color:#F07178">EpdMCalendar</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">  &#x3C;/</span><span style="color:#F07178">EpdConfigProvider</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">template</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;</span><span style="color:#F07178">script</span><span style="color:#C792EA"> setup</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#BABED8"> zhTradMsg </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F07178">  allCheckbox</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F07178">    title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">全選</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#89DDFF">  },</span></span>
+<span class="line"><span style="color:#F07178">  mCalendar</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">    // mini: ['日', '一', '二', '三', '四', '五', '六'],</span></span>
+<span class="line"><span style="color:#F07178">    short</span><span style="color:#89DDFF">:</span><span style="color:#BABED8"> [</span><span style="color:#89DDFF">'</span><span style="color:#C3E88D">週日</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週一</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週二</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週三</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週四</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週五</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#C3E88D">週六</span><span style="color:#89DDFF">'</span><span style="color:#BABED8">]</span></span>
+<span class="line"><span style="color:#676E95;font-style:italic">    // long: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六']</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">&#x3C;/</span><span style="color:#F07178">script</span><span style="color:#89DDFF">></span></span></code></pre>
+              </details>
+            </div>
+          </div>
+          
+<h2>props</h2>
+<p><code>locale</code> <em>Object</em><br>语言包对象</p>
