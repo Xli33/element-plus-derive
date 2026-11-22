@@ -171,7 +171,7 @@ async function buildComponentHtml() {
 
       //  构造菜单
       apiSub.push({
-        name: file,
+        name: 'Epd' + file,
         url: relativeTxtPath
       })
       // const each = apiUrl.split('/')
