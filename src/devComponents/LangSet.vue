@@ -9,11 +9,11 @@
 </template>
 
 <script setup lang="ts">
-import { $i18n } from '@/locale/i18n'
+// import { $i18n } from '@/locale/i18n'
 import { i18n } from '@/i18n'
 import { AppLocale } from '@/store'
 
-$i18n.i18n = i18n
+// $i18n.i18n = i18n
 
 const langs = [
   {

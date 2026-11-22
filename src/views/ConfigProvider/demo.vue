@@ -12,6 +12,11 @@
 
   <h3>跟随全局语言切换</h3>
   <EpdAllCheckbox v-model="allCheckeds" :list="allCheckedList"></EpdAllCheckbox>
+
+  <h3>固定不变</h3>
+  <EpdConfigProvider>
+    <EpdAllCheckbox v-model="allCheckeds" :list="allCheckedList"></EpdAllCheckbox>
+  </EpdConfigProvider>
 </template>
 
 <script setup lang="ts">

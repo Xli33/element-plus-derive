@@ -4,11 +4,6 @@ import en from 'element-plus/es/locale/lang/en'
 import zhCN from './locale/zh-CN'
 import enUS from '../public/locale/en-US'
 
-// zhCN.q = zhCN.d
-// delete zhCN.d
-// enUS.q = enUS.d
-// delete enUS.d
-
 export const i18n = createI18n({
   allowComposition: true,
   // globalInjection: true,
