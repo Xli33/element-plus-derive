@@ -116,7 +116,7 @@ app.use(ElementPlus)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-app.component(EpdCombi.name, EpdCombi)
+app.component('EpdCombi', EpdCombi)
 app.mount('#app')
 ```
 
@@ -375,6 +375,9 @@ import 'element-plus-derive/ep-mod'
 ## 组件
 
 [文档](https://xli33.github.io/element-plus-derive)
+
+`EpdConfigProvider`  
+为其它组件提供provide注入配置，例如翻译内容
 
 `EpdAllCheckbox`  
 提供全选功能的CheckboxGroup
