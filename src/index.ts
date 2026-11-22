@@ -23,11 +23,16 @@ export function install(
   // 支持定义组件前缀
   if (opt.prefix != null) {
     useClass.prefix = opt.prefix
-    // components.forEach((e) => (e.name = opt.prefix! + e.name))
   }
-  components.forEach((e) => (e.name = useClass.prefix + e.name))
+  /* 
+    当通过多个createApp实例化并调用同一个epDerive的install时，此处直接叠加prefix会导致前缀不断重复拼接
+    故应在下面的注册阶段修改注册名，保持组件自身name始终无前缀以避免该bug
+  */
+  // components.forEach((e) => {
+  //   e.name = useClass.prefix + e.name
+  // })
   components.forEach((component) => {
-    app.component(component.name!, component)
+    app.component(useClass.prefix + component.name!, component)
   })
   directives.forEach(([key, value]) => {
     app.directive(key, value)
