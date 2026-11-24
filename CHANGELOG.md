@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.1](https://github.com/Xli33/element-plus-derive/compare/v0.4.0...v0.4.1) (2026-11-24)
+
+### Bug Fixes
+
+* 修复部分组件未使用ConfigProvider包裹时会触发警告`injection "Symbol(epd-c-p)" not found` ([f240808](https://github.com/Xli33/element-plus-derive/commit/f240808e7670fba1a10c6ddfc6a1fec8ca7b1096))
+
 ## [0.4.0](https://github.com/Xli33/element-plus-derive/compare/v0.3.0...v0.4.0) (2026-11-22)
 
 ### ⚠ BREAKING CHANGES
