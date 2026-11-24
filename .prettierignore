@@ -1,4 +1,5 @@
 .vscode/*
+.husky/
 
 public/*
 !public/locale/
